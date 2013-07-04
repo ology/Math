@@ -1,0 +1,32 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+die "Compute the type and area of a 2D triangle with Heron's formula\nUsage: perl $0 x y z\n"
+    unless @ARGV == 3;
+
+my ($x, $y, $z) = @ARGV; # sides
+my ($area, $type) = (0, 'invalid');
+
+if ($x + $y > $z and $x + $z > $y and $y + $z > $x) {
+    # We have a triangle!
+    my $p = ($x + $y + $z) / 2; # "Half-perimeter"
+    # Compute the area with Heron's formula.
+    $area = sqrt($p * ($p - $x) * ($p - $y) * ($p - $z));
+
+    # Figure out the type of triangle.
+    if ($x == $y and $y == $z) {
+        $type = 'equilateral';
+    }
+    elsif ($x == $y or $x == $z or $y == $z) {
+        $type = 'isoceles';
+    }
+    elsif ($x + $y == $z ** 2 or $x + $z == $y ** 2 or $y + $z == $x ** 2) {
+        $type = 'right';
+    }
+    else {
+        $type = 'scalene';
+    }
+}
+
+print "$type area=$area\n"; # Prints 0 if not a valid triangle.

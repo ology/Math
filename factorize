@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+# Unceremoniously lifted from
+# http://mwolf.net/archive/golfing-with-prime-factors/
+my @n = @ARGV ? @ARGV : die "Usage: perl $0 x y z\n";
+for my $n (@n) {
+    my @f = ();
+    print "$n = ";
+    for my $x (2 .. $n) {
+        my $i = 0;
+        $n /= $x, $i++ until $n % $x;
+        push @f, $x . "**$i" x ($i > 1) if $i;
+    }
+    print join(' * ', @f), "\n";
+}
