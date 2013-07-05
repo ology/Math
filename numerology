@@ -1,12 +1,21 @@
 #!/usr/bin/perl
+#
+# An enthusiastic friend showed me this book,
+# "The Life You Were Born to Live: A Guide to # Finding Your Life Purpose"
+# ISBN 091581160X by the venerable Dan Millman.
+# After a bit of tinkering, I distilled its "essence" to one algorithm.
+#
 use strict;
 use warnings;
 use Date::Calc qw(Add_Delta_Days);
 
+# Initialize our date counters.
 my ($y,$m,$d) = (1900, 1, 1);
 
+# Bucket for the sum ratios.
 my $n = {};
 
+# Return the sum of the digits of a number.
 my $digit_sum = sub {
     my $x = shift;
     my $y = 0;
@@ -14,11 +23,16 @@ my $digit_sum = sub {
     return $y;
 };
 
+# Perform the magical computations!
 while ($y < 2000) {
+    # Sum the digits of the date.
     my $i = $digit_sum->("$y$m$d");
-#warn"$m/$d/$y\n" if length $i == 1;
+    #warn"$m/$d/$y\n" if length $i == 1;
+    # Sum the digits of the "sum of the digits of the date."
     my $j = $digit_sum->($i);
+    # Increment the ratio of the sums.
     $n->{"$i/$j"}++;
+    # Increment the day.
     ($y, $m, $d) = Add_Delta_Days($y, $m, $d, 1);
 }
 
