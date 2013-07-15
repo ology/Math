@@ -1,9 +1,16 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-die "Euclid greatest common divisor\nUsage: perl $0 x y\n"
-    unless @ARGV == 2;
-print gcd( @ARGV );
+
+die "Euclid greatest common divisor for 2 or more numbers\nUsage: perl $0 m k [x y ...]\n"
+    unless @ARGV >= 2;
+
+my $gcd = gcd( shift, shift );
+
+$gcd = gcd( shift, $gcd ) for @ARGV;
+
+print $gcd;
+
 sub gcd {
     my ( $m, $k ) = @_;
     warn "m=$m, k=$k\n";
