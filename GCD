@@ -1,17 +1,25 @@
 #!/usr/bin/perl
+#
+# Euclid's greatest common divisor but with the added convenience of computing
+# with more than 2 numbers. - gene@ology.net
+#
 use strict;
 use warnings;
 
+# Output usage when less than two arguments are given.
 die "Euclid greatest common divisor for 2 or more numbers\nUsage: perl $0 m k [x y ...]\n"
     unless @ARGV >= 2;
 
+# Find the initial pair g.c.d.
 my $gcd = gcd( shift, shift );
 
+# Find the successive g.c.d. for any remaining numbers to process.
 $gcd = gcd( shift, $gcd ) for @ARGV;
 
+# Output the final, glorious greatist common factor.
 print $gcd;
 
-sub gcd {
+sub gcd { # Euclid's algorithm.
     my ( $m, $k ) = @_;
     warn "m=$m, k=$k\n";
     return $k == 0 ? $m : gcd($k, $m % $k);
