@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-die "Euclid greatist common divisor\nUsage: perl $0 x y\n"
+die "Euclid greatest common divisor\nUsage: perl $0 x y\n"
     unless @ARGV == 2;
-print gcd(@ARGV);
+print gcd( @ARGV );
 sub gcd {
     my ( $m, $k ) = @_;
     warn "m=$m, k=$k\n";
