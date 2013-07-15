@@ -6,5 +6,6 @@ die "Euclid greatist common divisor\nUsage: perl $0 x y\n"
 print gcd(@ARGV);
 sub gcd {
     my ( $m, $k ) = @_;
+    warn "m=$m, k=$k\n";
     return $k == 0 ? $m : gcd($k, $m % $k);
 }
