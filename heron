@@ -38,4 +38,5 @@ if ($x + $y > $z and $x + $z > $y and $y + $z > $x) {
     }
 }
 
-print "$type area=$area\n"; # Prints 0 if not a valid triangle.
+# Output triangle type and area.
+print "$type area=$area\n";
