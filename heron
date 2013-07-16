@@ -1,25 +1,34 @@
 #!/usr/bin/perl
+#
+# Compute the type and area of a 2D triangle with Heron's formula.
+# gene@ology.net
+#
 use strict;
 use warnings;
 
 die "Compute the type and area of a 2D triangle with Heron's formula\nUsage: perl $0 x y z\n"
     unless @ARGV == 3;
 
+# Get the command-line arguments.
 my ($x, $y, $z) = @ARGV; # sides
+
+# Initialize the variables to use in the computation.
 my ($area, $type) = (0, 'invalid');
 
+# Have we been given a triangle?
 if ($x + $y > $z and $x + $z > $y and $y + $z > $x) {
     # We have a triangle!
     my $p = ($x + $y + $z) / 2; # "Half-perimeter"
+
     # Compute the area with Heron's formula.
     $area = sqrt($p * ($p - $x) * ($p - $y) * ($p - $z));
 
-    # Figure out the type of triangle.
+    # Discern the type of triangle.
     if ($x == $y and $y == $z) {
         $type = 'equilateral';
     }
     elsif ($x == $y or $x == $z or $y == $z) {
-        $type = 'isoceles';
+        $type = 'isosceles';
     }
     elsif ($x + $y == $z ** 2 or $x + $z == $y ** 2 or $y + $z == $x ** 2) {
         $type = 'right';
