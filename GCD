@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # Euclid's greatest common divisor but with the added convenience of computing
-# with more than 2 numbers. - gene@ology.net
+# on more than 2 numbers. - gene@ology.net
 #
 use strict;
 use warnings;
@@ -13,10 +13,10 @@ die "Euclid greatest common divisor for 2 or more numbers\nUsage: perl $0 m k [x
 # Find the initial pair g.c.d.
 my $gcd = gcd( shift, shift );
 
-# Find the successive g.c.d. for any remaining numbers to process.
+# Find the subsequent g.c.d. for any remaining numbers.
 $gcd = gcd( shift, $gcd ) for @ARGV;
 
-# Output the final, glorious greatist common factor.
+# Output the final greatest common factor.
 print $gcd;
 
 sub gcd { # Euclid's algorithm.
