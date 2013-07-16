@@ -14,7 +14,7 @@ die "Euclid greatest common divisor for 2 or more numbers\nUsage: perl $0 m k [x
 my $gcd = gcd( shift, shift );
 
 # Find the subsequent g.c.d. for any remaining numbers.
-$gcd = gcd( shift, $gcd ) for @ARGV;
+$gcd = gcd( $_, $gcd ) for @ARGV;
 
 # Output the final greatest common factor.
 print $gcd;
