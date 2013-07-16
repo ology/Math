@@ -21,6 +21,6 @@ print $gcd;
 
 sub gcd { # Euclid's algorithm.
     my ( $m, $k ) = @_;
-    warn "m=$m, k=$k\n";
+    warn sprintf "%d : %d\n", $m, $k;
     return $k == 0 ? $m : gcd($k, $m % $k);
 }
