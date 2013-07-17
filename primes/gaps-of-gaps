@@ -1,10 +1,8 @@
 #!/usr/bin/perl
 #
-# Program: Chord-Perversions
-# Created: 2013 by gene@cpan.org
-#
 # Generate a table of the "gaps of gaps" between sucessive primes and their
 # gaps, and their gaps, and their gaps... given a maximum.
+# -- gene@cpan.org
 #
 use strict;
 use warnings;
