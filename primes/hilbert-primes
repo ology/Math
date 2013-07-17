@@ -1,9 +1,7 @@
 #!/usr/bin/perl
 #
-# Program: Chord-Perversions
-# Created: 2011-1-2 by gene@cpan.org
-#
 # Plot the primes on a Hilbert "curve."
+# -- gene@cpan.org
 #
 use strict;
 use warnings;
