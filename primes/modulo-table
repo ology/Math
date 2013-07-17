@@ -19,7 +19,7 @@ my $max = shift || $mod;
 my @primes = map { $_->{value}[0] } primes($max);
 print "Primes less than $max is ", scalar(@primes), "\n";
 
-# Set the field widths to use for output formatting.
+# Set the field widths for output formatting.
 my $mwidth = length($mod);
 my $pwidth = length($primes[-1]);
 my $iwidth = length(@primes);
