@@ -10,13 +10,13 @@ use warnings;
 use Math::Big qw(primes);
 
 # Set the starting modulo value.
-my $min  = shift || 2;
+my $mmin = shift || 2;
 # Set the upper modulo limit.
-my $mod  = shift || 20;
+my $mmax = shift || 20;
 # Set the starting prime value.
 my $pmin = shift || 2;
 # Set the ceiling for primes to consider.
-my $pmax = shift || $mod;
+my $pmax = shift || $mmax;
 
 # Get a list of the bounded primes only.
 my @primes = grep { $_->{value}[0] if $_->{value}[0] >= $pmin } primes($pmax);
@@ -25,13 +25,13 @@ printf "There are %d primes greater than or equal to %d but less than %d.\n",
 print "Table: Prime rows x modulo columns:\n";
 
 # Set the field widths for output formatting.
-my $mwidth = length($mod);
+my $mwidth = length($mmax);
 my $pwidth = length($primes[-1]);
 my $iwidth = length(@primes);
 
 # Display the table header.
 printf "%s %s\n", (' ' x ($iwidth + $pwidth + $mwidth)),
-    join(' ', (map { sprintf('%*d', $mwidth, $_) } $min .. $mod));
+    join(' ', (map { sprintf('%*d', $mwidth, $_) } $mmin .. $mmax));
 
 # Generate the table of primes x modulo arithmetic.
 my $i = 0;
@@ -39,7 +39,7 @@ for my $p (@primes) {
     # Start off a row with the number and prime.
     printf '%*d. %*d ', $iwidth, ++$i, $pwidth, $p;
     # Compute each modulo of the prime.
-    for my $m ($min .. $mod) {
+    for my $m ($mmin .. $mmax) {
         printf '%*d ', $mwidth, $p % $m;
     }
     # Conclude our row.
