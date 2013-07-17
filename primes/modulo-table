@@ -40,8 +40,7 @@ for my $p (@primes) {
     printf '%*d. %*d ', $iwidth, ++$i, $pwidth, $p;
     # Compute each modulo of the prime.
     for my $m ($min .. $mod) {
-        my $rem = $p % $m;
-        printf '%*d ', $mwidth, $rem;
+        printf '%*d ', $mwidth, $p % $m;
     }
     # Conclude our row.
     print "\n";
