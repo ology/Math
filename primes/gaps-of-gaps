@@ -1,0 +1,72 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# Why stats? Curiosity!
+use Statistics::Descriptive;
+
+# Grab the upper limit or show usage.
+my $max = shift
+    or die qq/Usage: perl $0 INTEGER\nMake a "gaps-of-gaps" table\n/;
+
+# Make a list of the primes to consider.
+my @primes = get_primes($max);
+# Show the bounds of the table.
+printf "There are %d prime numbers below %d.\n", scalar(@primes), $max;
+
+# Compute the size of the table formatting.
+my $width = length($primes[-2]) + 1;
+# Initialize our index counter.
+my $i = 0;
+
+# Show a row for the number of each prime.
+output('#', $width, 0, 1 .. @primes);
+# Show the primes under consideration.
+output('', $width, 0, @primes);
+# Show a horizontal rule for the table.
+print ' ', '-' x ($width * @primes + 1), "\n";
+
+# Initialize the list of gaps to the prime numbers.
+my @gaps = @primes;
+
+# Build and show successive gap lists.
+for (0 .. $#primes - 1) {
+    @gaps = difference(@gaps);
+    output(++$i, $width, 1, @gaps);
+}
+
+# Show a prefixed sequence of numbers in fields of specific width.
+sub output {
+    my ($i, $width, $stats, @sequence) = @_;
+    # Show the prefix.
+    printf '%2s', $i;
+    # Show the sequence values in the given width.
+    printf "%*d", $width, $_ for @sequence;
+    # Show the sum of the sequence if requested.
+    if ($stats) {
+        my $stat = Statistics::Descriptive::Full->new();
+        $stat->add_data(@sequence);
+        printf ' = %d, %.2f, %.2f', $stat->sum, $stat->mean, $stat->standard_deviation;
+    }
+    print "\n";
+}
+
+# Return a list of absolute differences between successive sequence members.
+sub difference {
+    my @sequence = @_;
+    my @difference = ();
+    # Loop over one less than the size of the sequence.
+    for my $n (0 .. $#sequence - 1) {
+        # Build a list of differences.
+        push @difference, abs($sequence[$n] - $sequence[$n + 1]);
+    }
+    return @difference;
+}
+
+# Return the prime numbers from an integer scope.
+sub get_primes {
+    my $upper_limit = shift;
+    require Math::Big;
+    Math::Big->import('primes');
+    return map { $_->{value}[0] } primes($upper_limit);
+}
