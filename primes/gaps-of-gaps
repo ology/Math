@@ -1,8 +1,15 @@
 #!/usr/bin/perl
+#
+# Program: Chord-Perversions
+# Created: 2013 by gene@cpan.org
+#
+# Generate a table of the "gaps of gaps" between sucessive primes and their
+# gaps, and their gaps, and their gaps... given a maximum.
+#
 use strict;
 use warnings;
 
-# Why stats? Curiosity!
+# Why stats in number theory? Because curiosity.
 use Statistics::Descriptive;
 
 # Grab the upper limit or show usage.
