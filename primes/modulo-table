@@ -10,9 +10,9 @@ use warnings;
 use Math::Big qw(primes);
 
 # Set the starting modulo value.
-my $min = '2';
+my $min = shift || 2;
 # Set the upper modulo limit.
-my $mod = shift || '20';
+my $mod = shift || 20;
 # Set the ceiling for primes to consider.
 my $max = shift || $mod;
 
