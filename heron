@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # Compute the type and area of a 2D triangle with Heron's formula.
-# gene@ology.net
+# -- gene@ology.net
 #
 use strict;
 use warnings;
