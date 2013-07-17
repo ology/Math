@@ -10,15 +10,18 @@ use warnings;
 use Math::Big qw(primes);
 
 # Set the starting modulo value.
-my $min = shift || 2;
+my $min  = shift || 2;
 # Set the upper modulo limit.
-my $mod = shift || 20;
+my $mod  = shift || 20;
+# Set the starting prime value.
+my $pmin = shift || 2;
 # Set the ceiling for primes to consider.
-my $max = shift || $mod;
+my $pmax = shift || $mod;
 
-# Get a list of the primes only.
-my @primes = map { $_->{value}[0] } primes($max);
-printf "There are %d primes less than %d.\n", scalar(@primes), $max;
+# Get a list of the bounded primes only.
+my @primes = grep { $_->{value}[0] if $_->{value}[0] >= $pmin } primes($pmax);
+printf "There are %d primes greater than or equal to %d but less than %d.\n",
+    scalar(@primes), $pmin, $pmax;
 print "Table: Prime rows x modulo columns:\n";
 
 # Set the field widths for output formatting.
