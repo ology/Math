@@ -1,21 +1,31 @@
 #!/usr/bin/perl
+#
+# TODO Description
+# -- gene@cpan.org
+#
 use strict;
 use warnings;
 
 use Math::Big qw(primes);
 
+# Set the 
 my $min = '2';
+# Set the modulo factor.
 my $mod = shift || '5';
+# Set the ceiling for primes to consider.
 my $max = shift || '100';
 
+# Get a list of the primes only.
 my @primes = map { $_->{value}[0] } primes($max);
 print "Primes less than $max is ", scalar(@primes), "\n";
 
+# Set the field widths to use for output formatting.
 my $mwidth = length($mod);
 my $pwidth = length($primes[-1]);
 my $iwidth = length(@primes);
 my $i = 0;
 
+# 
 my @mods = ();
 for my $m ($min .. $mod) {
     if (length($m) < $mwidth) {
