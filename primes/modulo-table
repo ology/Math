@@ -10,10 +10,10 @@ use Math::Big qw(primes);
 
 # Set the 
 my $min = '2';
-# Set the modulo factor.
-my $mod = shift || '5';
+# Set the upper modulo limit.
+my $mod = shift || '20';
 # Set the ceiling for primes to consider.
-my $max = shift || '100';
+my $max = shift || $mod;
 
 # Get a list of the primes only.
 my @primes = map { $_->{value}[0] } primes($max);
