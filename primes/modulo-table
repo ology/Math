@@ -14,7 +14,7 @@ my $mmin = shift || 2;
 # Set the upper modulo limit.
 my $mmax = shift || 20;
 # Set the starting prime value.
-my $pmin = shift || 2;
+my $pmin = shift || $mmin;
 # Set the ceiling for primes to consider.
 my $pmax = shift || $mmax;
 
