@@ -4,6 +4,7 @@
 # "The Life You Were Born to Live: A Guide to # Finding Your Life Purpose"
 # ISBN 091581160X by the venerable Dan Millman.
 # After a bit of tinkering, I distilled its "essence" to one algorithm.
+# -- gene@cpan.org
 #
 use strict;
 use warnings;
