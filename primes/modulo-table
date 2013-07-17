@@ -23,23 +23,12 @@ print "Primes less than $max is ", scalar(@primes), "\n";
 my $mwidth = length($mod);
 my $pwidth = length($primes[-1]);
 my $iwidth = length(@primes);
+
+printf "%*s  %*s\n", $iwidth, '#', $pwidth, 'P';
+
 my $i = 0;
-
-# 
-my @mods = ();
-for my $m ($min .. $mod) {
-    if (length($m) < $mwidth) {
-        push @mods, ' ' x ($mwidth - length($m)) . $m;
-    }
-    else {
-        push @mods, $m;
-    }
-}
-
-printf "%*s  %*s  %s\n", $iwidth, '#', $pwidth, 'P', join(' ', @mods);
-
 for my $p (@primes) {
-    printf '%*d. %*d: ', $iwidth, ++$i, $pwidth, $p;
+    printf '%*d. %*d ', $iwidth, ++$i, $pwidth, $p;
     for my $m ($min .. $mod) {
         my $rem = $p % $m;
         printf '%*d ', $mwidth, $rem;
