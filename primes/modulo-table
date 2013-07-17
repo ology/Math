@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 #
-# TODO Description
+# Compute a table of primes x modulo arithmetic for a given ceiling of primes
+# and a maximum number to modulo by.
 # -- gene@cpan.org
 #
 use strict;
@@ -8,7 +9,7 @@ use warnings;
 
 use Math::Big qw(primes);
 
-# Set the 
+# Set the starting modulo value.
 my $min = '2';
 # Set the upper modulo limit.
 my $mod = shift || '20';
@@ -17,21 +18,28 @@ my $max = shift || $mod;
 
 # Get a list of the primes only.
 my @primes = map { $_->{value}[0] } primes($max);
-print "Primes less than $max is ", scalar(@primes), "\n";
+printf "There are %d primes less than %d.\n", scalar(@primes), $max;
+print "Table: Prime rows x modulo columns:\n";
 
 # Set the field widths for output formatting.
 my $mwidth = length($mod);
 my $pwidth = length($primes[-1]);
 my $iwidth = length(@primes);
 
-printf "%*s  %*s\n", $iwidth, '#', $pwidth, 'P';
+# Display the table header.
+printf "%s %s\n", (' ' x ($iwidth + $pwidth + $mwidth)),
+    join(' ', (map { sprintf('%*d', $mwidth, $_) } $min .. $mod));
 
+# Generate the table of primes x modulo arithmetic.
 my $i = 0;
 for my $p (@primes) {
+    # Start off a row with the number and prime.
     printf '%*d. %*d ', $iwidth, ++$i, $pwidth, $p;
+    # Compute each modulo of the prime.
     for my $m ($min .. $mod) {
         my $rem = $p % $m;
         printf '%*d ', $mwidth, $rem;
     }
+    # Conclude our row.
     print "\n";
 }
