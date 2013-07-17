@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use Imager;
+use Math::Curve::Hilbert;
+use Math::Numbers;
+
+# Set the image dimensions.
+my $dimension = shift || 1050;
+my $max = shift || 65521;
+
+# Instantiate an image.
+my $image = Imager->new(xsize => $dimension, ysize => $dimension);
+# Draw a filled box filling the image.
+$image->box(filled => 1, color => 'white');
+
+# Instantiate a Hilbert curve.
+my $hilbert = Math::Curve::Hilbert->new(
+    direction => 'up', max => 8, clockwise => 1, step => 4,
+);
+
+# Declare an increment.
+my $count = 0;
+
+# Start the Hilbert curve.
+my ($x1, $y1) = $hilbert->CoordinatesFromPoint($count++);
+
+# Draw the Hilbert curve.
+while (($hilbert->CoordinatesFromPoint($count))[0]) {
+    # Instantiate a Math::Numbers object from the current increment.
+    my $number = Math::Numbers->new($count);
+
+    # Output the increment if it is a prime number.
+    warn "$count\n" if $count > 1 && $number->is_prime;
+
+    # Set the line segment color.
+    my $color = $count > 1 && $number->is_prime ? 'blue' : 'lightgray';
+
+    # Increment the Hilbert curve.
+    my ($x2, $y2) = $hilbert->CoordinatesFromPoint($count++);
+
+    # Draw a line segment of the Hilbert curve onto the image.
+    $image->line(
+        color => $color,
+        x1 => $x1, x2 => $x2, y1 => $y1, y2 => $y2,
+        aa => 1, endp => 1
+    );
+
+    # Increment the line segment.
+    ($x1, $y1) = ($x2, $y2);
+
+    # End the loop if we have reched the maximum count.
+    last if $count > $max;
+}
+
+# Output the image as a file.
+my $file = "$0.png";
+$image->write(file => $file) or die "Can't save $file: ", $image->errstr;
+
+# Output the final count.
+warn "$file below $count\n";
