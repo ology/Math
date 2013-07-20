@@ -1,0 +1,76 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use integer;
+use Math::Big qw(primes fibonacci);
+
+# The limit is the prime ceiling or the number of fibonacci.
+my $limit = shift || 20;
+# The number base to which to convert.
+my $base = shift || 6;
+# The sequence to inspect.
+my $sequence = shift || 'primes';
+# The actual digits to use.
+my @digits = @ARGV ? @ARGV : (0 .. 9, 'A' .. 'Z')[0 .. $base - 1];
+
+convert_series($sequence, $limit, \@digits);
+
+sub convert_series {
+    my ($sequence, $limit, $digits) = @_;
+
+    # Fetch our sequence.
+    my @sequence = ();
+    if ($sequence =~ /^p/) {
+        @sequence = primes($limit);
+    }
+    elsif ($sequence =~ /^f/) {
+        @sequence = fibonacci($limit);
+    }
+    else {
+        die "ERROR: Unknown sequence: $sequence.\n";
+    }
+
+    # Compute the length of the final converted sequence number.
+    my $field = length(Math::Big::to_base($sequence[-1], $base, join('', @$digits))) + 1;
+
+    # Display a column header.
+    printf "%*s %*s %*s %2s %*s %s\n",
+        length scalar @sequence, '#',
+        length $sequence[-1], 'S',
+        6, '+ ',
+        '%',
+        $field, "B$base",
+        'Digits';
+
+    # How many of each digit?
+    my %count = ();
+
+    # Initialize our counter.
+    my $i = 0;
+
+    # Accumulate the cycle.
+    for my $n (@sequence) {
+        my ($sum, $modulus, $to_base) = (0, 0, 0);
+
+        # Sum the digits of the number.
+        $sum += $_ for split //, $n;
+
+        # Find the modulus of the number by the base.
+        $modulus = $n % scalar @$digits;
+
+        # Convert the number to our chosen base.
+        $to_base = Math::Big::to_base($n, $base, join('', @$digits));
+
+        # Count the number of digits seen in the base converted representation.
+        $count{$_} = eval "'$to_base' =~ tr/$_/$_/" for @$digits;
+
+        # Display each step - index, decimal number, mod number and base converted number.
+        printf "%*d %*s (%*d) %2s %*s %s\n",
+            length scalar @sequence, ++$i,
+            length $sequence[-1], $n,
+            4, $sum,
+            $modulus,
+            $field, $to_base,
+            join(',', @count{@$digits});
+    }
+}
