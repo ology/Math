@@ -1,6 +1,10 @@
 #!/usr/bin/perl
+#
+# TODO Program description
+#
 use strict;
 use warnings;
+
 use integer;
 use Math::Big qw(primes fibonacci);
 
@@ -13,9 +17,10 @@ my $sequence = shift || 'primes';
 # The actual digits to use.
 my @digits = @ARGV ? @ARGV : (0 .. 9, 'A' .. 'Z')[0 .. $base - 1];
 
+# TODO ?
 convert_series($sequence, $limit, \@digits);
 
-sub convert_series {
+sub convert_series { # TODO ?
     my ($sequence, $limit, $digits) = @_;
 
     # Fetch our sequence.
@@ -50,6 +55,7 @@ sub convert_series {
 
     # Accumulate the cycle.
     for my $n (@sequence) {
+        # Initialize our calculation results.
         my ($sum, $modulus, $to_base) = (0, 0, 0);
 
         # Sum the digits of the number.
@@ -64,7 +70,7 @@ sub convert_series {
         # Count the number of digits seen in the base converted representation.
         $count{$_} = eval "'$to_base' =~ tr/$_/$_/" for @$digits;
 
-        # Display each step - index, decimal number, mod number and base converted number.
+        # Display each index, decimal, modulo and base-converted number.
         printf "%*d %*s (%*d) %2s %*s %s\n",
             length scalar @sequence, ++$i,
             length $sequence[-1], $n,
