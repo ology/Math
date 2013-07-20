@@ -74,7 +74,7 @@ sub convert_series {
         printf "%*d %*s (%*d) %2s %*s %s\n",
             length scalar @$sequence, ++$i,
             length $sequence->[-1], $n,
-            4, $sum,
+            length $sequence->[-1], $sum,
             $modulus,
             $field, $to_base,
             join(',', @count{@$digits});
