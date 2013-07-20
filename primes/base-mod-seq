@@ -17,31 +17,31 @@ my $sequence = shift || 'primes';
 # The actual digits to use for transformation.
 my @digits = @ARGV ? @ARGV : (0 .. 9, 'A' .. 'Z')[0 .. $base - 1];
 
+# Fetch our sequence.
+my @sequence = ();
+if ($sequence =~ /^p/) {
+    @sequence = primes($limit);
+}
+elsif ($sequence =~ /^f/) {
+    @sequence = fibonacci($limit);
+}
+else {
+    die "ERROR: Unknown sequence: $sequence.\n";
+}
+
 # Transform the series.
-convert_series($sequence, $limit, \@digits);
+convert_series(\@sequence, $limit, \@digits);
 
 sub convert_series {
     my ($sequence, $limit, $digits) = @_;
-
-    # Fetch our sequence.
-    my @sequence = ();
-    if ($sequence =~ /^p/) {
-        @sequence = primes($limit);
-    }
-    elsif ($sequence =~ /^f/) {
-        @sequence = fibonacci($limit);
-    }
-    else {
-        die "ERROR: Unknown sequence: $sequence.\n";
-    }
 
     # Compute the length of the final converted sequence number.
     my $field = length(Math::Big::to_base($sequence[-1], $base, join('', @$digits))) + 1;
 
     # Display a column header.
     printf "%*s %*s %*s %2s %*s %s\n",
-        length scalar @sequence, '#',
-        length $sequence[-1], 'S',
+        length scalar @$sequence, '#',
+        length $sequence->[-1], 'S',
         6, '+ ',
         '%',
         $field, "B$base",
@@ -54,7 +54,7 @@ sub convert_series {
     my $i = 0;
 
     # Accumulate the cycle.
-    for my $n (@sequence) {
+    for my $n (@$sequence) {
         # Initialize our calculation results.
         my ($sum, $modulus, $to_base) = (0, 0, 0);
 
@@ -72,8 +72,8 @@ sub convert_series {
 
         # Display each index, decimal, modulo and base-converted number.
         printf "%*d %*s (%*d) %2s %*s %s\n",
-            length scalar @sequence, ++$i,
-            length $sequence[-1], $n,
+            length scalar @$sequence, ++$i,
+            length $sequence->[-1], $n,
             4, $sum,
             $modulus,
             $field, $to_base,
