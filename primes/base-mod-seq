@@ -1,6 +1,13 @@
 #!/usr/bin/perl
 #
 # Modulo transform a numerical sequence into an alternate set of "digits."
+# Usage: perl base-mod-seq [M B p|f 0 1 2 a b c...] where 
+#  M is the either the prime ceiling or the number of fibonacci.
+#  B is the number base to which to convert each number of the series.
+#  p or f stands for primes or fibonacci.
+#  0 1 2... is the set of base "digits" into which each number of the series is
+#    tranformed into.
+# All arguments optional with defaults: M=20, B=6, Primes, Digits=0-5
 #
 use strict;
 use warnings;
