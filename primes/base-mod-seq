@@ -39,10 +39,12 @@ sub convert_series {
     my $field = length(Math::Big::to_base($sequence[-1], $base, join('', @$digits))) + 1;
 
     # Display a column header.
-    printf "%*s %*s %*s %2s %*s %s\n",
+    print "Index. Sequence number n (digit sum) | n % ",
+        scalar(@$digits), " | convert n to $base | digits\n";
+    printf "%*s. %*s %*s  %2s %*s %s\n",
         length scalar @$sequence, '#',
-        length $sequence->[-1], 'S',
-        6, '+ ',
+        length $sequence->[-1], 'n',
+        length($sequence->[-1]) + 1, '+',
         '%',
         $field, "B$base",
         'Digits';
@@ -70,8 +72,8 @@ sub convert_series {
         # Count the number of digits seen in the base converted representation.
         $count{$_} = eval "'$to_base' =~ tr/$_/$_/" for @$digits;
 
-        # Display each index, decimal, modulo and base-converted number.
-        printf "%*d %*s (%*d) %2s %*s %s\n",
+        # Display each index, term, digit sum, modulo and base-converted number.
+        printf "%*d. %*s (%*d) %2s %*s %s\n",
             length scalar @$sequence, ++$i,
             length $sequence->[-1], $n,
             length $sequence->[-1], $sum,
