@@ -10,7 +10,8 @@ use warnings;
 use Math::Prime::XS qw(is_prime);
 
 # Set the number of columns (or "spokes").
-my $spokes = shift || die "Usage: perl $0 N (where N = number of spokes)\n";
+my $spokes = shift
+    || die "Usage: perl $0 N M\n\twhere N=spokes (rows), M=rings (columns)\n";
 # Set the maximum number of rows (or "rings").
 my $max    = shift || $spokes * 20;
 # Get the output field width.
