@@ -51,7 +51,7 @@ sub convert_series {
 
     # Display a column header.
     print "Index. Sequence number n (digit sum) | n % ",
-        scalar(@$digits), " | convert n to $base | digits\n";
+        scalar(@$digits), " | convert n to base $base | digits\n";
     printf "%*s. %*s %*s %*s %*s %s\n",
         $seq_len, '#',
         $last_len, 'n',
