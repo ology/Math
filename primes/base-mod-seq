@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# TODO Program description
+# Modulo transform a numerical sequence into an alternate set of "digits."
 #
 use strict;
 use warnings;
@@ -8,19 +8,19 @@ use warnings;
 use integer;
 use Math::Big qw(primes fibonacci);
 
-# The limit is the prime ceiling or the number of fibonacci.
+# The limit is either the prime ceiling or the number of fibonacci.
 my $limit = shift || 20;
-# The number base to which to convert.
+# The number base to which to convert each number of the series.
 my $base = shift || 6;
-# The sequence to inspect.
+# The sequence to transform.
 my $sequence = shift || 'primes';
-# The actual digits to use.
+# The actual digits to use for transformation.
 my @digits = @ARGV ? @ARGV : (0 .. 9, 'A' .. 'Z')[0 .. $base - 1];
 
-# TODO ?
+# Transform the series.
 convert_series($sequence, $limit, \@digits);
 
-sub convert_series { # TODO ?
+sub convert_series {
     my ($sequence, $limit, $digits) = @_;
 
     # Fetch our sequence.
