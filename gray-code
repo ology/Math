@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# By binary width.
+my $w = shift || 4;
+my $n = 2**$w - 1;
+# By decimal max.
+#my $n = shift || 15;
+#my $w = length(sprintf '%b', $n);
+
+my $m = length $n;
+printf "%*d. %0*b\n", $m, $_, $w, ($_ ^ $_ >> 1)
+    for 0 .. $n;
+
+__END__
+# http://en.wikipedia.org/wiki/Gray_code#Constructing_an_n-bit_Gray_code
+# The "reflect-and-prefix method"
+# Build a sorted list of binary permutations. XXX Memory abuser
+my $x = shift || 1;
+my $c = [];
+$c = gray($c) for 1 .. $x;
+use Data::Dumper;print Data::Dumper->new($c)->Indent(1)->Terse(1)->Sortkeys(1)->Dump;
+sub gray {
+    my $c = shift;
+    return @$c ? [(map {"0$_"} @$c), (map {"1$_"} reverse @$c)] : [0,1];
+}
