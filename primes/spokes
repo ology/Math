@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+# This program geerates the numbers behind Timothy Butcher's prime spiral drawings.
+# The Ulam spiral is N=4
+use strict;
+use warnings;
+use Math::Prime::XS qw(is_prime);
+
+# Usage: perl $0 number_of_spokes
+my $spokes = shift || 3;
+my $max    = shift || $spokes * 20;
+my $width  = length $max;
+
+#printf '%*s ', $width, ' ';
+for my $i (1 .. $max) {
+#    next unless $i % 2;
+    printf '%*s ', $width, is_prime($i) ? $i : '.';
+    print "\n" unless $i % $spokes;
+}
