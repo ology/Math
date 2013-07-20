@@ -7,6 +7,7 @@
 use strict;
 use warnings;
 
+# We will be considering the prime numbers.
 use Math::Prime::XS qw(is_prime);
 
 # Set the number of columns (or "spokes").
@@ -19,6 +20,7 @@ my $width  = length $max;
 
 # Output each column.
 for my $i (1 .. $max) {
+    # Skip evenly divisible numbers.
 #    next unless $i % 2;
     # Output a row.
     printf '%*s ', $width, is_prime($i) ? $i : '.';
