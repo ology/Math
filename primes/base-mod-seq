@@ -38,14 +38,18 @@ sub convert_series {
     # Compute the length of the final converted sequence number.
     my $field = length(Math::Big::to_base($sequence[-1], $base, join('', @$digits))) + 1;
 
+    # Convenience variables.
+    my $seq_len  = length scalar @$sequence;
+    my $last_len = length $sequence->[-1];
+
     # Display a column header.
     print "Index. Sequence number n (digit sum) | n % ",
         scalar(@$digits), " | convert n to $base | digits\n";
     printf "%*s. %*s %*s %*s %*s %s\n",
-        length scalar @$sequence, '#',
-        length $sequence->[-1], 'n',
-        length($sequence->[-1]) + 1, '+',
-        length($sequence->[-1]) + 1, '%',
+        $seq_len, '#',
+        $last_len, 'n',
+        $last_len + 1, '+',
+        $last_len + 1, '%',
         $field, "B$base",
         'Digits';
 
@@ -62,6 +66,7 @@ sub convert_series {
 
         # Sum the digits of the number.
         $sum += $_ for split //, $n;
+        # XXX Why? Because curiosity.
 
         # Find the modulus of the number by the base.
         $modulus = $n % scalar @$digits;
@@ -74,9 +79,9 @@ sub convert_series {
 
         # Display each index, term, digit sum, modulo and base-converted number.
         printf "%*d. %*s (%*d) %2s %*s %s\n",
-            length scalar @$sequence, ++$i,
-            length $sequence->[-1], $n,
-            length $sequence->[-1], $sum,
+            $seq_len, ++$i,
+            $last_len, $n,
+            $last_len, $sum,
             $modulus,
             $field, $to_base,
             join(',', @count{@$digits});
