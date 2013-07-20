@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # This program generates a table of the numbers behind Timothy Butcher's prime
-# spiral drawings.  A spiral similar to Ulam's is N=4.
+# spiral drawings.  A spiral similar to Ulam's is N=4.  Examples at the bottom.
 # -- gene@cpan.org
 #
 use strict;
@@ -25,3 +25,25 @@ for my $i (1 .. $max) {
     # End a row if we are on the last column.
     print "\n" unless $i % $spokes;
 }
+
+__END__
+# Example 1 with N = 3, M = 21
+ .  2  3 
+ .  5  . 
+ 7  .  . 
+ . 11  . 
+13  .  . 
+ . 17  . 
+19  .  .
+
+# Example 2 with N = 4, M = 40
+ .  2  3  . 
+ 5  .  7  . 
+ .  . 11  . 
+13  .  .  . 
+17  . 19  . 
+ .  . 23  . 
+ .  .  .  . 
+29  . 31  . 
+ .  .  .  . 
+37  .  .  .
