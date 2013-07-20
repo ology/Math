@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # This program generates a table of the numbers behind Timothy Butcher's prime
-# spiral drawings.  The Ulam spiral is N=4.
+# spiral drawings.  A spiral similar to Ulam's is N=4.
 # -- gene@cpan.org
 #
 use strict;
@@ -9,15 +9,13 @@ use warnings;
 
 use Math::Prime::XS qw(is_prime);
 
-# Usage: perl $0 number_of_spokes
 # Set the number of columns (or "spokes").
-my $spokes = shift || 3;
+my $spokes = shift || die "Usage: perl $0 N (where N = number of spokes)\n";
 # Set the maximum number of rows (or "rings").
 my $max    = shift || $spokes * 20;
 # Get the output field width.
 my $width  = length $max;
 
-#printf '%*s ', $width, ' ';
 # Output each column.
 for my $i (1 .. $max) {
 #    next unless $i % 2;
