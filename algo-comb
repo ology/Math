@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use Algorithm::Combinatorics qw(
+    variations_with_repetition
+);
+
+my $k = shift || 3;
+my @range = @ARGV ? @ARGV : 1 .. $k;
+
+print "variations_with_repetition:\n";
+my $v = variations_with_repetition(\@range, $k);
+my $i = 0;
+while (my $x = $v->next) {
+    printf "%*d. %s\n", 2, ++$i, join(' ', @$x);
+}
