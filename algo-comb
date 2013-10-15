@@ -11,7 +11,8 @@ my @range = @ARGV ? @ARGV : 1 .. $k;
 
 print "variations_with_repetition:\n";
 my $v = variations_with_repetition(\@range, $k);
+my $n = 2;
 my $i = 0;
 while (my $x = $v->next) {
-    printf "%*d. %s\n", 2, ++$i, join(' ', @$x);
+    printf "%*d. %s\n", $n, ++$i, join(' ', @$x);
 }
