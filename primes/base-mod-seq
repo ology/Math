@@ -12,7 +12,6 @@
 use strict;
 use warnings;
 
-use integer;
 use Math::Big qw(primes fibonacci);
 
 # The limit is either the prime ceiling or the number of fibonacci.
@@ -51,14 +50,15 @@ sub convert_series {
 
     # Display a column header.
     print "Index. Sequence number n (digit sum) | n % ",
-        scalar(@$digits), " | convert n to base $base | digits\n";
-    printf "%*s. %*s %*s %*s %*s %s\n",
+        scalar(@$digits), " | convert n to base $base | digit count | ratio\n";
+    printf "%*s. %*s %*s %*s %*s %s => %s\n",
         $seq_len, '#',
         $last_len, 'n',
         $last_len + 1, '+',
         $last_len + 1, '%',
         $field, "B$base",
-        'Digits';
+        'Digits',
+        'Ratio';
 
     # How many of each digit?
     my %count = ();
@@ -80,18 +80,22 @@ sub convert_series {
 
         # Convert the number to our chosen base.
         $to_base = Math::Big::to_base($n, $base, join('', @$digits));
+        my $len = length $to_base;
 
         # Count the number of digits seen in the base converted representation.
         $count{$_} = eval "'$to_base' =~ tr/$_/$_/" for @$digits;
 
-        # Display each index, term, digit sum, modulo and base-converted number.
-        printf "%*d. %*s (%*d) %2s %*s %s\n",
+        # Display each index, term, digit sum, modulo and base-converted number
+        # & ratio of digits to length of base converted number.
+        printf "%*d. %*s (%*d) %2s %*s %s => %s\n",
             $seq_len, ++$i,
             $last_len, $n,
             $last_len, $sum,
             $modulus,
             $field, $to_base,
-            join(',', @count{@$digits});
+            join(',', @count{@$digits}),
+            join(',', map { sprintf '%.2f', $_ / $len } @count{@$digits})
+        ;
     }
 }
 
