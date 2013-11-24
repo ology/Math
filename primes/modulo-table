@@ -3,6 +3,8 @@
 # Compute a table of primes x modulo arithmetic for a given ceiling of primes
 # and a maximum number to modulo by.
 # -- gene@cpan.org
+# Ex: $ perl modulo-table 55 90
+#     $ perl modulo-table 2 10 2 1000
 #
 use strict;
 use warnings;
