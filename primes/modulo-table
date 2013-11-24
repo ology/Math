@@ -25,9 +25,11 @@ my $pmax = shift || $mmax;
 
 # Get a list of the bounded primes only.
 my @primes = grep { $_->{value}[0] if $_->{value}[0] >= $pmin } primes($pmax);
-printf("There are %d primes greater than or equal to %d but less than %d.\n",
-    scalar(@primes), $pmin, $pmax);
-print "Table: Prime rows x modulo columns:\n";
+if ($DEBUG) {
+    printf("There are %d primes >= %d but < %d.\n",
+        scalar(@primes), $pmin, $pmax);
+    print "Table: Prime rows x modulo columns:\n";
+}
 
 # Set the field widths for output formatting.
 my $mwidth = length($mmax);
