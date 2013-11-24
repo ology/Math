@@ -3,16 +3,22 @@
 # Compute a table of primes x modulo arithmetic for a given ceiling of primes
 # and a maximum number to modulo by.
 # -- gene@cpan.org
-# Ex: $ perl modulo-table 55 90
-#     $ perl modulo-table 3 10 11 1000
 #
 use strict;
 use warnings;
 
 use Math::Big qw(primes);
 
-# Crude but handy debug flag.
-my $DEBUG = 1;
+# Handy debug flag or die.
+my $DEBUG = defined $ARGV[0]
+    ? shift
+    : die(<<"USAGE");
+Program: $0 - Compute a table of primes x modulo n
+Usage: perl $0 debug [mod_min mod_max prime_min prime_max]
+  Defaults: *_min=2,*_max=20
+  Ex: perl modulo-table 1 55 90
+      perl modulo-table 0 3 10 11 1000
+USAGE
 
 # Set the starting modulo value.
 my $mmin = shift || 2;
@@ -25,30 +31,37 @@ my $pmax = shift || $mmax;
 
 # Get a list of the bounded primes only.
 my @primes = grep { $_->{value}[0] if $_->{value}[0] >= $pmin } primes($pmax);
-if ($DEBUG) {
-    printf("There are %d primes >= %d but < %d.\n",
-        scalar(@primes), $pmin, $pmax);
-    print "Table: Prime rows x modulo columns:\n";
-}
 
-# Set the field widths for output formatting.
+# Set the field widths for output formatting if debugging.
 my $mwidth = length($mmax);
 my $pwidth = length($primes[-1]);
 my $iwidth = length(@primes);
 
-# Display the table header.
-printf("%s", (' ' x ($iwidth + $pwidth + $mwidth + 1))) if $DEBUG;
-printf("%s\n", join(' ', (map { sprintf('%*d', $mwidth, $_) } $mmin .. $mmax)));
+if ($DEBUG) {
+    # Display the table header.
+    print "Table: Prime rows x modulo columns:\n";
+    printf("%s", (' ' x ($iwidth + $pwidth + $mwidth + 1)));
+    printf("%s\n", join(' ', (map { sprintf('%*d', $mwidth, $_) } $mmin .. $mmax)));
+}
 
 # Generate the table of primes x modulo arithmetic.
 my $i = 0;
 for my $p (@primes) {
-    # Start off a row with the number and prime.
-    printf('%*d. %*d ', $iwidth, ++$i, $pwidth, $p) if $DEBUG;
-    # Compute each modulo of the prime.
-    for my $m ($mmin .. $mmax) {
-        printf '%*d ', $mwidth, $p % $m;
+    if ($DEBUG) {
+        # Show human readible tables.
+        # Start off a row with the number and prime.
+        printf('%*d. %*d ', $iwidth, ++$i, $pwidth, $p) if $DEBUG;
     }
+    # Compute each modulo of the prime.
+    my @row = ();
+    for my $m ($mmin .. $mmax) {
+        if ($DEBUG) {
+            printf '%*d ', $mwidth, $p % $m;
+        } else {
+            push @row, $p % $m;
+        }
+    }
+    print join(',', @row) unless $DEBUG;
     # Conclude our row.
     print "\n";
 }
