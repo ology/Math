@@ -9,24 +9,24 @@ use List::MoreUtils qw( all );
 # Player strategies.
 my $p1 = {
     # Reducible
-    1 => [1,1,3],
-    2 => [0,0,3],
-    3 => [0,2,5],
+#    1 => [1,1,3],
+#    2 => [0,0,3],
+#    3 => [0,2,5],
     # Irreducible. Nash
-#    1 => [1,0],
-#    2 => [0,1],
+    1 => [1,0],
+    2 => [0,1],
     # Irreducible. No Nash
 #    1 => [0,3],
 #    2 => [2,1],
 };
 my $p2 = {
     # Reducible
-    1 => [0,2,2],
-    2 => [3,1,4],
-    3 => [0,0,3],
+#    1 => [0,2,2],
+#    2 => [3,1,4],
+#    3 => [0,0,3],
     # Irreducible. Nash
-#    1 => [1,0],
-#    2 => [0,1],
+    1 => [1,0],
+    2 => [0,1],
     # Irreducible. No Nash
 #    1 => [3,1],
 #    2 => [0,2],
@@ -37,6 +37,8 @@ reduce_game($p2, $p1);
 reduce_game($p1, $p2);
 reduce_game($p2, $p1);
 reduce_game($p1, $p2);
+
+nash($p1, $p2);
 warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
@@ -94,4 +96,8 @@ sub reduce_game {
             last;
         } 
     }
+}
+
+sub nash {
+    my ($player, $opponent) = @_;
 }
