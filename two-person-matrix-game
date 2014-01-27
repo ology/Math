@@ -17,9 +17,12 @@ my $p2 = {
     3 => [0,0,3],
 };
 
-reduce_game($p2, $p1);
-use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 reduce_game($p1, $p2);
+#use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+reduce_game($p2, $p1);
+#use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+reduce_game($p2, $p1);
+#use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
