@@ -18,12 +18,10 @@ my $p2 = {
     3 => [0,0,3],
 };
 
+reduce_game($p2, $p1);
 reduce_game($p1, $p2);
-#warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 reduce_game($p2, $p1);
-#warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
-reduce_game($p2, $p1);
-#warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+reduce_game($p1, $p2);
 warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
@@ -40,6 +38,7 @@ sub reduce_game {
 
 #warn join(', ', @$v), "\n";
         for my $i (0 .. @$v - 1) {
+            if (defined $player->{$v->[0]}[$i] && defined $player->{$v->[1]}[$i]) {
 #warn "$i: $player->{$v->[0]}[$i] vs $player->{$v->[1]}[$i]\n";
             if ($player->{$v->[0]}[$i] > $player->{$v->[1]}[$i]) {
                 # Strictly dominant utility
@@ -52,6 +51,7 @@ sub reduce_game {
             else {
                 # Equivalent utility
                 push @{ $utility->{join '|', @$v} }, 0;
+            }
             }
         }
     }
