@@ -18,6 +18,7 @@ my $p2 = {
     3 => [0,0,3],
 };
 
+# Solve game.
 reduce_game($p2, $p1);
 reduce_game($p1, $p2);
 reduce_game($p2, $p1);
@@ -28,17 +29,21 @@ sub reduce_game {
     my ($player, $opponent) = @_;
     #use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
-    # Bucket of X|Y strategy pair utilities.
+    # Declare the bucket of "X given Y" strategy pair utilities.
     my $utility = {};
 
     # Evaluate pairs of strategies.
     my $iter = variations_with_repetition([keys %$player], 2);
     while (my $v = $iter->next) {
+        # Skip "X|X" pairs.
         next if $v->[0] eq $v->[1];
 
+        # Inspect each stategy utility.
         #warn join(', ', @$v), "\n";
         for my $i (0 .. @$v - 1) {
+            # Skip undefined utilities.
             if (defined $player->{$v->[0]}[$i] && defined $player->{$v->[1]}[$i]) {
+                # Add a relative utility indicator.
                 #warn "$i: $player->{$v->[0]}[$i] vs $player->{$v->[1]}[$i]\n";
                 if ($player->{$v->[0]}[$i] > $player->{$v->[1]}[$i]) {
                     # Strictly dominant utility
