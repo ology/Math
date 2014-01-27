@@ -20,12 +20,22 @@ my $p2 = {
 # Bucket of X|Y strategy pair utilities.
 my $utility = {};
 
-reduce_game($p2);
-reduce_game($p1);
+reduce_game($p2, $p1);
+use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+{
+  '1' => [ 1, 1 ],
+  '2' => [ 0, 0 ],
+  '3' => [ 0, 2 ]
+}
+{
+  '1' => [ 0, 2, 2 ],
+  '2' => [ 3, 1, 4 ]
+}
+#reduce_game($p1, $p2);
 
 sub reduce_game {
-    my $player = shift;
-use Data::Dumper;warn Data::Dumper->new([$player])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    my ($player, $opponent) = @_;
+#use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Evaluate pairs of strategies.
     my $iter = variations_with_repetition([keys %$player], 2);
@@ -58,10 +68,13 @@ use Data::Dumper;warn Data::Dumper->new([$player])->Indent(1)->Terse(1)->Quoteke
 #warn "U:[@{$utility->{$strat}}]\n";
 #warn "D:'$dominated[0]'\n";
             delete $player->{$dominated[0]};
-            # Delete the oppositing utilities for the opponent strategy.
-#            splice...
+            # Remove the utilities for the deleted opponent strategy.
+            for my $u (keys %$opponent) {
+                splice @{$opponent->{$u}}, $dominated[0] - 1, 1;
+#warn "u:'@{$opponent->{$u}}'\n";
+            }
             last;
         } 
     }
-use Data::Dumper;warn Data::Dumper->new([$player])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 }
