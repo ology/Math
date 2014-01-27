@@ -26,7 +26,7 @@ warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(
 
 sub reduce_game {
     my ($player, $opponent) = @_;
-#use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    #use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Bucket of X|Y strategy pair utilities.
     my $utility = {};
@@ -36,10 +36,10 @@ sub reduce_game {
     while (my $v = $iter->next) {
         next if $v->[0] eq $v->[1];
 
-#warn join(', ', @$v), "\n";
+        #warn join(', ', @$v), "\n";
         for my $i (0 .. @$v - 1) {
             if (defined $player->{$v->[0]}[$i] && defined $player->{$v->[1]}[$i]) {
-#warn "$i: $player->{$v->[0]}[$i] vs $player->{$v->[1]}[$i]\n";
+                #warn "$i: $player->{$v->[0]}[$i] vs $player->{$v->[1]}[$i]\n";
                 if ($player->{$v->[0]}[$i] > $player->{$v->[1]}[$i]) {
                     # Strictly dominant utility
                     push @{ $utility->{join '|', @$v} }, 1;
@@ -55,22 +55,22 @@ sub reduce_game {
             }
         }
     }
-#warn Data::Dumper->new([$utility])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    #warn Data::Dumper->new([$utility])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Remove strictly dominated strategies.
     for my $strat (keys %$utility) {
         if (all { $_ == -1 } @{$utility->{$strat}}) {
             my @dominated = split /\|/, $strat;
-#warn "U:[@{$utility->{$strat}}]\n";
-#warn "D:'$dominated[0]'\n";
+            #warn "U:[@{$utility->{$strat}}]\n";
+            #warn "D:'$dominated[0]'\n";
             delete $player->{$dominated[0]};
             # Remove the utilities for the deleted opponent strategy.
             for my $u (keys %$opponent) {
                 splice @{$opponent->{$u}}, $dominated[0] - 1, 1;
-#warn "u:'@{$opponent->{$u}}'\n";
+                #warn "u:'@{$opponent->{$u}}'\n";
             }
             last;
         } 
     }
-#warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    #warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 }
