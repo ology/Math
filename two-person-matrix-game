@@ -22,15 +22,6 @@ my $utility = {};
 
 reduce_game($p2, $p1);
 use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
-{
-  '1' => [ 1, 1 ],
-  '2' => [ 0, 0 ],
-  '3' => [ 0, 2 ]
-}
-{
-  '1' => [ 0, 2, 2 ],
-  '2' => [ 3, 1, 4 ]
-}
 #reduce_game($p1, $p2);
 
 sub reduce_game {
