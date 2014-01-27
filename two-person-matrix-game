@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 
+use Data::Dumper;
 use Algorithm::Combinatorics qw( variations_with_repetition );
 use List::MoreUtils qw( all );
 
@@ -18,12 +19,12 @@ my $p2 = {
 };
 
 reduce_game($p1, $p2);
-#use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 reduce_game($p2, $p1);
-#use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 reduce_game($p2, $p1);
-#use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
-use Data::Dumper;warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
     my ($player, $opponent) = @_;
@@ -54,7 +55,7 @@ sub reduce_game {
             }
         }
     }
-#use Data::Dumper;warn Data::Dumper->new([$utility])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn Data::Dumper->new([$utility])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Remove strictly dominated strategies.
     for my $strat (keys %$utility) {
@@ -71,5 +72,5 @@ sub reduce_game {
             last;
         } 
     }
-#use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 }
