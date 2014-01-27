@@ -8,14 +8,28 @@ use List::MoreUtils qw( all );
 
 # Player strategies.
 my $p1 = {
+    # Reducible
     1 => [1,1,3],
     2 => [0,0,3],
     3 => [0,2,5],
+    # Irriducible. Nash
+#    1 => [1,0],
+#    2 => [0,1],
+    # Irriducible. No Nash
+#    1 => [0,3],
+#    2 => [2,1],
 };
 my $p2 = {
+    # Reducible
     1 => [0,2,2],
     2 => [3,1,4],
     3 => [0,0,3],
+    # Irriducible. Nash
+#    1 => [1,0],
+#    2 => [0,1],
+    # Irriducible. No Nash
+#    1 => [3,1],
+#    2 => [0,2],
 };
 
 # Solve game.
@@ -31,6 +45,7 @@ sub reduce_game {
 
     # Declare the bucket of "X given Y" strategy pair utilities.
     my $utility = {};
+    my $metric  = {};
 
     # Evaluate pairs of strategies.
     my $iter = variations_with_repetition([keys %$player], 2);
@@ -57,10 +72,12 @@ sub reduce_game {
                     # Equivalent utility
                     push @{ $utility->{join '|', @$v} }, 0;
                 }
+                push @{ $metric->{join '|', @$v} }, $player->{$v->[0]}[$i] - $player->{$v->[1]}[$i];
             }
         }
     }
     #warn Data::Dumper->new([$utility])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    #warn Data::Dumper->new([$metric])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Remove strictly dominated strategies.
     for my $strat (keys %$utility) {
