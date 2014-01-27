@@ -44,7 +44,7 @@ sub reduce_game {
 
     # Declare the bucket of "X given Y" strategy pair utilities.
     my $utility = {};
-    my $metric  = {};
+    #my $metric  = {};
 
     # Evaluate pairs of strategies.
     my $iter = variations_with_repetition([keys %$player], 2);
