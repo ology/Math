@@ -40,18 +40,18 @@ sub reduce_game {
         for my $i (0 .. @$v - 1) {
             if (defined $player->{$v->[0]}[$i] && defined $player->{$v->[1]}[$i]) {
 #warn "$i: $player->{$v->[0]}[$i] vs $player->{$v->[1]}[$i]\n";
-            if ($player->{$v->[0]}[$i] > $player->{$v->[1]}[$i]) {
-                # Strictly dominant utility
-                push @{ $utility->{join '|', @$v} }, 1;
-            }
-            elsif ($player->{$v->[0]}[$i] < $player->{$v->[1]}[$i]) {
-                # Strictly dominated utility
-                push @{ $utility->{join '|', @$v} }, -1;
-            }
-            else {
-                # Equivalent utility
-                push @{ $utility->{join '|', @$v} }, 0;
-            }
+                if ($player->{$v->[0]}[$i] > $player->{$v->[1]}[$i]) {
+                    # Strictly dominant utility
+                    push @{ $utility->{join '|', @$v} }, 1;
+                }
+                elsif ($player->{$v->[0]}[$i] < $player->{$v->[1]}[$i]) {
+                    # Strictly dominated utility
+                    push @{ $utility->{join '|', @$v} }, -1;
+                }
+                else {
+                    # Equivalent utility
+                    push @{ $utility->{join '|', @$v} }, 0;
+                }
             }
         }
     }
