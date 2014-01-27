@@ -41,7 +41,6 @@ warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(
 
 sub reduce_game {
     my ($player, $opponent) = @_;
-    #use Data::Dumper;warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Declare the bucket of "X given Y" strategy pair utilities.
     my $utility = {};
@@ -72,11 +71,12 @@ sub reduce_game {
                     # Equivalent utility
                     push @{ $utility->{join '|', @$v} }, 0;
                 }
-                push @{ $metric->{join '|', @$v} }, $player->{$v->[0]}[$i] - $player->{$v->[1]}[$i];
+
+                # Track the actual relative utility metric.
+                #push @{ $metric->{join '|', @$v} }, $player->{$v->[0]}[$i] - $player->{$v->[1]}[$i];
             }
         }
     }
-    #warn Data::Dumper->new([$utility])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
     #warn Data::Dumper->new([$metric])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
     # Remove strictly dominated strategies.
@@ -94,5 +94,4 @@ sub reduce_game {
             last;
         } 
     }
-    #warn Data::Dumper->new([$opponent])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 }
