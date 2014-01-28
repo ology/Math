@@ -4,7 +4,8 @@ use warnings;
 
 use Data::Dumper;
 use Algorithm::Combinatorics qw( variations_with_repetition );
-use List::MoreUtils qw( all );
+use List::Util qw( max );
+use List::MoreUtils qw( all indexes );
 
 # Player strategies.
 my $p1 = {
@@ -32,14 +33,14 @@ my $p2 = {
 #    2 => [0,2],
 };
 
-# Solve game.
-reduce_game($p2, $p1);
-reduce_game($p1, $p2);
-reduce_game($p2, $p1);
-reduce_game($p1, $p2);
+# Solve reducible game.
+#reduce_game($p2, $p1);
+#reduce_game($p1, $p2);
+#reduce_game($p2, $p1);
+#reduce_game($p1, $p2);
 
 nash($p1, $p2);
-warn Data::Dumper->new([$p1, $p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+warn Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
     my ($player, $opponent) = @_;
@@ -100,4 +101,16 @@ sub reduce_game {
 
 sub nash {
     my ($player, $opponent) = @_;
+
+    # Inspect each item for strategic equilibrium.
+    my $i = 1; # TODO Fix hardcoded column names.
+    for my $p_u ( values %$player ) {
+        my $pmax = max @$p_u;
+        my @i = indexes { $_ >= $pmax } @$p_u;
+        warn 'Ps',$i,":'@i'\n";
+        my $omax = max @{ $opponent->{$i} };
+        my @j = indexes { $_ >= $omax } @{ $opponent->{$i} };
+        warn 'Os',$i,":'@j'\n";
+        $i++;
+    }
 }
