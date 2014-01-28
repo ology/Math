@@ -9,27 +9,21 @@ use List::MoreUtils qw( all indexes each_array );
 
 # Player strategies.
 my $p1 = {
-    # Reducible
-    1 => [1,1,3],
+    1 => [1,1,3], # Reducible
     2 => [0,0,3],
     3 => [0,2,5],
-    # Irreducible. Nash
-#    1 => [1,0,1],
+#    1 => [1,0,1], # Irreducible. Nash
 #    2 => [0,1,0],
-    # Irreducible. No Nash
-#    1 => [0,3],
+#    1 => [0,3], # Irreducible. No Nash
 #    2 => [2,1],
 };
 my $p2 = {
-    # Reducible
-    1 => [0,2,2],
+    1 => [0,2,2], # Reducible
     2 => [3,1,4],
     3 => [0,0,3],
-    # Irreducible. Nash
-#    1 => [1,0,1],
+#    1 => [1,0,1], # Irreducible. Nash
 #    2 => [0,1,0],
-    # Irreducible. No Nash
-#    1 => [3,1],
+#    1 => [3,1], # Irreducible. No Nash
 #    2 => [0,2],
 };
 
