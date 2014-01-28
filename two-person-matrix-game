@@ -5,7 +5,7 @@ use warnings;
 use Data::Dumper;
 use Algorithm::Combinatorics qw( variations_with_repetition );
 use List::Util qw( max );
-use List::MoreUtils qw( all indexes mesh );
+use List::MoreUtils qw( all indexes mesh each_array );
 
 # Player strategies.
 my $p1 = {
@@ -123,9 +123,20 @@ sub nash {
 
     # Identify the equilibria.
     my $nash = {};
-    for my $key ( sort { $a <=> $b } keys %x ) {
-        if ( $x{$key}[0] == $y{$key}[0] ) {
-            $nash->{"$key,$key"} = [ $x{$key}[0], $y{$key}[0] ];
+    my @xstrat = sort { $a <=> $b } keys %x;
+    my @ystrat = sort { $a <=> $b } keys %y;
+#use Data::Dumper;warn Data::Dumper->new([\@xstrat])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#use Data::Dumper;warn Data::Dumper->new([\@ystrat])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    my $estrat = each_array(@xstrat, @ystrat);
+    while ( my ($xs, $ys) = $estrat->() ) {
+        #warn "xs:'@{$x{$xs}}'\n";
+        #warn "ys:'@{$y{$ys}}'\n";
+        my $eutil = each_array(@{$x{$xs}}, @{$y{$ys}});
+        while ( my ( $i, $j ) = $eutil->() ) {
+            if ( $i == $j ) {
+                #warn "$xs,$ys: $i == $j\n";
+                $nash->{"$xs,$ys"} = [ $player->{$xs}[$i], $opponent->{$ys}->[$j] ];
+            }
         }
     }
 
