@@ -14,11 +14,11 @@ my $p1 = {
 #    2 => [0,0,3],
 #    3 => [0,2,5],
     # Irreducible. Nash
-    1 => [1,0],
-    2 => [0,1],
+#    1 => [1,0],
+#    2 => [0,1],
     # Irreducible. No Nash
-#    1 => [0,3],
-#    2 => [2,1],
+    1 => [0,3],
+    2 => [2,1],
 };
 my $p2 = {
     # Reducible
@@ -26,11 +26,11 @@ my $p2 = {
 #    2 => [3,1,4],
 #    3 => [0,0,3],
     # Irreducible. Nash
-    1 => [1,0],
-    2 => [0,1],
+#    1 => [1,0],
+#    2 => [0,1],
     # Irreducible. No Nash
-#    1 => [3,1],
-#    2 => [0,2],
+    1 => [3,1],
+    2 => [0,2],
 };
 
 # Solve reducible game.
@@ -112,7 +112,7 @@ sub nash {
         my $max = max @{ $player->{$u} };
         # Get the "strategically most desirable" indexes.
         $x{$u} = [ indexes { $_ >= $max } @{ $player->{$u} } ];
-        warn 'Ps',$i,":'@{$x{$u}}'\n";
+#        warn 'Ps',$i,":'@{$x{$u}}'\n";
         # Increment the column.
         $i++;
     }
@@ -123,13 +123,18 @@ sub nash {
     for my $u ( sort { $a <=> $b } keys %$opponent ) {
         my $max = max @{ $opponent->{$u} };
         $y{$u} = [ indexes { $_ >= $max } @{ $opponent->{$u} } ];
-        warn 'Os',$i,":'@{$y{$u}}'\n";
+#        warn 'Os',$i,":'@{$y{$u}}'\n";
         $i++;
     }
 
     my @x = map { $x{$_}->[0] } sort { $a <=> $b } keys %x;
     my @y = map { $y{$_}->[0] } sort { $a <=> $b } keys %y;
-    my @mesh = mesh @x, @y;
-#    my %mesh = @mesh;
-use Data::Dumper;warn Data::Dumper->new([\@mesh])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    my %mesh = mesh @x, @y;
+    for my $key ( sort { $a <=> $b } keys %mesh ) {
+        if ( $key == $mesh{$key} ) {
+warn "Nash: $key == $mesh{$key}\n";
+        }
+    }
+
+#    return $nash;
 }
