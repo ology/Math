@@ -14,11 +14,11 @@ my $p1 = {
 #    2 => [0,0,3],
 #    3 => [0,2,5],
     # Irreducible. Nash
-#    1 => [1,0],
-#    2 => [0,1],
+    1 => [1,0],
+    2 => [0,1],
     # Irreducible. No Nash
-    1 => [0,3],
-    2 => [2,1],
+#    1 => [0,3],
+#    2 => [2,1],
 };
 my $p2 = {
     # Reducible
@@ -26,21 +26,22 @@ my $p2 = {
 #    2 => [3,1,4],
 #    3 => [0,0,3],
     # Irreducible. Nash
-#    1 => [1,0],
-#    2 => [0,1],
+    1 => [1,0],
+    2 => [0,1],
     # Irreducible. No Nash
-    1 => [3,1],
-    2 => [0,2],
+#    1 => [3,1],
+#    2 => [0,2],
 };
 
 # Solve reducible game.
-#reduce_game($p2, $p1);
-#reduce_game($p1, $p2);
-#reduce_game($p2, $p1);
-#reduce_game($p1, $p2);
-
-nash($p1, $p2);
+reduce_game($p2, $p1);
+reduce_game($p1, $p2);
+reduce_game($p2, $p1);
+reduce_game($p1, $p2);
 #warn Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+
+my $nash = nash($p1, $p2);
+use Data::Dumper;warn Data::Dumper->new([$nash])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
     my ($player, $opponent) = @_;
@@ -104,37 +105,29 @@ sub nash {
 
     # Inspect each player item for strategic equilibrium.
     my %x; # Max utility indexes.
-    # Numeric column names.
-    my $i = 1; # TODO Fix hardcoded column names.
     # Inspect the strategies of the player.
     for my $u ( sort { $a <=> $b } keys %$player ) {
         # Find the maximum utility for the strategy.
         my $max = max @{ $player->{$u} };
         # Get the "strategically most desirable" indexes.
         $x{$u} = [ indexes { $_ >= $max } @{ $player->{$u} } ];
-#        warn 'Ps',$i,":'@{$x{$u}}'\n";
-        # Increment the column.
-        $i++;
     }
-
     # Inspect each opponent item for strategic equilibrium.
     my %y;
-    $i = 1;
     for my $u ( sort { $a <=> $b } keys %$opponent ) {
         my $max = max @{ $opponent->{$u} };
         $y{$u} = [ indexes { $_ >= $max } @{ $opponent->{$u} } ];
-#        warn 'Os',$i,":'@{$y{$u}}'\n";
-        $i++;
     }
+#use Data::Dumper;warn Data::Dumper->new([\%x])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#use Data::Dumper;warn Data::Dumper->new([\%y])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
-    my @x = map { $x{$_}->[0] } sort { $a <=> $b } keys %x;
-    my @y = map { $y{$_}->[0] } sort { $a <=> $b } keys %y;
-    my %mesh = mesh @x, @y;
-    for my $key ( sort { $a <=> $b } keys %mesh ) {
-        if ( $key == $mesh{$key} ) {
-warn "Nash: $key == $mesh{$key}\n";
+    # Identify the equilibria.
+    my $nash = {};
+    for my $key ( sort { $a <=> $b } keys %x ) {
+        if ( $x{$key}[0] == $y{$key}[0] ) {
+            $nash->{"$key,$key"} = [ $x{$key}[0], $y{$key}[0] ];
         }
     }
 
-#    return $nash;
+    return $nash;
 }
