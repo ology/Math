@@ -127,8 +127,8 @@ sub nash {
         $i++;
     }
 
-    my @x = map { $_->[0] } values(%x);
-    my @y = map { $_->[0] } values(%y);
+    my @x = map { $x{$_}->[0] } sort { $a <=> $b } keys %x;
+    my @y = map { $y{$_}->[0] } sort { $a <=> $b } keys %y;
     my @mesh = mesh @x, @y;
 #    my %mesh = @mesh;
 use Data::Dumper;warn Data::Dumper->new([\@mesh])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
