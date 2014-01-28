@@ -5,7 +5,7 @@ use warnings;
 use Data::Dumper;
 use Algorithm::Combinatorics qw( variations_with_repetition );
 use List::Util qw( max );
-use List::MoreUtils qw( all indexes mesh each_array );
+use List::MoreUtils qw( all indexes each_array );
 
 # Player strategies.
 my $p1 = {
