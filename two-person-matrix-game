@@ -102,14 +102,20 @@ sub reduce_game {
 sub nash {
     my ($player, $opponent) = @_;
 
-    # Inspect each item for strategic equilibrium.
+    # Inspect each player item for strategic equilibrium.
     my $i = 1; # TODO Fix hardcoded column names.
-    for my $p_u ( values %$player ) {
-        my $pmax = max @$p_u;
-        my @i = indexes { $_ >= $pmax } @$p_u;
-        warn 'Ps',$i,":'@i'\n";
-        my $omax = max @{ $opponent->{$i} };
-        my @j = indexes { $_ >= $omax } @{ $opponent->{$i} };
+    for my $p_u ( sort { $a <=> $b } keys %$player ) {
+        my $pmax = max @{ $player->{$p_u} };
+        my @j = indexes { $_ >= $pmax } @{ $player->{$p_u} };
+        warn 'Ps',$i,":'@j'\n";
+        $i++;
+    }
+
+    # Inspect each opponent item for strategic equilibrium.
+    $i = 1; # TODO Fix hardcoded column names.
+    for my $o_u ( sort { $a <=> $b } keys %$opponent ) {
+        my $omax = max @{ $opponent->{$o_u} };
+        my @j = indexes { $_ >= $omax } @{ $opponent->{$o_u} };
         warn 'Os',$i,":'@j'\n";
         $i++;
     }
