@@ -48,7 +48,7 @@ sub reduce_game {
 
     # Declare the bucket of "X given Y" strategy pair utilities.
     my $utility = {};
-    #my $metric  = {};
+    my $metric  = {};
 
     # Evaluate pairs of strategies.
     my $iter = variations_with_repetition([keys %$player], 2);
@@ -77,7 +77,7 @@ sub reduce_game {
                 }
 
                 # Track the actual relative utility metric.
-                #push @{ $metric->{join '|', @$v} }, $player->{$v->[0]}[$i] - $player->{$v->[1]}[$i];
+                push @{ $metric->{join '|', @$v} }, $player->{$v->[0]}[$i] - $player->{$v->[1]}[$i];
             }
         }
     }
@@ -104,38 +104,42 @@ sub reduce_game {
 sub nash {
     my ($player, $opponent) = @_;
 
-    # Inspect each player item for strategic equilibrium.
+    # Inspect each player item for best strategy.
     my %x; # Max utility indexes.
-    # Inspect the strategies of the player.
+
+    # Get the best strategies of the player.
     for my $u ( sort { $a <=> $b } keys %$player ) {
         # Find the maximum utility for the strategy.
         my $max = max @{ $player->{$u} };
         # Get the "strategically most desirable" indexes.
         $x{$u} = [ indexes { $_ >= $max } @{ $player->{$u} } ];
     }
-    # Inspect each opponent item for strategic equilibrium.
+
+    # Inspect each opponent item for best strategy.
     my %y;
     for my $u ( sort { $a <=> $b } keys %$opponent ) {
         my $max = max @{ $opponent->{$u} };
         $y{$u} = [ indexes { $_ >= $max } @{ $opponent->{$u} } ];
     }
-warn 'X:',Data::Dumper->new([\%x])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
-warn 'Y:',Data::Dumper->new([\%y])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    #warn 'X:',Data::Dumper->new([\%x])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+    #warn 'Y:',Data::Dumper->new([\%y])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
-    # Identify the equilibria.
+    # Identify the Nash equilibria.
     my $nash = {};
     my @xstrat = sort { $a <=> $b } keys %x;
     my @ystrat = sort { $a <=> $b } keys %y;
-#warn 'Xstrat:',Data::Dumper->new([\@xstrat])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
-#warn 'Ystrat:',Data::Dumper->new([\@ystrat])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
     my $estrat = each_array(@xstrat, @ystrat);
+    # Inspect index pairs of strategies.
     while ( my ($xs, $ys) = $estrat->() ) {
         #warn "xs:'@{$x{$xs}}'\n";
         #warn "ys:'@{$y{$ys}}'\n";
+        # Inspect index pairs of utilities.
         my $eutil = each_array(@{$x{$xs}}, @{$y{$ys}});
         while ( my ( $i, $j ) = $eutil->() ) {
+            # Are the best strategies for both players on the same coordinate?
             if ( $i == $j ) {
                 #warn "$xs,$ys: $i == $j\n";
+                # Save the coordinate and utility.
                 $nash->{"$xs,$ys"} = [ $player->{$xs}[$i], $opponent->{$ys}->[$j] ];
             }
         }
