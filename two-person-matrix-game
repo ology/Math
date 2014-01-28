@@ -5,7 +5,7 @@ use warnings;
 use Data::Dumper;
 use Algorithm::Combinatorics qw( variations_with_repetition );
 use List::Util qw( max );
-use List::MoreUtils qw( all indexes );
+use List::MoreUtils qw( all indexes mesh );
 
 # Player strategies.
 my $p1 = {
@@ -40,7 +40,7 @@ my $p2 = {
 #reduce_game($p1, $p2);
 
 nash($p1, $p2);
-warn Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 sub reduce_game {
     my ($player, $opponent) = @_;
@@ -103,20 +103,33 @@ sub nash {
     my ($player, $opponent) = @_;
 
     # Inspect each player item for strategic equilibrium.
+    my %x; # Max utility indexes.
+    # Numeric column names.
     my $i = 1; # TODO Fix hardcoded column names.
-    for my $p_u ( sort { $a <=> $b } keys %$player ) {
-        my $pmax = max @{ $player->{$p_u} };
-        my @j = indexes { $_ >= $pmax } @{ $player->{$p_u} };
-        warn 'Ps',$i,":'@j'\n";
+    # Inspect the strategies of the player.
+    for my $u ( sort { $a <=> $b } keys %$player ) {
+        # Find the maximum utility for the strategy.
+        my $max = max @{ $player->{$u} };
+        # Get the "strategically most desirable" indexes.
+        $x{$u} = [ indexes { $_ >= $max } @{ $player->{$u} } ];
+        warn 'Ps',$i,":'@{$x{$u}}'\n";
+        # Increment the column.
         $i++;
     }
 
     # Inspect each opponent item for strategic equilibrium.
-    $i = 1; # TODO Fix hardcoded column names.
-    for my $o_u ( sort { $a <=> $b } keys %$opponent ) {
-        my $omax = max @{ $opponent->{$o_u} };
-        my @j = indexes { $_ >= $omax } @{ $opponent->{$o_u} };
-        warn 'Os',$i,":'@j'\n";
+    my %y;
+    $i = 1;
+    for my $u ( sort { $a <=> $b } keys %$opponent ) {
+        my $max = max @{ $opponent->{$u} };
+        $y{$u} = [ indexes { $_ >= $max } @{ $opponent->{$u} } ];
+        warn 'Os',$i,":'@{$y{$u}}'\n";
         $i++;
     }
+
+    my @x = map { $_->[0] } values(%x);
+    my @y = map { $_->[0] } values(%y);
+    my @mesh = mesh @x, @y;
+#    my %mesh = @mesh;
+use Data::Dumper;warn Data::Dumper->new([\@mesh])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 }
