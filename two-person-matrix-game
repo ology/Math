@@ -26,13 +26,14 @@ my $p2 = {
 #    1 => [3,1], # Irreducible. No Nash
 #    2 => [0,2],
 };
+warn 'Players:',Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 # Solve reducible game.
 reduce_game($p2, $p1);
 reduce_game($p1, $p2);
 reduce_game($p2, $p1);
 reduce_game($p1, $p2);
-#warn 'Players:',Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+#warn 'Solved:',Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 my $nash = nash($p1, $p2);
 warn 'Nash:',Data::Dumper->new([$nash])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
