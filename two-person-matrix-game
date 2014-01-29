@@ -9,22 +9,14 @@ use List::MoreUtils qw( all indexes each_array );
 
 # Player strategies.
 my $p1 = {
-    1 => [1,1,3], # Reducible
-    2 => [0,0,3],
-    3 => [0,2,5],
-#    1 => [1,0,1], # Irreducible. Nash
-#    2 => [0,1,0],
-#    1 => [0,3], # Irreducible. No Nash
-#    2 => [2,1],
+    1 => [1,1,3], 2 => [0,0,3], 3 => [0,2,5], # Reducible
+#    1 => [1,0], 2 => [0,1], # Irreducible. Nash
+#    1 => [0,3], 2 => [2,1], # Irreducible. No Nash
 };
 my $p2 = {
-    1 => [0,2,2], # Reducible
-    2 => [3,1,4],
-    3 => [0,0,3],
-#    1 => [1,0,1], # Irreducible. Nash
-#    2 => [0,1,0],
-#    1 => [3,1], # Irreducible. No Nash
-#    2 => [0,2],
+    1 => [0,2,2], 2 => [3,1,4], 3 => [0,0,3], # Reducible
+#    1 => [1,0], 2 => [0,1], # Irreducible. Nash
+#    1 => [3,1], 2 => [0,2], # Irreducible. No Nash
 };
 warn 'Players:',Data::Dumper->new([$p1,$p2])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
