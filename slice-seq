@@ -7,6 +7,7 @@ use Math::BigInt try => 'GMP';
 
 my $max = shift || 20;
 my $mod = shift || 6;
+my $w   = length $max;
 
 my $html = "$0.html";
 open( my $content, '>', $html ) or die "Can't write to '$html': $!";
@@ -23,7 +24,8 @@ for my $m ( 2 .. $mod )
 
     for my $x ( 2 .. $max )
     {
-        my $file = "$0-$x-$m.dat";
+        my $name = sprintf '%s-%d-%0*d', $0, $x, $w, $m;
+        my $file = $name . '.dat';
         open( my $dat, '>', $file ) or die "Can't write to '$file': $!";
 
         print $content "<td>"; # Start table cell
@@ -43,7 +45,7 @@ for my $m ( 2 .. $mod )
 
             $i++;
         }
-        print $content qq|<img src="$file.png"/>|; # Table cell data
+        print $content qq|<img src="$name.png"/>|; # Table cell data
 
         print $content "</td>\n\n"; # End table cell
 
