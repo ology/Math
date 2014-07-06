@@ -8,6 +8,7 @@ use Math::BigInt try => 'GMP';
 my $max = shift || 20;
 my $mod = shift || 6;
 my $w   = length $max;
+my $z   = length $mod;
 
 my $html = "$0.html";
 open( my $content, '>', $html ) or die "Can't write to '$html': $!";
@@ -24,7 +25,7 @@ for my $m ( 2 .. $mod )
 
     for my $x ( 2 .. $max )
     {
-        my $name = sprintf '%s-%d-%0*d', $0, $x, $w, $m;
+        my $name = sprintf '%s-%0*d-%0*d', $0, $w, $x, $z, $m;
         my $file = $name . '.dat';
         open( my $dat, '>', $file ) or die "Can't write to '$file': $!";
 
