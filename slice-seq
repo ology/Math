@@ -8,6 +8,10 @@ use Math::BigInt try => 'GMP';
 my $max = shift || 20;
 my $mod = shift || 6;
 
+my $html = "$0.html";
+open( my $content, '>', $html ) or die "Can't write to '$html': $!";
+print $content "<html>\n<body>\n<table>\n\n";
+
 my @primes = primes($max);
 
 for my $m ( 2 .. $mod )
@@ -15,10 +19,14 @@ for my $m ( 2 .. $mod )
     # Get the modulus as a bigint
     my $bm = Math::BigInt->new($m);
 
+    print $content "<tr>\n\n"; # Start table row
+
     for my $x ( 2 .. $max )
     {
         my $file = "$0-$x-$m.dat";
         open( my $dat, '>', $file ) or die "Can't write to '$file': $!";
+
+        print $content "<td>"; # Start table cell
 
         my $i = 1;
         for my $n ( @primes )
@@ -35,7 +43,15 @@ for my $m ( 2 .. $mod )
 
             $i++;
         }
+        print $content qq|<img src="$file.png"/>|; # Table cell data
+
+        print $content "</td>\n\n"; # End table cell
 
         close $dat;
     }
+
+    print $content "</tr>\n\n"; # End table row
 }
+
+print $content "\n\n</table>\n</body>\n</html>";
+close $content;
