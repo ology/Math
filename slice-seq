@@ -14,8 +14,6 @@ my $html = "$0.html";
 open( my $content, '>', $html ) or die "Can't write to '$html': $!";
 print $content "<html>\n<body>\n<table>\n\n";
 
-my @primes = primes($max);
-
 for my $m ( 2 .. $mod )
 {
     # Get the modulus as a bigint
@@ -23,7 +21,7 @@ for my $m ( 2 .. $mod )
 
     print $content "<tr>\n\n"; # Start table row
 
-    for my $x ( 2 .. $max )
+    for ( my $x = 2; $x <= $max; $x += 10 )
     {
         my $name = sprintf '%s-%0*d-%0*d', $0, $w, $x, $z, $m;
         my $file = $name . '.dat';
@@ -32,7 +30,7 @@ for my $m ( 2 .. $mod )
         print $content "<td>"; # Start table cell
 
         my $i = 1;
-        for my $n ( @primes )
+        for my $n ( primes($x) )
         {
             my $p = Math::BigInt->new($n);
             $p->bmod($bm);
@@ -46,7 +44,7 @@ for my $m ( 2 .. $mod )
 
             $i++;
         }
-        print $content qq|<img src="$name.png"/>|; # Table cell data
+        print $content qq|<a href="$name.png"><img src="$name.png" width="100 height="100"/></a>|; # Table cell data
 
         print $content "</td>\n\n"; # End table cell
 
