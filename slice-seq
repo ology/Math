@@ -1,0 +1,30 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use Math::Big qw( fibonacci primes );
+
+my $max = shift || 20;
+my $mod = shift || 6;
+
+my @primes = primes($max);
+
+for my $m ( 2 .. $mod )
+{
+    for my $x ( 2 .. $max )
+    {
+        my $file = "$0-$x-$m.dat";
+        open( my $dat, '>', $file ) or die "Can't write to '$file': $!";
+
+        my $i = 1;
+        for my $n ( @primes )
+        {
+            my $fib = fibonacci($n);
+#            print $i, " ($x,$m) ", $n, "\t", $fib, "\n";
+            print $dat $n % $mod, "\t", $fib % $mod, "\n";
+            $i++;
+        }
+
+        close $dat;
+    }
+}
