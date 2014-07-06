@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Math::Big qw( fibonacci primes );
+use Math::BigInt try => 'GMP';
 
 my $max = shift || 20;
 my $mod = shift || 6;
@@ -11,6 +12,9 @@ my @primes = primes($max);
 
 for my $m ( 2 .. $mod )
 {
+    # Get the modulus as a bigint
+    my $bm = Math::BigInt->new($m);
+
     for my $x ( 2 .. $max )
     {
         my $file = "$0-$x-$m.dat";
@@ -19,9 +23,16 @@ for my $m ( 2 .. $mod )
         my $i = 1;
         for my $n ( @primes )
         {
+            my $p = Math::BigInt->new($n);
+            $p->bmod($bm);
             my $fib = fibonacci($n);
+            my $f = Math::BigInt->new($fib);
+            $f->bmod($bm);
+
 #            print $i, " ($x,$m) ", $n, "\t", $fib, "\n";
-            print $dat $n % $mod, "\t", $fib % $mod, "\n";
+#            print $i, " ($x,$m) ", $p, "\t", $f, "\n";
+            print $dat "$p\t$f\n";
+
             $i++;
         }
 
