@@ -19,7 +19,7 @@ for (file in filenames) {
     cat(paste('Building image file for', title, '...'));
 
     # Read the data.
-    data <- read.table(
+    data <- read.delim(
         file,
         header = FALSE,
         sep    = '\t',
@@ -32,7 +32,7 @@ for (file in filenames) {
 
     # Render the scatter plot.
     plot(
-        data$V1, data$V.2,
+        data$V1, data$V2,
         main = title,
         xlab = 'P(n)',
         ylab = 'F(P(n))',
