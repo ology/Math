@@ -10,11 +10,11 @@ filenames <- list.files(
 # Process the data into charts.
 for (file in filenames) {
     # Get the parameters from the filename.
-    seq <- sub('^slice-seq-([0-9]+)-[0-9]+\\.dat$', '\\1', file);
-    mod <- sub('^slice-seq-[0-9]+-([0-9]+)\\.dat$', '\\1', file);
+    seq <- sub('^\\.\\/slice-seq-([0-9]+)-[0-9]+\\.dat$', '\\1', file);
+    mod <- sub('^\\.\\/slice-seq-[0-9]+-([0-9]+)\\.dat$', '\\1', file);
 
     # Build the chart title.
-    title <- paste( 'Fibonacci x Primes to ', seq, ', modulo ', mod );
+    title <- paste( 'Fibonacci x Primes, to', seq, 'at modulo', mod );
 
     cat(paste('Building image file for', title, '...'));
 
@@ -22,7 +22,6 @@ for (file in filenames) {
     data <- read.table(
         file,
         header = FALSE,
-        nrows  = 1,
         sep    = '\t',
     );
 
@@ -33,14 +32,15 @@ for (file in filenames) {
 
     # Render the scatter plot.
     plot(
-        data$N, data$N.1,
+        data$V1, data$V.2,
         main = title,
-        xlab = data[[1]],
-        ylab = data[[2]],
+        xlab = 'P(n)',
+        ylab = 'F(P(n))',
+        type = 'l',
     );
 
     # Close the graphics device.
     dev.off();
 
-    cat(paste('Wrote image file:', image_file));
+    cat(paste('Wrote image file:', image_file, "\n"));
 }
