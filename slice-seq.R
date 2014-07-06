@@ -10,13 +10,13 @@ filenames <- list.files(
 # Process the data into charts.
 for (file in filenames) {
     # Get the parameters from the filename.
-    seq <- sub('^\\.\\/slice-seq-([0-9]+)-[0-9]+\\.dat$', '\\1', file);
-    mod <- sub('^\\.\\/slice-seq-[0-9]+-([0-9]+)\\.dat$', '\\1', file);
+    seq <- sub( '^\\.\\/slice-seq-([0-9]+)-[0-9]+\\.dat$', '\\1', file );
+    mod <- sub( '^\\.\\/slice-seq-[0-9]+-([0-9]+)\\.dat$', '\\1', file );
 
     # Build the chart title.
     title <- paste( 'Fibonacci x Primes, to', seq, 'at modulo', mod );
 
-    cat(paste('Building image file for', title, '...'));
+    cat( paste( 'Building image file for', title, '...' ) );
 
     # Read the data.
     data <- read.delim(
@@ -25,12 +25,11 @@ for (file in filenames) {
         sep    = '\t',
     );
 
-    image_file <- paste('slice-seq-', seq, '-', mod, '.png', sep = '');
-
     # Open the graphics device to save our chart.
+    image_file <- paste( 'slice-seq-', seq, '-', mod, '.png', sep = '' );
     png(image_file);
 
-    # Render the scatter plot.
+    # Render the plot.
     plot(
         data$V1, data$V2,
         main = title,
