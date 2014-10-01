@@ -47,7 +47,7 @@ sub output {
     printf '%2s', $i;
     # Show the sequence values in the given width.
     printf "%*d", $width, $_ for @sequence;
-    # Show the stats of the sequence if requested.
+    # Show the stats of the sequence
     if ($stats) {
         my $stat = Statistics::Descriptive::Full->new();
         $stat->add_data(@sequence);
