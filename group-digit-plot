@@ -1,0 +1,46 @@
+#!/usr/bin/env perl
+use Modern::Perl '2012';
+
+use GD::Graph::Cartesian;
+
+my $group_size = shift || die 'group_size required';
+my $modulo     = shift || die 'modulo required';
+my $sequence   = shift || die 'sequence required';
+
+my $height = 400;
+my $width  = 800;
+my $margin = 20;
+
+my $obj = GD::Graph::Cartesian->new(
+    height   => $height,
+    width    => $width,
+    borderx  => $margin,
+    bordery  => $margin,
+    iconsize => 4,
+);
+
+my $group_re = '(' . ('.' x $group_size) . ')';
+
+my $counter = 0;
+my ( $last_x, $last_y );
+while ( $sequence =~ /$group_re/g )
+{
+    $counter++;
+    my $mod = $1 % $modulo;
+#    say $counter, $1 % $modulo = $mod";
+    if ( defined $last_x && defined $last_y )
+    {
+        $obj->addLine( $last_x, $last_y, $counter, $mod )
+    }
+    ( $last_x, $last_y ) = ( $counter, $mod );
+    $obj->addPoint( $counter, $mod );
+    $obj->addString( $counter, $mod, $mod );
+}
+
+my ( $x0, $x1, $y0, $y1 ) = ( $obj->_minmaxx, $obj->_minmaxy );
+$obj->addRectangle( $x0, $y0, $x1, $y1 );
+
+print $obj->draw;
+
+__END__
+perl -MMath::BigFloat -E'say Math::BigFloat->bpi(100)'
