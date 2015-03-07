@@ -25,9 +25,9 @@ my $width = length($primes[-2]) + 1;
 my $i = 0;
 
 # Show a row for the number of each prime.
-output('#', $width, 0, 1 .. @primes);
+output('#:', $width, 0, 1 .. @primes);
 # Show the primes under consideration.
-output('P', $width, 0, @primes);
+output('P:', $width, 0, @primes);
 # Show a horizontal rule for the table.
 print ' ', '-' x ($width * @primes + 1), "\n";
 
