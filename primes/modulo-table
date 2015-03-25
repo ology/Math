@@ -35,7 +35,7 @@ my @primes = grep { $_->{value}[0] if $_->{value}[0] >= $pmin } primes($pmax);
 # Set the field widths for output formatting if debugging.
 my $mwidth = length($mmax);
 my $pwidth = length($primes[-1]);
-my $iwidth = length(@primes);
+my $iwidth = @primes;
 
 if ($DEBUG) {
     # Display the table header.
