@@ -7,8 +7,8 @@
 use strict;
 use warnings;
 
-# Why stats in number theory? Because curiosity.
-use Statistics::Descriptive;
+use Statistics::Descriptive; # Why stats in number theory? Because curiosity.
+use Math::Big qw(primes);
 
 # Grab the upper limit or show usage.
 my $max = shift
@@ -71,7 +71,5 @@ sub difference {
 # Return the prime numbers from an integer scope.
 sub get_primes {
     my $upper_limit = shift;
-    require Math::Big;
-    Math::Big->import('primes');
     return map { $_->{value}[0] } primes($upper_limit);
 }
