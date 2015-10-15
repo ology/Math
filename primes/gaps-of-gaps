@@ -15,7 +15,7 @@ my $max = shift
     or die qq/Usage: perl $0 INTEGER\nMake a "gaps-of-gaps" table\n/;
 
 # Make a list of the primes to consider.
-my @primes = get_primes($max);
+my @primes = map { $_->{value}[0] } primes($max);
 # Show the bounds of the table.
 printf "There are %d prime numbers below %d.\n", scalar(@primes), $max;
 
@@ -69,7 +69,3 @@ sub difference {
 }
 
 # Return the prime numbers from an integer scope.
-sub get_primes {
-    my $upper_limit = shift;
-    return map { $_->{value}[0] } primes($upper_limit);
-}
