@@ -1,0 +1,40 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use Graph;
+
+my $edges = [
+    ['C','E'],
+    ['C','F'],
+    ['D','F'],
+    ['D','G'],
+    ['E','G'],
+    ['E','A'],
+    ['F','A'],
+    ['F','B'],
+    ['G','B'],
+    ['G','C'],
+    ['A','C'],
+    ['A','D'],
+    ['B','D'],
+    ['B','E'],
+];
+
+my $g = Graph->new;
+
+for my $e ( @$edges ) {
+    $g->add_edge( $e->[0], $e->[1] )
+}
+
+my @path;
+
+my $v = 'C';
+push @path, $v;
+
+for ( 0 .. $g->vertices - 1 ) {
+    $v = $g->random_successor($v);
+    push @path, $v;
+}
+
+print join( ', ', @path ), "\n";
