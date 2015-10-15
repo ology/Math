@@ -40,8 +40,7 @@ for (0 .. $#primes - 1) {
     output(++$i, $width, 1, @gaps);
 }
 
-# Show a prefixed sequence of numbers in fields of specific width.
-sub output {
+sub output { # Show a prefixed sequence of numbers in fields of specific width
     my ($i, $width, $stats, @sequence) = @_;
     # Show the prefix.
     printf '%2s', $i;
@@ -56,8 +55,7 @@ sub output {
     print "\n";
 }
 
-# Return a list of absolute differences between successive sequence members.
-sub difference {
+sub difference { # Return a list of absolute differences between successive sequence members
     my @sequence = @_;
     my @difference = ();
     # Loop over one less than the size of the sequence.
@@ -67,5 +65,3 @@ sub difference {
     }
     return @difference;
 }
-
-# Return the prime numbers from an integer scope.
