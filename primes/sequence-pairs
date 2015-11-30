@@ -1,0 +1,46 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use Math::Prime::XS qw(primes);
+use List::MoreUtils qw(firstidx);
+use GD::Graph::linespoints;
+
+my $start = shift // 2;
+my $limit = shift // 10;
+my $mod   = shift // 7;
+
+my @primes = map { $_ % $mod } primes($limit);
+
+my $index = firstidx { $_ == $start } @primes;
+
+@primes = @primes[ $index .. @primes  - 1 ];
+
+my $last;
+my @x;
+my @y;
+
+for my $p ( 0 .. @primes - 1 ) {
+    if ( defined $last ) {
+        push @x, $primes[$last];
+        push @y, $primes[$p];
+        $last = $p;
+    }
+    else {
+        $last = $p;
+        next;
+    }
+}
+
+my $g = GD::Graph::linespoints->new(800, 600);
+$g->set(
+    x_label           => 'P',
+    y_label           => 'P+1',
+    title             => 'Successive Primes',
+) or die $g->error;
+
+$g->set( markers => [ 7 ] ); # Set points to filled circles
+
+my $plot = $g->plot( [ \@x, \@y ] ) or die $g->error;
+
+print $plot->png;
