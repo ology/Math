@@ -47,9 +47,9 @@ my %prop = $freq->proportional_frequencies;
 my $R = Statistics::R->new();
 my $file = "$0-mod-$mod.png";
 $R->run( "png(file='$0-mod-$mod.png')" );
-$R->run( 'x <- c(' . join( "\n", @x ) . ')' );
-$R->run( 'y <- c(' . join( "\n", @y ) . ')' );
-$R->run( 'z <- c(' . join( "\n", map { $prop{$_} } @y ) . ')' );
+$R->run( 'x <- c(' . join( ',', @x ) . ')' );
+$R->run( 'y <- c(' . join( ',', @y ) . ')' );
+$R->run( 'z <- c(' . join( ',', map { $prop{$_} } @y ) . ')' );
 $R->run( "plot(x, y, pch=21, bg= gray(z), xlab='P', ylab='P+1', main='Successive Primes Modulo $mod')" );
 $R->run("dev.off()");
 
