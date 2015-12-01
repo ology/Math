@@ -61,7 +61,7 @@ for my $mod ( $start .. $stop ) {
     $R->run( 'x <- c(' . join( ',', @plotx ) . ')' );
     $R->run( 'y <- c(' . join( ',', @ploty ) . ')' );
     $R->run( 'z <- c(' . join( ',', map { $prop{$_} } @ploty ) . ')' );
-    $R->run( "plot(x, y, pch=21, bg= gray(z), xlab='P', ylab='P+1', main='Successive Primes to $limit Modulo $mod')" );
+    $R->run( "plot(x, y, pch=21, bg=gray(z), xlab='P', ylab='P+1', xlim=c(0, $stop), ylim=c(0, $stop), main='Successive Primes to $limit Modulo $mod')" );
     $R->run( 'dev.off()' );
 }
 
