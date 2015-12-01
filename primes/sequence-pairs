@@ -5,6 +5,7 @@ use warnings;
 use Math::Prime::XS qw(primes);
 use List::MoreUtils qw(firstidx);
 use Statistics::Frequency;
+use Statistics::R;
 
 my $start = shift // 2;
 my $limit = shift // 10;
@@ -33,12 +34,21 @@ for my $p ( 0 .. @primes - 1 ) {
         next;
     }
 }
-
-print join(', ', @x), "\n";
-print join(', ', @y), "\n";
+#print join("\n", @x), "\n";
+#print join("\n", @y), "\n";
 
 my $freq = Statistics::Frequency->new;
 $freq->add_data(@y);
 my %prop = $freq->proportional_frequencies;
 #use Data::Dumper::Concise;warn Dumper\%prop;
-print join(', ', map { $prop{$_} } @y), "\n";
+#print join("\n", map { $prop{$_} } @y), "\n";
+
+my $R = Statistics::R->new();
+my $file = "$0-mod-$mod.png";
+$R->run( "png(file='$0-mod-$mod.png')" );
+$R->run( 'x <- c(' . join( "\n", @x ) . ')' );
+$R->run( 'y <- c(' . join( "\n", @y ) . ')' );
+$R->run( 'z <- c(' . join( "\n", map { $prop{$_} } @y ) . ')' );
+$R->run( "plot(x, y, pch=21, bg= gray(z), xlab='P', ylab='P+1', main='Successive Primes Modulo $mod')" );
+$R->run("dev.off()");
+
