@@ -26,10 +26,17 @@ for my $mod ( $start .. $stop ) {
     my $last;
     my @x;
     my @y;
+    my %seen;
+    my @plotx;
+    my @ploty;
 
     for my $p ( 0 .. @sequence - 1 ) {
         if ( defined $last ) {
-            #print "[$sequence[$last],$sequence[$p]]\n";
+            my $key = $sequence[$last] . $sequence[$p];
+            if ( !$seen{$key}++ ) {
+                push @plotx, $sequence[$last];
+                push @ploty, $sequence[$p];
+            }
             push @x, $sequence[$last];
             push @y, $sequence[$p];
             $last = $p;
@@ -51,9 +58,9 @@ for my $mod ( $start .. $stop ) {
 
     my $file = sprintf '%s-mod-%.*d.png', $0, length($limit) - 1, $mod;
     $R->run( "png(file='$file')" );
-    $R->run( 'x <- c(' . join( ',', @x ) . ')' );
-    $R->run( 'y <- c(' . join( ',', @y ) . ')' );
-    $R->run( 'z <- c(' . join( ',', map { $prop{$_} } @y ) . ')' );
+    $R->run( 'x <- c(' . join( ',', @plotx ) . ')' );
+    $R->run( 'y <- c(' . join( ',', @ploty ) . ')' );
+    $R->run( 'z <- c(' . join( ',', map { $prop{$_} } @ploty ) . ')' );
     $R->run( "plot(x, y, pch=21, bg= gray(z), xlab='P', ylab='P+1', main='Successive Primes to $limit Modulo $mod')" );
     $R->run( 'dev.off()' );
 }
