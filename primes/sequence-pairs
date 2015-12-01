@@ -13,6 +13,8 @@ my $stop  = shift // 6;
 
 my @primes = primes($limit);
 
+my $R; # Interface to the R interpreter
+
 for my $mod ( $start .. $stop ) {
     my @sequence = map { $_ % $mod } @primes;
 
@@ -27,7 +29,7 @@ for my $mod ( $start .. $stop ) {
 
     for my $p ( 0 .. @sequence - 1 ) {
         if ( defined $last ) {
-    #        print "[$sequence[$last],$sequence[$p]]\n";
+            #print "[$sequence[$last],$sequence[$p]]\n";
             push @x, $sequence[$last];
             push @y, $sequence[$p];
             $last = $p;
@@ -47,7 +49,7 @@ for my $mod ( $start .. $stop ) {
     #print join("\n", @y), "\n";
     #print join("\n", map { $prop{$_} } @y), "\n";
 
-    my $R = Statistics::R->new();
+    $R = Statistics::R->new();
     my $file = "$0-mod-$mod.png";
     $R->run( "png(file='$0-mod-$mod.png')" );
     $R->run( 'x <- c(' . join( ',', @x ) . ')' );
