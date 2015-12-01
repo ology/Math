@@ -50,8 +50,8 @@ for my $mod ( $start .. $stop ) {
     #print join("\n", map { $prop{$_} } @y), "\n";
 
     $R = Statistics::R->new();
-    my $file = "$0-mod-$mod.png";
-    $R->run( "png(file='$0-mod-$mod.png')" );
+    my $file = sprintf '%s-mod-%.*d.png', $0, length($limit), $mod;
+    $R->run( "png(file='$file')" );
     $R->run( 'x <- c(' . join( ',', @x ) . ')' );
     $R->run( 'y <- c(' . join( ',', @y ) . ')' );
     $R->run( 'z <- c(' . join( ',', map { $prop{$_} } @y ) . ')' );
