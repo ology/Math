@@ -20,16 +20,20 @@ for my $mod ( $start .. $stop ) {
 
     my $index = firstidx { $_ == $start } @sequence;
 
-    # Slice the sequence given the sstart index
+    # Slice the sequence given the start index
     @sequence = @sequence[ $index .. @sequence  - 1 ];
     #use Data::Dumper::Concise;warn Dumper\@sequence;
 
     my ( $last, @x, @y, %seen, @plotx, @ploty );
 
+    my ( $minimum, $count ) = ( 0, 0 );
+
     for my $p ( 0 .. @sequence - 1 ) {
         if ( defined $last ) {
+            $count++;
             my $key = $sequence[$last] . '.' . $sequence[$p];
             if ( !$seen{$key}++ ) {
+                $minimum = $count;
                 push @plotx, $sequence[$last];
                 push @ploty, $sequence[$p];
             }
@@ -42,6 +46,8 @@ for my $mod ( $start .. $stop ) {
             next;
         }
     }
+
+    #printf "Modulo: $mod, Minimum: $minimum\n";
 
     my $freq = Statistics::Frequency->new;
     $freq->add_data(@y);
