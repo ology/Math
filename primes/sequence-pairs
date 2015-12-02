@@ -28,7 +28,7 @@ for my $mod ( $start .. $stop ) {
 
     for my $p ( 0 .. @sequence - 1 ) {
         if ( defined $last ) {
-            my $key = $sequence[$last] . $sequence[$p];
+            my $key = $sequence[$last] . '.' . $sequence[$p];
             if ( !$seen{$key}++ ) {
                 push @plotx, $sequence[$last];
                 push @ploty, $sequence[$p];
