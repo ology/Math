@@ -23,12 +23,7 @@ for my $mod ( $start .. $stop ) {
     @sequence = @sequence[ $index .. @sequence  - 1 ];
     #use Data::Dumper::Concise;warn Dumper\@sequence;
 
-    my $last;
-    my @x;
-    my @y;
-    my %seen;
-    my @plotx;
-    my @ploty;
+    my ( $last, @x, @y, %seen, @plotx, @ploty );
 
     for my $p ( 0 .. @sequence - 1 ) {
         if ( defined $last ) {
