@@ -20,6 +20,7 @@ for my $mod ( $start .. $stop ) {
 
     my $index = firstidx { $_ == $start } @sequence;
 
+    # Slice the sequence given the sstart index
     @sequence = @sequence[ $index .. @sequence  - 1 ];
     #use Data::Dumper::Concise;warn Dumper\@sequence;
 
