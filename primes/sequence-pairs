@@ -12,6 +12,11 @@ my $limit = shift // 10;
 my $stop  = shift // 6;
 
 my @primes = primes($limit);
+#my @sequence;
+#for my $p ( @primes ) {
+#    push @sequence, int(rand(2)) ? $p + 2 : $p -2;
+#}
+#@sequence = sort { $a <=> $b } @sequence;
 
 my $R = Statistics::R->new;
 
