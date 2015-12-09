@@ -19,7 +19,10 @@ my $position = 0;
 while ( $position + $span - 1 < length($decimal) ) {
     my $group = substr $decimal, $position, $span;
 
-    printf "%3d. %s%s\n", $position, $group, is_prime($group) ? ' *' : '';
+    printf "%3d. %s%s\n",
+        $position,
+        $group,
+        is_prime($group) ? ' *' : '';
 
     $position++;
 }
