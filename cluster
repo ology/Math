@@ -2,14 +2,16 @@
 use strict;
 use warnings;
 
-use Math::Big qw( pi );
+use Math::Big qw( pi euler );
 use Math::Prime::XS qw( is_prime );
 
 my $digits = shift // 100;
 my $span   = shift // 1;
 
-my $pi = pi($digits);
-( my $decimal = $pi ) =~ s/\A\d\.(.*)\z/$1/;
+#my $num = pi($digits);
+my $num = euler( 1, $digits );
+
+( my $decimal = $num ) =~ s/\A\d\.(.*)\z/$1/;
 print "$decimal\n";
 
 my $i = 0;
