@@ -8,18 +8,18 @@ use Math::Prime::XS qw( is_prime );
 my $digits = shift // 100;
 my $span   = shift // 1;
 
-#my $num = pi($digits);
-my $num = euler( 1, $digits );
+#my $number = pi($digits);
+my $number = euler( 1, $digits );
 
-( my $decimal = $num ) =~ s/\A\d\.(.*)\z/$1/;
+( my $decimal = $number ) =~ s/\A\d\.(.*)\z/$1/;
 print "$decimal\n";
 
-my $i = 0;
+my $position = 0;
 
-while ( $i + $span - 1 < length($decimal) ) {
-    my $group = substr $decimal, $i, $span;
+while ( $position + $span - 1 < length($decimal) ) {
+    my $group = substr $decimal, $position, $span;
 
-    printf "%3d. %s%s\n", $i, $group, is_prime($group) ? ' *' : '';
+    printf "%3d. %s%s\n", $position, $group, is_prime($group) ? ' *' : '';
 
-    $i++;
+    $position++;
 }
