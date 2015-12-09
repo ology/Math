@@ -17,9 +17,9 @@ print "$decimal\n";
 my $i = 0;
 
 while ( $i + $span - 1 < length($decimal) ) {
-    my $x = substr $decimal, $i, $span;
+    my $group = substr $decimal, $i, $span;
 
-    printf "%3d. %s%s\n", $i, $x, is_prime($x) ? ' *' : '';
+    printf "%3d. %s%s\n", $i, $group, is_prime($group) ? ' *' : '';
 
     $i++;
 }
