@@ -23,15 +23,21 @@ else {
 ( my $decimal = $number ) =~ s/\A\d\.(.*)\z/$1/;
 print "$decimal\n";
 
-my $position = 0;
+my ( $position, $prime ) = ( 0, 0 );
 
 while ( $position + $span - 1 < length($decimal) ) {
     my $group = substr $decimal, $position, $span;
 
-    printf "%3d. %s%s\n",
-        $position,
-        $group,
-        is_prime($group) ? ' *' : '';
+    my $flag = '';
+
+    if ( is_prime($group) ) {
+        $prime++;
+        $flag = ' *';
+    }
+
+    printf "%3d. %s%s\n", $position, $group, $flag;
 
     $position++;
 }
+
+print "$prime primes\n";
