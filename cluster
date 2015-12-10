@@ -40,4 +40,5 @@ while ( $position + $span - 1 < length($decimal) ) {
     $position++;
 }
 
-print "For groups of $span, there are $prime primes out of $position total\n";
+printf "For %s groups of %d, there are %d primes out of %d total (%.2f%%).\n",
+    $type, $span, $prime, $position, $prime / $position;
