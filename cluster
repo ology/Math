@@ -21,7 +21,7 @@ else {
 }
 
 ( my $decimal = $number ) =~ s/\A\d\.(.*)\z/$1/;
-print "$decimal\n";
+print "Decimal: $decimal\n";
 
 my ( $position, $prime ) = ( 0, 0 );
 
@@ -35,9 +35,9 @@ while ( $position + $span - 1 < length($decimal) ) {
         $flag = ' *';
     }
 
-    printf "%3d. %s%s\n", $position, $group, $flag;
+    printf "%3d. %s%s\n", $position + 1, $group, $flag;
 
     $position++;
 }
 
-print "$prime primes\n";
+print "$prime primes out of $position total\n";
