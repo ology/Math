@@ -40,4 +40,4 @@ while ( $position + $span - 1 < length($decimal) ) {
     $position++;
 }
 
-print "$prime primes out of $position total\n";
+print "For groups of $span, there are $prime primes out of $position total\n";
