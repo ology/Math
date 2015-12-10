@@ -10,11 +10,14 @@ my $span   = shift // 1;
 my $type   = shift // 'pi';
 
 my $number;
-if ( $type eq 'pi' ) {
-    $number = pi($digits);
+if ( $type eq 'e' ) {
+    $number = euler( 1, $digits );
+}
+elsif ( $type eq 'r' ) {
+    $number = join '', map { int rand 10 } 1 .. $digits;
 }
 else {
-    $number = euler( 1, $digits );
+    $number = pi($digits);
 }
 
 ( my $decimal = $number ) =~ s/\A\d\.(.*)\z/$1/;
