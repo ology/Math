@@ -7,9 +7,15 @@ use Math::Prime::XS qw( is_prime );
 
 my $digits = shift // 100;
 my $span   = shift // 1;
+my $type   = shift // 'pi';
 
-#my $number = pi($digits);
-my $number = euler( 1, $digits );
+my $number;
+if ( $type eq 'pi' ) {
+    $number = pi($digits);
+}
+else {
+    $number = euler( 1, $digits );
+}
 
 ( my $decimal = $number ) =~ s/\A\d\.(.*)\z/$1/;
 print "$decimal\n";
