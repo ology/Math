@@ -12,8 +12,6 @@ my @primes = primes($limit);
 
 my $width = length $primes[-1];
 
-my $greater;
-
 my $position = 0;
 
 while ( $position + $size - 1 < @primes - 1 ) {
