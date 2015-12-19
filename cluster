@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use Math::Big qw( pi euler );
-use Math::Prime::XS qw( is_prime );
+use Math::Prime::XS qw( primes is_prime );
 
 my $digits = shift // 100;
 my $span   = shift // 1;
@@ -15,6 +15,10 @@ if ( $type eq 'e' ) {
 }
 elsif ( $type eq 'r' ) {
     $number = join '', map { int rand 10 } 1 .. $digits;
+}
+elsif ( $type eq 'prime' ) {
+    my @primes = primes($digits);
+    $number = join '', @primes;
 }
 else {
     $number = pi($digits);
