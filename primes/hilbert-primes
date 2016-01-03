@@ -56,7 +56,7 @@ while (($hilbert->CoordinatesFromPoint($count))[0]) {
     # Increment the line segment.
     ($x1, $y1) = ($x2, $y2);
 
-    # End the loop if we have reched the maximum count.
+    # End the loop if we have reached the maximum count.
     last if $count > $max;
 }
 
