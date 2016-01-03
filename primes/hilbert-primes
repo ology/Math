@@ -35,11 +35,13 @@ while (($hilbert->CoordinatesFromPoint($count))[0]) {
     # Instantiate a Math::Numbers object from the current increment.
     my $number = Math::Numbers->new($count);
 
-    # Output the increment if it is a prime number.
-    warn "$count\n" if $count > 1 && is_prime($count);
-
     # Set the line segment color.
-    my $color = $count > 1 && is_prime($count) ? 'blue' : 'lightgray';
+    my $color = 'lightgray';
+    if ( $count > 1 && is_prime($count) ) {
+        # Output the increment
+        warn "$count\n";
+        $color = 'blue';
+    }
 
     # Increment the Hilbert curve.
     my ($x2, $y2) = $hilbert->CoordinatesFromPoint($count++);
