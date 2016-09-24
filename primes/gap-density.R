@@ -13,16 +13,20 @@ geom_series <- function( base, max ) {
     base ^ ( 0 : floor( log( max, base ) ) )
 }
 
-for ( limit in geom_series( base = 10, max = 1000000 ) ) {
-    if ( limit < 10 ) {
-        next
+gap_density <- function( base_limit, max_limit ) {
+    for ( limit in geom_series( base = base_limit, max = max_limit ) ) {
+        if ( limit < 10 ) {
+            next
+        }
+
+        print( paste( 'Computing gaps for limit', limit, '...' ) )
+
+        gaps <- prime_gaps(limit)
+
+        plot( density(gaps), xlab = 'prime gaps', main = paste( 'Below', limit ) )
+
+        readline( prompt = 'Enter to proceed' )
     }
-
-    print( paste( 'Computing gaps for limit', limit, '...' ) )
-
-    gaps <- prime_gaps(limit)
-
-    plot( density(gaps), xlab = 'prime gaps', main = paste( 'Below', limit ) )
-
-    readline( prompt = 'Enter to proceed' )
 }
+
+gap_density( 2, 10000000 )
