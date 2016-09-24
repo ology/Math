@@ -16,7 +16,6 @@ for ( limit in geom_series( base = 10, max = 1000000 ) ) {
     }
     print( paste( 'Computing gaps for limit', limit, '...' ) )
     gaps <- prime_gaps(limit)
-    png( file = paste( 'gap-density-', limit, '.png', sep = '' ) )
     plot( density(gaps), xlab = 'prime gaps', main = paste( 'Below', limit ) )
-    dev.off()
+    readline( prompt = 'Enter to proceed' )
 }
