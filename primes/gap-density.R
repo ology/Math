@@ -2,12 +2,7 @@ library(numbers)
 
 prime_gaps <- function(limit) {
     primes <- Primes(limit)
-    gaps <- c()
-    n <- 1
-    while ( n < length(primes) - 1 ) { 
-        gaps[n] <- primes[ n + 1 ] - primes[n]
-        n <- n + 1
-    }
+    gaps <- primes[ 2 : length(primes) ] - primes[ 1 : length(primes) - 1 ]
     return(gaps)
 }
 
