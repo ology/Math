@@ -5,17 +5,20 @@ prime_gaps <- function(limit) {
     gaps <- c()
     n <- 1
     while ( n < length(primes) - 1 ) { 
-        gaps[n] <- primes[n + 1] - primes[n]
+        gaps[n] <- primes[ n + 1 ] - primes[n]
         n <- n + 1
     }
     return(gaps)
 }
 
 geom_series <- function( base, max ) {
-    base ^ ( 0:floor( log( max, base ) ) )
+    base ^ ( 0 : floor( log( max, base ) ) )
 }
 
 for ( limit in geom_series( base = 10, max = 1000000 ) ) {
+    if (limit < 10) {
+        next
+    }
     print( paste( 'Computing gaps for limit', limit, '...' ) )
     gaps <- prime_gaps(limit)
     png( file = paste( 'gap-density-', limit, '.png', sep = '' ) )
