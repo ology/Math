@@ -39,6 +39,7 @@ r_max <- 4
 # r * exp(x) * ( 1 - exp(x) )
 v <- iterate( equation = 'r * x * ( 1 - x )', range = seq( r_min, r_max, 0.01 ), x_max = 30 )
 
+# Recompute our range in terms of the equation iteration.
 r <- seq( r_min, r_max, length.out = length(v) )
 
 #png(file = 'bifurcation.png')
