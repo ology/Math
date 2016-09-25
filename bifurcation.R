@@ -20,7 +20,7 @@ iterate <- function( equation, range, x_max ) {
     return(v)
 }
 
-iterate_plot <- function( equation, r_min, r_max ) {
+iterate_plot <- function( r_min, r_max, equation ) {
     v <- iterate( equation = equation, range = seq( r_min, r_max, 0.01 ), x_max = 30 )
 
     r <- seq( r_min, r_max, length.out = length(v) )
@@ -29,15 +29,15 @@ iterate_plot <- function( equation, r_min, r_max ) {
 }
 
 # The logistic equation
-#iterate_plot( equation = 'r * x * ( 1 - x )', r_min = 1, r_max = 4 )
+#iterate_plot( r_min = 1, r_max = 4, equation = 'r * x * ( 1 - x )' )
 # Alternatives:
-#iterate_plot( equation = 'r ** ( 1 - x )', r_min = 1, r_max = 4 )
-#iterate_plot( equation = 'r * x ** ( 1 - x )', r_min = 1, r_max = 4 )
-#iterate_plot( equation = 'r * sin(x)', r_min = 1, r_max = 3 )
-#iterate_plot( equation = 'r * cos(x) - sin(x)', r_min = -3, r_max = 3 )
-#iterate_plot( equation = 'r * ( cos(x) - sin(x) )', r_min = 0, r_max = 3 )
-#iterate_plot( equation = 'r ** sin(x)', r_min = -0.1, r_max = 4 )
-#iterate_plot( equation = 'r ** cos( 1 - x )', r_min = 2, r_max = 8 )
-#iterate_plot( equation = 'r * cos(x) * ( 1 - sin(x) )', r_min = 0, r_max = 5 )
-#iterate_plot( equation = 'r * exp(x) * ( 1 - exp(x) )', r_min = 0.5, r_max = 3 )
-iterate_plot( equation = 'r - x ** 2', r_min = 0, r_max = 2 )
+#iterate_plot( r_min = 1, r_max = 4, equation = 'r ** ( 1 - x )' )
+#iterate_plot( r_min = 1, r_max = 4, equation = 'r * x ** ( 1 - x )' )
+#iterate_plot( r_min = 1, r_max = 3, equation = 'r * sin(x)' )
+#iterate_plot( r_min = -3, r_max = 3, equation = 'r * cos(x) - sin(x)' )
+#iterate_plot( r_min = 0, r_max = 3, equation = 'r * ( cos(x) - sin(x) )' )
+#iterate_plot( r_min = -0.1, r_max = 4, equation = 'r ** sin(x)' )
+#iterate_plot( r_min = 2, r_max = 8, equation = 'r ** cos( 1 - x )' )
+#iterate_plot( r_min = 0, r_max = 5, equation = 'r * cos(x) * ( 1 - sin(x) )' )
+#iterate_plot( r_min = 0.5, r_max = 3, equation = 'r * exp(x) * ( 1 - exp(x) )' )
+iterate_plot( r_min = 0, r_max = 2, equation = 'r - x ** 2' )
