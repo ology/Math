@@ -11,7 +11,7 @@ iterate <- function( equation, range, x_max ) {
         # Repeat x_max times...
         for ( i in 0 : x_max ) {
             x <- eval( parse( text = equation ) )
-            # Hopefully we have stabilized
+            # Save the last half of computed x's
             if ( i > x_max / 2 ) {
                 v <- c( v, x )
             }
