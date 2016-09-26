@@ -41,4 +41,5 @@ iterate_plot <- function( r_min, r_max, equation ) {
 #iterate_plot( r_min = 0, r_max = 5, equation = 'r * cos(x) * ( 1 - sin(x) )' )
 #iterate_plot( r_min = 0.5, r_max = 3, equation = 'r * exp(x) * ( 1 - exp(x) )' )
 #iterate_plot( r_min = 0, r_max = 2, equation = 'r - x ** 2' )
-iterate_plot( r_min = 2.4, r_max = 4, equation = 'r * x * ( 1 - x * r )' )
+#iterate_plot( r_min = 2.4, r_max = 4, equation = 'r * x * ( 1 - x * r )' )
+iterate_plot( r_min = 1, r_max = 3, equation = 'r * x * exp( 1 - x ** r )' )
