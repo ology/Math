@@ -3,12 +3,12 @@ use strict;
 use warnings;
 
 # An enthusiastic friend showed me this book,
-# "The Life You Were Born to Live: A Guide to # Finding Your Life Purpose"
+# "The Life You Were Born to Live: A Guide to Finding Your Life Purpose"
 # ISBN 091581160X by Dan Millman.
 
 my $birthdate = shift || die "Usage: perl $0 YYYY/MM/DD\n";
 
-my ( $year, $month, $day ) = split /\//, $birthdate;
+my @digits = split /\//, $birthdate;
 
 # Return the sum of the digits of a number.
 my $digit_sum = sub {
@@ -19,7 +19,7 @@ my $digit_sum = sub {
 };
 
 # Perform the magical computations!
-my $x = sum_digits( $year, $month, $day );
+my $x = sum_digits(@digits);
 
 if ( length($x) > 1 ) {
     $x = sum_digits($x);
