@@ -1,20 +1,14 @@
-#!/usr/bin/perl
-#
-# An enthusiastic friend showed me this book,
-# "The Life You Were Born to Live: A Guide to # Finding Your Life Purpose"
-# ISBN 091581160X by the venerable Dan Millman.
-# After a bit of tinkering, I distilled its "essence" to one algorithm.
-# -- gene@cpan.org
-#
+#!/usr/bin/env perl
 use strict;
 use warnings;
-use Date::Calc qw(Add_Delta_Days);
 
-# Initialize our date counters.
-my ($y,$m,$d) = (1900, 1, 1);
+# An enthusiastic friend showed me this book,
+# "The Life You Were Born to Live: A Guide to # Finding Your Life Purpose"
+# ISBN 091581160X by Dan Millman.
 
-# Bucket for the sum ratios.
-my $n = {};
+my $birthdate = shift || die "Usage: perl $0 YYYY/MM/DD\n";
+
+my ( $year, $month, $day ) = split /\//, $birthdate;
 
 # Return the sum of the digits of a number.
 my $digit_sum = sub {
@@ -25,17 +19,28 @@ my $digit_sum = sub {
 };
 
 # Perform the magical computations!
-while ($y < 2000) {
-    # Sum the digits of the date.
-    my $i = $digit_sum->("$y$m$d");
-    #warn"$m/$d/$y\n" if length $i == 1;
-    # Sum the digits of the "sum of the digits of the date."
-    my $j = $digit_sum->($i);
-    # Increment the ratio of the sums.
-    $n->{"$i/$j"}++;
-    # Increment the day.
-    ($y, $m, $d) = Add_Delta_Days($y, $m, $d, 1);
+my $x = sum_digits( $year, $month, $day );
+
+if ( length($x) > 1 ) {
+    $x = sum_digits($x);
 }
 
-use Data::Dumper;local$Data::Dumper::Indent=1;local$Data::Dumper::Terse=1;local$Data::Dumper::Sortkeys=1;
-warn Dumper(scalar(keys %$n), $n);
+print "$x\n";
+
+sub sum_digits {
+    my @args = @_;
+
+    my @digits;
+
+    for my $x ( @args ) {
+        while ( length $x > 1 ) {
+            $x = $digit_sum->($x);
+        }
+        push @digits, $x;
+    }
+
+    my $sum = 0;
+    $sum += $_ for @digits;
+
+    return $sum;
+}
