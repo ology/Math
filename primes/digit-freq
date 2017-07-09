@@ -1,0 +1,44 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+# https://www.quantamagazine.org/20160313-mathematicians-discover-prime-conspiracy/
+
+use Math::Prime::XS qw(primes);
+
+my $max = shift || 100;
+
+my @primes = primes( 11, $max );
+my $length = @primes;
+print "Primes = $length\n";
+
+my %digits;
+my $previous;
+
+for my $p ( @primes ) {
+    my $current = substr $p, -1;
+    if ($previous) {
+        $digits{ $previous . $current }++;
+    }
+    $previous = $current;
+}
+
+my ( $i, $sum ) = ( 0, 0 );
+
+for my $key ( sort { $digits{$a} <=> $digits{$b} } keys %digits ) {
+    $i++;
+
+    # Set the value to the ratio of the number of times seen per number of primes.
+    $digits{$key} = $digits{$key} / $length * 100;
+
+    printf "%2d. %s: %.6f %%\n", $i, $key, $digits{$key};
+
+    $sum += $digits{$key};
+}
+printf "Sum = %.2f\n", $sum;
+
+__END__
+df <- read.table('~/sandbox/dev/Math/primes/prime-digit-freq.txt')
+names(df) <- c('follows','percent')
+hist(df$percent)
+barplot(df$percent, names.arg=df$follows, ylim=c(0,8))
