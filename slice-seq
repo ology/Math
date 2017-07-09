@@ -38,8 +38,8 @@ for my $m ( 2 .. $mod )
             my $f = Math::BigInt->new($fib);
             $f->bmod($bm);
 
-#            print $i, " ($x,$m) ", $n, "\t", $fib, "\n";
-#            print $i, " ($x,$m) ", $p, "\t", $f, "\n";
+            print "[$i,$x] mod=$m\tprime=$n ($p)\tfib=$fib ($f)\n";
+
             print $dat "$p\t$f\n";
 
             $i++;
