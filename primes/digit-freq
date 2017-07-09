@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-# https://www.quantamagazine.org/20160313-mathematicians-discover-prime-conspiracy/
+# http://techn.ology.net/subsequent-prime-number-distribution/
 
 use Math::Prime::XS qw(primes);
 
@@ -40,5 +40,4 @@ printf "Sum = %.2f\n", $sum;
 __END__
 df <- read.table('~/sandbox/dev/Math/primes/prime-digit-freq.txt')
 names(df) <- c('follows','percent')
-hist(df$percent)
 barplot(df$percent, names.arg=df$follows, ylim=c(0,8))
