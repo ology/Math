@@ -36,7 +36,6 @@ while ( ( $hilbert->CoordinatesFromPoint($count) )[0] ) {
     my $color = $line_color;
 
     if ( $count > 1 && is_prime($count) ) {
-#        warn "$count\n";
         $color = $prime_color;
     }
 
