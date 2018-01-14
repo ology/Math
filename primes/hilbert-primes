@@ -10,13 +10,13 @@ use Math::Curve::Hilbert;
 use Math::Prime::XS qw( is_prime );
 
 # Set the image dimensions.
-my $dimension   = shift || 1050;
+my $size        = shift || 1050;
 my $max         = shift || 65521;
 my $prime_color = shift || 'black';
 my $line_color  = shift || 'lightgray';
 
 # Instantiate an image.
-my $image = Imager->new( xsize => $dimension, ysize => $dimension );
+my $image = Imager->new( xsize => $size, ysize => $size );
 
 # Draw a filled box filling the image.
 $image->box( filled => 1, color => 'white' );
