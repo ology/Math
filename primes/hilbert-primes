@@ -9,19 +9,15 @@ use Imager;
 use Math::Curve::Hilbert;
 use Math::Prime::XS qw( is_prime );
 
-# Set the image dimensions.
 my $size        = shift || 1050;
 my $max         = shift || 65521;
 my $prime_color = shift || 'black';
 my $line_color  = shift || 'lightgray';
 
-# Instantiate an image.
 my $image = Imager->new( xsize => $size, ysize => $size );
 
-# Draw a filled box filling the image.
 $image->box( filled => 1, color => 'white' );
 
-# Instantiate a Hilbert curve.
 my $hilbert = Math::Curve::Hilbert->new(
     direction => 'up',
     max       => 8,
@@ -29,7 +25,6 @@ my $hilbert = Math::Curve::Hilbert->new(
     step      => 4,
 );
 
-# Declare an increment.
 my $count = 0;
 
 # Start the Hilbert curve.
@@ -41,7 +36,6 @@ while ( ( $hilbert->CoordinatesFromPoint($count) )[0] ) {
     my $color = $line_color;
 
     if ( $count > 1 && is_prime($count) ) {
-        # Output the increment
 #        warn "$count\n";
         $color = $prime_color;
     }
@@ -63,10 +57,8 @@ while ( ( $hilbert->CoordinatesFromPoint($count) )[0] ) {
     last if $count > $max;
 }
 
-# Output the image as a file.
 my $file = "$0.png";
 $image->write( file => $file )
     or die "Can't save $file: ", $image->errstr;
 
-# Output the final count.
 warn "$file below $count\n";
