@@ -39,7 +39,7 @@ while ( ( $hilbert->CoordinatesFromPoint($count) )[0] ) {
         $color = $prime_color;
     }
 
-    # Increment the Hilbert curve
+    # Get a new point on the curve
     my ( $x2, $y2 ) = $hilbert->CoordinatesFromPoint( $count++ );
 
     # Draw a line segment
