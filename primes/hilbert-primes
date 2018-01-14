@@ -7,6 +7,7 @@ use warnings;
 
 use Imager;
 use Math::Curve::Hilbert;
+use Math::Numbers;
 use Math::Prime::XS qw( is_prime );
 
 # Set the image dimensions.
@@ -42,8 +43,8 @@ while ( ( $hilbert->CoordinatesFromPoint($count) )[0] ) {
     my $color = 'lightgray';
     if ( $count > 1 && is_prime($count) ) {
         # Output the increment
-        warn "$count\n";
-        $color = 'blue';
+#        warn "$count\n";
+        $color = 'black';
     }
 
     # Increment the Hilbert curve.
