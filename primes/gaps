@@ -20,7 +20,7 @@ while ( $position + $size - 1 < @primes - 1 ) {
 
     my $gap = $greater - $prime;
 
-    printf "%*d. %*d - %*d = %*d [%05b]\n",
+    printf "%*d. %*d - %*d = %*d [%06b]\n",
         $width, $position + 1,
         $width, $greater,
         $width, $prime,
