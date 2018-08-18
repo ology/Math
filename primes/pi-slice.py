@@ -40,32 +40,32 @@ import collections
 seen = {}
 points = collections.defaultdict(lambda : {'count': 0, 'primes': []})
 
-for x in range(2, 101):
-    # Set the number of pi digits desired
-    mp.dps = x
-    # Capture the decimal part only
-    digits = re.sub(r'^3\.(.+)$', r'\1', str(mp.pi))
+# Set the number of pi digits desired
+mp.dps = 501
+# Capture the decimal part only
+digits = re.sub(r'^3\.(.+)$', r'\1', str(mp.pi))
 
-    # Inspect successive chunks of the digits
-    for i in range(0, len(digits) + 1):
-        for j in range(i, len(digits) + 1):
-            if i != j:
-                # Get the nth digit as an integer
-                n = int(digits[i:j])
+# Inspect successive chunks of the digits
+for i in range(0, len(digits) + 1):
+    for j in range(i, len(digits) + 1):
+        if i != j:
+            # Get the nth digit as an integer
+            n = int(digits[i:j])
+            #print(i,j,n)
 
-                if gmp.is_prime(n):
-                    # If this prime has not been seen...
-                    if not n in seen:
-                        seen[n] = 1
+            if gmp.is_prime(n):
+                # If this prime has not been seen...
+                if not n in seen:
+                    seen[n] = 1
 
-                        # Increment the number of times seen
-                        if not i in points:
-                            points[i]['count'] = 1
-                        else:
-                            points[i]['count'] += 1
-                        
-                        # Add the prime seen for later inspection
-                        points[i]['primes'].append(n)
+                    # Increment the number of times seen
+                    if not i in points:
+                        points[i]['count'] = 1
+                    else:
+                        points[i]['count'] += 1
+                    
+                    # Add the prime seen for later inspection
+                    points[i]['primes'].append(n)
 
 # The y-axis is the count of the number of primes seen at each position
 yaxis = [points[i]['count'] for i in points]
