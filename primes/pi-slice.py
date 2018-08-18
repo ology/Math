@@ -50,18 +50,24 @@ for x in range(2, 101):
     for i in range(0, len(digits) + 1):
         for j in range(i, len(digits) + 1):
             if i != j:
+                # Get the nth digit as an integer
                 n = int(digits[i:j])
+
                 if gmp.is_prime(n):
+                    # If this prime has not been seen...
                     if not n in seen:
                         seen[n] = 1
 
+                        # Increment the number of times seen
                         if not i in points:
                             points[i]['count'] = 1
                         else:
                             points[i]['count'] += 1
                         
+                        # Add the prime seen for later inspection
                         points[i]['primes'].append(n)
 
+# The y-axis is the count of the number of primes seen at each position
 yaxis = [points[c]['count'] for c in points]
 
 plt.plot(range(0, len(points)), yaxis)
