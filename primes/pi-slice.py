@@ -68,7 +68,7 @@ for x in range(2, 101):
                         points[i]['primes'].append(n)
 
 # The y-axis is the count of the number of primes seen at each position
-yaxis = [points[c]['count'] for c in points]
+yaxis = [points[i]['count'] for i in points]
 
 plt.plot(range(0, len(points)), yaxis)
 plt.xlabel('Position')
