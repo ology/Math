@@ -63,9 +63,13 @@ for i in range(0, len(digits) + 1):
                         points[i]['count'] = 1
                     else:
                         points[i]['count'] += 1
-                    
+
                     # Add the prime seen for later inspection
                     points[i]['primes'].append(n)
+
+    if not i in points:
+        points[i]['count'] = 0
+        points[i]['primes'] = []
 
 # The y-axis is the count of the number of primes seen at each position
 yaxis = [points[i]['count'] for i in points]
