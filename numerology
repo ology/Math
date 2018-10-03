@@ -31,7 +31,7 @@ sub reduce_digits {
 
     # Reduce the date to a single digit.
     for my $x ( @date ) {
-        while ( length $x > 1 ) {
+        while ( length($x) > 1 ) {
             $x = num_sum($x);
         }
         push @digits, $x;
