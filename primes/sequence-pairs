@@ -8,8 +8,8 @@ use Statistics::Frequency;
 use Statistics::R;
 
 my $start = shift // 2;
-my $stop  = shift // 6;
-my $limit = shift // 10;
+my $stop  = shift || 6;
+my $limit = shift || 10;
 
 my @primes = primes($limit);
 
