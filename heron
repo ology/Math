@@ -12,7 +12,7 @@ my ($x, $y, $z) = @ARGV; # sides
 my ($area, $type) = (0, 'invalid');
 
 # Have we been given a triangle?
-if ($x + $y > $z and $x + $z > $y and $y + $z > $x) {
+if ( ($x + $y > $z) and ($x + $z > $y) and ($y + $z > $x) ) {
     # We have a triangle!
     my $p = ($x + $y + $z) / 2; # "Half-perimeter"
 
