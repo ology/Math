@@ -6,9 +6,7 @@ use warnings;
 # "The Life You Were Born to Live: A Guide to Finding Your Life Purpose"
 # ISBN 091581160X by Dan Millman.
 
-my $birth = shift || die "Usage: perl $0 YYYY/MM/DD\n";
-
-my @date = split /\//, $birth;
+my @date = @ARGV ? @ARGV : die "Usage: perl $0 YYYY MM DD\n";
 
 # Perform the magical computations!
 my $x = reduce_digits(@date);
