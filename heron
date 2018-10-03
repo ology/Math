@@ -2,8 +2,6 @@
 use strict;
 use warnings;
 
-# Compute the type and area of a 2D triangle with Heron's formula.
-
 die "Compute the type and area of a 2D triangle with Heron's formula\nUsage: perl $0 x y z\n"
     unless @ARGV == 3;
 
