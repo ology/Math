@@ -10,14 +10,6 @@ my $birthdate = shift || die "Usage: perl $0 YYYY/MM/DD\n";
 
 my @digits = split /\//, $birthdate;
 
-# Return the sum of the digits of a number.
-my $digit_sum = sub {
-    my $x = shift;
-    my $y = 0;
-    $y += $_ for split //, $x;
-    return $y;
-};
-
 # Perform the magical computations!
 my $x = sum_digits(@digits);
 
@@ -25,7 +17,15 @@ if ( length($x) > 1 ) {
     $x = sum_digits($x);
 }
 
-print "$x\n";
+print "Birth number = $x\n";
+
+# Return the sum of the digits of a number.
+sub num_sum {
+    my $x = shift;
+    my $y = 0;
+    $y += $_ for split //, $x;
+    return $y;
+}
 
 sub sum_digits {
     my @args = @_;
@@ -34,7 +34,7 @@ sub sum_digits {
 
     for my $x ( @args ) {
         while ( length $x > 1 ) {
-            $x = $digit_sum->($x);
+            $x = num_sum($x);
         }
         push @digits, $x;
     }
