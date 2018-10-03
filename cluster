@@ -49,16 +49,16 @@ printf "For %s groups of %d, there are %d primes out of %d total (%.2f%%).\n",
     $type, $span, $prime, $position, $prime / $position;
 
 __END__
-prime_groups <- c( 388,430,362,336,163,119,94,94,95,85,68,65,57,52,44,40,45,35,33 ) # primes
-plot( prime_groups, type='l',col='red',main="Primes Seen in Sequence Groups", xlab="Group size", ylab="Primes seen" )
+groups <- c( 388,430,362,336,163,119,94,94,95,85,68,65,57,52,44,40,45,35,33 ) # primes
+plot( groups, type='l',col='red',main="Primes Seen in Sequence Groups", xlab="Group size", ylab="Primes seen" )
 
-prime_groups <- c( 397,264,158,120,99,83,80,65,59,55,44,49,33,28,26,27,35,19,19 ) # pi
-lines( prime_groups, type='l' )
+groups <- c( 397,264,158,120,99,83,80,65,59,55,44,49,33,28,26,27,35,19,19 ) # pi
+lines( groups, type='l' )
 
-prime_groups <- c( 417,244,195,113,89,91,59,57,42,54,33,34,33,43,21,32,20,30,20 ) # random
-lines( prime_groups, type='l',col='blue' )
+groups <- c( 417,244,195,113,89,91,59,57,42,54,33,34,33,43,21,32,20,30,20 ) # random
+lines( groups, type='l',col='blue' )
 
-prime_groups <- c( 424,223,160,132,105,68,57,52,59,40,35,36,33,39,21,24,23,24,17 ) # random
-lines( prime_groups, type='l',col='dark_green' )
+groups <- c( 424,223,160,132,105,68,57,52,59,40,35,36,33,39,21,24,23,24,17 ) # random
+lines( groups, type='l',col='dark_green' )
 
 legend("topright", inset=.05, legend=c("primes","pi","random","random"), col=c("red","black","blue","darkgreen"), lty=1, cex=0.8)
