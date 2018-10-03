@@ -23,9 +23,7 @@ my $edges = [
 
 my $g = Graph->new;
 
-for my $e ( @$edges ) {
-    $g->add_edge( @$e )
-}
+$g->add_edge( @$_ ) for @$edges;
 
 my @path;
 
