@@ -8,10 +8,10 @@ use warnings;
 
 my $birthdate = shift || die "Usage: perl $0 YYYY/MM/DD\n";
 
-my @digits = split /\//, $birthdate;
+my @date = split /\//, $birthdate;
 
 # Perform the magical computations!
-my $x = sum_digits(@digits);
+my $x = sum_digits(@date);
 
 if ( length($x) > 1 ) {
     $x = sum_digits($x);
