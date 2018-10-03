@@ -11,10 +11,10 @@ my $birthdate = shift || die "Usage: perl $0 YYYY/MM/DD\n";
 my @date = split /\//, $birthdate;
 
 # Perform the magical computations!
-my $x = sum_digits(@date);
+my $x = reduce_digits(@date);
 
 if ( length($x) > 1 ) {
-    $x = sum_digits($x);
+    $x = reduce_digits($x);
 }
 
 print "Birth number = $x\n";
@@ -27,11 +27,12 @@ sub num_sum {
     return $y;
 }
 
-sub sum_digits {
+sub reduce_digits {
     my @args = @_;
 
     my @digits;
 
+    # Reduce the date args to a single digit.
     for my $x ( @args ) {
         while ( length $x > 1 ) {
             $x = num_sum($x);
@@ -39,6 +40,7 @@ sub sum_digits {
         push @digits, $x;
     }
 
+    # Reduce the digits to a single digit.
     my $sum = 0;
     $sum += $_ for @digits;
 
