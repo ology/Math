@@ -19,9 +19,9 @@ print "Birth number = $x\n";
 # Return the sum of the digits of a number.
 sub num_sum {
     my $x = shift;
-    my $y = 0;
-    $y += $_ for split //, $x;
-    return $y;
+    my $sum = 0;
+    $sum += $_ for split //, $x;
+    return $sum;
 }
 
 sub reduce_digits {
