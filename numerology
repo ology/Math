@@ -11,9 +11,8 @@ my @birthdate = @ARGV ? @ARGV : die "Usage: perl $0 YYYY MM DD\n";
 # Perform the magical computations!
 my $x = reduce_digits(@birthdate);
 
-if ( length($x) > 1 ) {
-    $x = reduce_digits($x);
-}
+$x = reduce_digits($x)
+    if length($x) > 1;
 
 print "Birth number = $x\n";
 
