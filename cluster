@@ -10,20 +10,16 @@ my $span   = shift || 1;
 my $type   = shift || 'pi';
 
 my $number;
-my $name;
 if ( $type eq 'e' ) {
     $number = euler( 1, $digits );
-    $name = 'euler';
 }
 elsif ( $type eq 'r' ) {
     $number = join '', map { int rand 10 } 1 .. $digits;
-    $name = 'random';
 }
 elsif ( $type eq 'prime' ) {
     my @primes = primes( $digits * $digits );
     $number = join '', @primes;
     $number = substr $number, 0, $digits;
-    $name = 'prime';
 }
 else {
     $number = pi($digits);
@@ -50,7 +46,7 @@ while ( $position + $span - 1 < length($decimal) ) {
     $position++;
 }
 
-printf "For %s groups of %d, there are %d $name out of %d total (%.2f%%).\n",
+printf "For %s groups of %d, there are %d primes out of %d total (%.2f%%).\n",
     $type, $span, $prime, $position, $prime / $position;
 
 __END__
