@@ -26,12 +26,12 @@ sub num_sum {
 }
 
 sub reduce_digits {
-    my @args = @_;
+    my @date = @_;
 
     my @digits;
 
-    # Reduce the date args to a single digit.
-    for my $x ( @args ) {
+    # Reduce the date to a single digit.
+    for my $x ( @date ) {
         while ( length $x > 1 ) {
             $x = num_sum($x);
         }
