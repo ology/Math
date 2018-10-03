@@ -1,11 +1,8 @@
-#!/usr/bin/perl
-#
-# Euclid's greatest common divisor, but with the added convenience
-# of computing on more than 2 numbers.
-# 2013-07-15 - gene@ology.net
-#
+#!/usr/bin/env perl
 use strict;
 use warnings;
+
+# Euclid's greatest common divisor, but with the added convenience of computing on more than 2 numbers.
 
 # Output usage when less than two arguments are given.
 die "Euclid greatest common divisor for 2 or more numbers\nUsage: perl $0 m k [x y ...]\n"
