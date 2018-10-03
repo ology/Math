@@ -26,7 +26,7 @@ if ( ($x + $y > $z) and ($x + $z > $y) and ($y + $z > $x) ) {
     elsif ( ($x == $y) or ($x == $z) or ($y == $z) ) {
         $type = 'isosceles';
     }
-    elsif ($x + $y == $z ** 2 or $x + $z == $y ** 2 or $y + $z == $x ** 2) {
+    elsif ( ($x + $y == $z ** 2) or ($x + $z == $y ** 2) or ($y + $z == $x ** 2) ) {
         $type = 'right';
     }
     else {
