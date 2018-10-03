@@ -20,10 +20,10 @@ if ( ($x + $y > $z) and ($x + $z > $y) and ($y + $z > $x) ) {
     $area = sqrt($p * ($p - $x) * ($p - $y) * ($p - $z));
 
     # Discern the type of triangle.
-    if ($x == $y and $y == $z) {
+    if ( ($x == $y) and ($y == $z) ) {
         $type = 'equilateral';
     }
-    elsif ($x == $y or $x == $z or $y == $z) {
+    elsif ( ($x == $y) or ($x == $z) or ($y == $z) ) {
         $type = 'isosceles';
     }
     elsif ($x + $y == $z ** 2 or $x + $z == $y ** 2 or $y + $z == $x ** 2) {
