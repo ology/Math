@@ -25,12 +25,12 @@ sub num_sum {
 }
 
 sub reduce_digits {
-    my @date = @_;
+    my @numbers = @_;
 
     my @digits;
 
-    # Reduce the date to a single digit.
-    for my $x ( @date ) {
+    # Reduce the numbers to a single digit.
+    for my $x ( @numbers ) {
         while ( length($x) > 1 ) {
             $x = num_sum($x);
         }
