@@ -34,8 +34,8 @@ my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
 my $plot = Chart::Plotly::Plot->new();
 $plot->add_trace($scatter);
 $plot->layout({
-    height => 800,
-    width  => 800,
+    height => 600,
+    width  => 600,
     title  => 'Primes up to '. $max . ' Modulo ' . $mod . ' vs Next Prime Modulo ' . $mod,
     xaxis  => { title => 'Primes Modulo ' . $mod, },
     yaxis  => { title => 'Next Prime Modulo ' . $mod, },
