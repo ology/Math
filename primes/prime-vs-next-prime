@@ -8,8 +8,9 @@ use Chart::Plotly::Plot;
 use Chart::Plotly::Trace::Scatter;
 use Math::Big 'primes';
 
-my $max = shift || 20;
-my $mod = shift || 6;
+my $max  = shift || 20;
+my $mod  = shift || 6;
+my $size = shift || 600;
 
 my @xs;
 my @ys;
@@ -34,8 +35,8 @@ my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
 my $plot = Chart::Plotly::Plot->new();
 $plot->add_trace($scatter);
 $plot->layout({
-    height => 600,
-    width  => 600,
+    height => $size,
+    width  => $size,
     title  => 'Primes up to '. $max . ' Modulo ' . $mod . ' vs Next Prime Modulo ' . $mod,
     xaxis  => { title => 'Primes Modulo ' . $mod, },
     yaxis  => { title => 'Next Prime Modulo ' . $mod, },
