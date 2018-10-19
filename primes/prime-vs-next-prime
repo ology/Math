@@ -19,11 +19,11 @@ my $previous;
 
 for my $p ( primes($max) ) {
     my $n = $p % $mod;
-warn(__PACKAGE__,' ',__LINE__," MARK: $p % $mod = $n\n");
+    warn "$p % $mod = $n\n";
 
     if ( $previous ) {
         my $n2 = $previous % $mod;
-warn("\t",__PACKAGE__,' ',__LINE__," MARK: $previous % $mod = $n2\n");
+        warn "\t$previous % $mod = $n2\n";
         push @xs, $n2->numify();
         push @ys, $n->numify();
     }
@@ -37,7 +37,7 @@ $plot->add_trace($scatter);
 $plot->layout({
     height => $size,
     width  => $size,
-    title  => 'Primes up to '. $max . ' Modulo ' . $mod . ' vs Next Prime Modulo ' . $mod,
+    title  => 'Primes below '. $max . ' Modulo ' . $mod . ' vs Next Prime Modulo ' . $mod,
     xaxis  => { title => 'Primes Modulo ' . $mod, },
     yaxis  => { title => 'Next Prime Modulo ' . $mod, },
 });
