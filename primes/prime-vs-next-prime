@@ -28,7 +28,7 @@ warn("\t",__PACKAGE__,' ',__LINE__," MARK: $previous % $mod = $n2\n");
         push @ys, $n->numify();
     }
 
-    $previous = $n;
+    $previous = $p;
 }
 
 my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
