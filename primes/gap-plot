@@ -1,0 +1,34 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use HTML::Show;
+use Chart::Plotly;
+use Chart::Plotly::Plot;
+use Chart::Plotly::Trace::Scatter;
+use Math::Big qw(primes);
+
+my $limit = shift || 100;
+
+my $previous;
+my @data;
+
+for my $prime ( primes($limit) ) {
+    if ( $previous ) {
+        my $gap = $prime - $previous;
+        push @data, $gap->numify();
+        print "$gap = $prime - $previous\n";
+    }
+    $previous = $prime;
+}
+
+my $scatter = Chart::Plotly::Trace::Scatter->new( y => \@data );
+my $plot = Chart::Plotly::Plot->new();
+$plot->add_trace($scatter);
+$plot->layout({
+    title  => 'Gaps for Primes Below ' . $limit,
+    xaxis  => { title => 'Nth Prime'},
+    yaxis  => { title => 'Gap' },
+});
+
+Chart::Plotly::show_plot($plot);
