@@ -1,0 +1,48 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use HTML::Show;
+use Chart::Plotly;
+use Chart::Plotly::Plot;
+use Chart::Plotly::Trace::Scatter;
+use Math::Big 'primes';
+
+my $max = shift || 20;
+my $mod = shift || 6;
+my $w   = length $max;
+my $z   = length $mod;
+
+my $name = sprintf '%s-%0*d-%0*d.png', $0, $w, $max, $z, $mod;
+
+my @xs;
+my @ys;
+
+my $previous;
+
+for my $p ( primes($max) ) {
+    my $n = $p % $mod;
+warn(__PACKAGE__,' ',__LINE__," MARK: $p % $mod = $n\n");
+
+    if ( $previous ) {
+        my $n2 = $previous % $mod;
+warn("\t",__PACKAGE__,' ',__LINE__," MARK: $previous % $mod = $n2\n");
+        push @xs, $n2->numify();
+        push @ys, $n->numify();
+    }
+
+    $previous = $n;
+}
+
+my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
+my $plot = Chart::Plotly::Plot->new();
+$plot->add_trace($scatter);
+$plot->layout({
+    height => 800,
+    width  => 800,
+    title  => 'Primes up to '. $max . ' Modulo ' . $mod . ' vs Next Prime Modulo ' . $mod,
+    xaxis  => { title => 'Primes Modulo ' . $mod, },
+    yaxis  => { title => 'Next Prime Modulo ' . $mod, },
+});
+ 
+Chart::Plotly::show_plot($plot);
