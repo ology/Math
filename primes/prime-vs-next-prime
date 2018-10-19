@@ -10,10 +10,6 @@ use Math::Big 'primes';
 
 my $max = shift || 20;
 my $mod = shift || 6;
-my $w   = length $max;
-my $z   = length $mod;
-
-my $name = sprintf '%s-%0*d-%0*d.png', $0, $w, $max, $z, $mod;
 
 my @xs;
 my @ys;
