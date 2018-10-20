@@ -7,17 +7,6 @@ use warnings;
 
 use Math::Big qw(primes);
 
-# Handy debug flag or die.
-my $DEBUG = defined $ARGV[0]
-    ? shift
-    : die(<<"USAGE");
-Program: $0 - Compute a table of primes x modulo n
-Usage: perl $0 debug [mod_min mod_max prime_min prime_max]
-  Defaults: *_min=2,*_max=20
-  Ex: perl modulo-table 1 55 90
-      perl modulo-table 0 3 10 11 1000
-USAGE
-
 # Set the starting modulo value.
 my $mmin = shift || 2;
 # Set the upper modulo limit.
@@ -30,36 +19,27 @@ my $pmax = shift || $mmax;
 # Get a list of the bounded primes only.
 my @primes = grep { $_->{value}[0] if $_->{value}[0] >= $pmin } primes($pmax);
 
-# Set the field widths for output formatting if debugging.
+# Set the field widths for output formatting
 my $mwidth = length($mmax);
 my $pwidth = length($primes[-1]);
 my $iwidth = length scalar @primes;
 
-if ($DEBUG) {
-    # Display the table header.
-    print "Table: Prime rows x modulo columns:\n";
-    printf("%s", (' ' x ($iwidth + $pwidth + $mwidth + 1)));
-    printf("%s\n", join(' ', (map { sprintf('%*d', $mwidth, $_) } $mmin .. $mmax)));
-}
+# Display the table header.
+print "Table: Prime rows x modulo columns:\n";
+printf("%s", (' ' x ($iwidth + $pwidth + $mwidth + 1)));
+printf("%s\n", join(' ', (map { sprintf('%*d', $mwidth, $_) } $mmin .. $mmax)));
 
 # Generate the table of primes x modulo arithmetic.
 my $i = 0;
 for my $p (@primes) {
-    if ($DEBUG) {
-        # Show human readible tables.
-        # Start off a row with the number and prime.
-        printf('%*d. %*d ', $iwidth, ++$i, $pwidth, $p) if $DEBUG;
-    }
+    # Show human readable tables.
+    # Start off a row with the number and prime.
+    printf('%*d. %*d ', $iwidth, ++$i, $pwidth, $p);
+
     # Compute each modulo of the prime.
-    my @row = ();
     for my $m ($mmin .. $mmax) {
-        if ($DEBUG) {
-            printf '%*d ', $mwidth, $p % $m;
-        } else {
-            push @row, $p % $m;
-        }
+        printf '%*d ', $mwidth, $p % $m;
     }
-    print join(',', @row) unless $DEBUG;
     # Conclude our row.
     print "\n";
 }
