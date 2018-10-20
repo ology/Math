@@ -18,14 +18,14 @@ my @ys;
 my $previous;
 
 for my $p ( primes($max) ) {
-    my $n = $p % $mod;
-    warn "$p % $mod = $n\n";
+    my $y = $p % $mod;
+    warn "$p % $mod = $y\n";
 
     if ( $previous ) {
-        my $n2 = $previous % $mod;
-        warn "\t$previous % $mod = $n2\n";
-        push @xs, $n2->numify();
-        push @ys, $n->numify();
+        my $x = $previous % $mod;
+        warn "\t$previous % $mod = $x\n";
+        push @xs, $x->numify();
+        push @ys, $y->numify();
     }
 
     $previous = $p;
