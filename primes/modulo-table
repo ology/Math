@@ -1,11 +1,9 @@
-#!/usr/bin/perl
-#
-# Compute a table of primes x modulo arithmetic for a given ceiling of primes
-# and a maximum number to modulo by.
-# -- gene@cpan.org
-#
+#!/usr/bin/env perl
 use strict;
 use warnings;
+
+# Compute a table of primes x modulo arithmetic for a given ceiling of primes
+# and a maximum number to modulo by.
 
 use Math::Big qw(primes);
 
