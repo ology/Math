@@ -20,14 +20,14 @@ my $pmax = shift || $mmax;
 my @primes = grep { $_ >= $pmin } primes($pmax);
 
 # Set the field widths for output formatting
-my $mwidth = length($mmax);
-my $pwidth = length($primes[-1]);
+my $mwidth = length $mmax;
+my $pwidth = length $primes[-1];
 my $iwidth = length scalar @primes;
 
 # Display the table header.
 print "Table: Prime rows x modulo columns:\n";
-printf("%s", (' ' x ($iwidth + $pwidth + $mwidth + 1)));
-printf("%s\n", join(' ', (map { sprintf('%*d', $mwidth, $_) } $mmin .. $mmax)));
+printf "%s", ' ' x ($iwidth + $pwidth + $mwidth + 1);
+printf "%s\n", join(' ', map { sprintf '%*d', $mwidth, $_ } $mmin .. $mmax);
 
 # Generate the table of primes x modulo arithmetic.
 my $i = 0;
