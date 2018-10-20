@@ -17,7 +17,7 @@ my $pmin = shift || $mmin;
 my $pmax = shift || $mmax;
 
 # Get a list of the bounded primes only.
-my @primes = grep { $_->numify() if $_->numify() >= $pmin } primes($pmax);
+my @primes = grep { $_ >= $pmin } primes($pmax);
 
 # Set the field widths for output formatting
 my $mwidth = length($mmax);
