@@ -36,7 +36,7 @@ for my $max (qw( 10 100 1000 10000 )) {
             $previous = $p;
         }
 
-        my $title = sprintf 'Primes below %d Modulo %d vs Next Prime Modulo %d',
+        my $title = sprintf 'Primes Below %d Modulo %d vs Next Prime Modulo %d',
             $max, $modulo, $modulo;
         my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
         my $plot = Chart::Plotly::Plot->new();
