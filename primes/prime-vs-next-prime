@@ -14,13 +14,12 @@ my $size = shift || 600;
 
 die "Path $path does not exist" unless -d $path;
 
-my @xs;
-my @ys;
-
-my $previous;
-
 for my $max (qw( 10 100 1000 10000 )) {
     for my $modulo ( 2 .. $mod ) {
+        my @xs;
+        my @ys;
+        my $previous;
+
         for my $p ( primes($max) ) {
             my $y = $p % $modulo;
             warn "$p % $modulo = $y\n";
