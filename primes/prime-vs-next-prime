@@ -8,9 +8,10 @@ use Chart::Plotly::Trace::Scatter;
 use Chart::Plotly::Image::Orca;
 use Math::Big 'primes';
 
-my $path = shift || '/Users/gene/tmp/primes-vs-next-prime';
 my $mod  = shift || 6;
-my $size = shift || 600;
+my $path = shift || '/Users/gene/tmp/primes-vs-next-prime';
+
+my $size = 600;
 
 die "Path $path does not exist" unless -d $path;
 
