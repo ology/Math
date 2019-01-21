@@ -20,35 +20,35 @@ my @ys;
 my $previous;
 
 for my $max (qw( 10 100 1000 10000 )) {
-for my $modulo ( 2 .. $mod ) {
-    for my $p ( primes($max) ) {
-        my $y = $p % $modulo;
-        warn "$p % $modulo = $y\n";
+    for my $modulo ( 2 .. $mod ) {
+        for my $p ( primes($max) ) {
+            my $y = $p % $modulo;
+            warn "$p % $modulo = $y\n";
 
-        if ( $previous ) {
-            my $x = $previous % $modulo;
-            warn "\t$previous % $modulo = $x\n";
-            push @xs, $x->numify();
-            push @ys, $y->numify();
+            if ( $previous ) {
+                my $x = $previous % $modulo;
+                warn "\t$previous % $modulo = $x\n";
+                push @xs, $x->numify();
+                push @ys, $y->numify();
+            }
+
+            $previous = $p;
         }
 
-        $previous = $p;
+        my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
+        my $plot = Chart::Plotly::Plot->new();
+        $plot->add_trace($scatter);
+        $plot->layout({
+            height => $size,
+            width  => $size,
+            title  => 'Primes below '. $max . ' Modulo ' . $modulo . ' vs Next Prime Modulo ' . $modulo,
+            xaxis  => { title => 'Primes Modulo ' . $modulo, },
+            yaxis  => { title => 'Next Prime Modulo ' . $modulo, },
+        });
+         
+        Chart::Plotly::Image::Orca::orca(
+            plot => $plot,
+            file => "$path/primes-$max-mod-$modulo.png"
+        );
     }
-
-    my $scatter = Chart::Plotly::Trace::Scatter->new( x => \@xs, y => \@ys );
-    my $plot = Chart::Plotly::Plot->new();
-    $plot->add_trace($scatter);
-    $plot->layout({
-        height => $size,
-        width  => $size,
-        title  => 'Primes below '. $max . ' Modulo ' . $modulo . ' vs Next Prime Modulo ' . $modulo,
-        xaxis  => { title => 'Primes Modulo ' . $modulo, },
-        yaxis  => { title => 'Next Prime Modulo ' . $modulo, },
-    });
-     
-    Chart::Plotly::Image::Orca::orca(
-        plot => $plot,
-        file => "$path/primes-$max-mod-$modulo.png"
-    );
-}
 }
