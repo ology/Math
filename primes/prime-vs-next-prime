@@ -6,6 +6,7 @@ use HTML::Show;
 use Chart::Plotly;
 use Chart::Plotly::Plot;
 use Chart::Plotly::Trace::Scatter;
+use Chart::Plotly::Image::Orca;
 use Math::Big 'primes';
 
 my $max  = shift || 20;
@@ -42,4 +43,4 @@ $plot->layout({
     yaxis  => { title => 'Next Prime Modulo ' . $mod, },
 });
  
-Chart::Plotly::show_plot($plot);
+Chart::Plotly::Image::Orca::orca( plot => $plot, file => "primes-$max-mod-$mod.png" );
