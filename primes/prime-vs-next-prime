@@ -8,7 +8,7 @@ use Chart::Plotly::Trace::Scatter;
 use Chart::Plotly::Image::Orca;
 use Math::Big 'primes';
 
-my $mod  = shift || 6;
+my $mod  = shift || 20;
 my $path = shift || '/Users/gene/tmp/primes-vs-next-prime';
 
 my $size = 500;
