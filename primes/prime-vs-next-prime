@@ -28,6 +28,7 @@ for my $max (qw( 10 100 1000 10000 )) {
             if ( $previous ) {
                 my $x = $previous % $modulo;
                 warn "\t$previous % $modulo = $x\n";
+
                 push @xs, $x->numify();
                 push @ys, $y->numify();
             }
