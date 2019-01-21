@@ -46,10 +46,8 @@ for my $max (qw( 10 100 1000 10000 )) {
             xaxis  => { title => 'Primes Modulo ' . $modulo, },
             yaxis  => { title => 'Next Prime Modulo ' . $modulo, },
         });
-         
-        Chart::Plotly::Image::Orca::orca(
-            plot => $plot,
-            file => "$path/primes-$max-mod-$modulo.png"
-        );
+
+        my $name = sprintf '%s/primes-%d-mod-%0*d.png', $path, $max, length($mod), $modulo;
+        Chart::Plotly::Image::Orca::orca( plot => $plot, file => $name );
     }
 }
