@@ -51,3 +51,10 @@ for my $max (qw( 10 100 1000 10000 )) {
         Chart::Plotly::Image::Orca::orca( plot => $plot, file => $name );
     }
 }
+
+__END__
+montage $(ls -1 primes-10-mod-*|sort) -geometry '500x500+1+1>' -tile '19x1' montage-10.png
+montage $(ls -1 primes-100-mod-*|sort) -geometry '500x500+1+1>' -tile '19x1' montage-100.png
+montage $(ls -1 primes-1000-mod-*|sort) -geometry '500x500+1+1>' -tile '19x1' montage-1000.png
+montage $(ls -1 primes-10000-mod-*|sort) -geometry '500x500+1+1>' -tile '19x1' montage-10000.png
+montage $(ls -1 montage-*.png|sort) -geometry '2000' -tile '1x4' combined.png
