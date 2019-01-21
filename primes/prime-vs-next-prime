@@ -8,15 +8,18 @@ use Chart::Plotly::Trace::Scatter;
 use Chart::Plotly::Image::Orca;
 use Math::Big 'primes';
 
-my $max  = shift || 20;
+my $path = shift || '/Users/gene/tmp/primes-vs-next-prime';
 my $mod  = shift || 6;
 my $size = shift || 600;
+
+die "Path $path does not exist" unless -d $path;
 
 my @xs;
 my @ys;
 
 my $previous;
 
+for my $max (qw( 10 100 1000 10000 )) {
 for my $modulo ( 2 .. $mod ) {
     for my $p ( primes($max) ) {
         my $y = $p % $modulo;
@@ -43,5 +46,9 @@ for my $modulo ( 2 .. $mod ) {
         yaxis  => { title => 'Next Prime Modulo ' . $modulo, },
     });
      
-    Chart::Plotly::Image::Orca::orca( plot => $plot, file => "primes-$max-mod-$modulo.png" );
+    Chart::Plotly::Image::Orca::orca(
+        plot => $plot,
+        file => "$path/primes-$max-mod-$modulo.png"
+    );
+}
 }
