@@ -23,7 +23,7 @@ for my $p ( @primes ) {
     $previous = $current;
 }
 
-my ( $i, $sum ) = ( 0, 0 );
+my $i = 0;
 
 for my $key ( sort { $digits{$a} <=> $digits{$b} } keys %digits ) {
     $i++;
@@ -32,10 +32,7 @@ for my $key ( sort { $digits{$a} <=> $digits{$b} } keys %digits ) {
     $digits{$key} = $digits{$key} / $length * 100;
 
     printf "%2d. %s: %.6f %%\n", $i, $key, $digits{$key};
-
-    $sum += $digits{$key};
 }
-printf "Sum = %.2f\n", $sum;
 
 __END__
 df <- read.table('~/sandbox/dev/Math/primes/prime-digit-freq.txt')
