@@ -22,10 +22,10 @@ for my $max (qw( 10 100 1000 10000 )) {
         my $previous;
 
         for my $p ( primes($max) ) {
-            my $y = $p % $modulo;
-            warn "$p % $modulo = $y\n";
-
             if ( $previous ) {
+                my $y = $p % $modulo;
+                warn "$p % $modulo = $y\n";
+
                 my $x = $previous % $modulo;
                 warn "\t$previous % $modulo = $x\n";
 
