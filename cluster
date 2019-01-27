@@ -10,20 +10,19 @@ my $span   = shift || 1;
 my $type   = shift || 'pi';
 
 my $number;
-if ( $type eq 'e' ) {
+if ( $type =~ /^e/ ) {
     $number = euler( 1, $digits );
 }
-elsif ( $type eq 'r' ) {
+elsif ( $type =~ /^r/ ) {
     $number = join '', map { int rand 10 } 1 .. $digits;
 }
-elsif ( $type eq 'prime' ) {
+elsif ( $type =~ /^p/ ) {
     my @primes = primes( $digits * $digits );
     $number = join '', @primes;
     $number = substr $number, 0, $digits;
 }
 else {
     $number = pi($digits);
-    $name = 'pi';
 }
 
 ( my $decimal = $number ) =~ s/\A\d\.(.*)\z/$1/;
