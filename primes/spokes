@@ -1,9 +1,8 @@
 #!/usr/bin/perl
-#
+
 # This program generates a table of the numbers behind Timothy Butcher's prime
 # spiral drawings.  A spiral similar to Ulam's is N=4.  Examples at the bottom.
-# -- gene@cpan.org
-#
+
 use strict;
 use warnings;
 
