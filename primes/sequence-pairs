@@ -39,12 +39,8 @@ for my $mod ( $start .. $stop ) {
             }
             push @x, $sequence[$last];
             push @y, $sequence[$p];
-            $last = $p;
         }
-        else {
-            $last = $p;
-            next;
-        }
+        $last = $p;
     }
 
     #printf "Modulo: $mod, Minimum: $minimum\n";
