@@ -13,11 +13,14 @@ my $limit = shift || 100;
 my $previous;
 my @data;
 
+my $n = 0;
+
 for my $prime ( primes($limit) ) {
     if ( $previous ) {
+        $n++;
         my $gap = $prime - $previous;
         push @data, $gap->numify();
-        print "$gap = $prime - $previous\n";
+        print "$n. $gap = $prime - $previous\n";
     }
     $previous = $prime;
 }
