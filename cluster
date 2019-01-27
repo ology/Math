@@ -16,7 +16,7 @@ if ( $type =~ /^e/ ) {
 elsif ( $type =~ /^r/ ) {
     $number = join '', map { int rand 10 } 1 .. $digits;
 }
-elsif ( $type =~ /^p/ ) {
+elsif ( $type =~ /^pr/ ) {
     my @primes = primes( $digits * $digits );
     $number = join '', @primes;
     $number = substr $number, 0, $digits;
