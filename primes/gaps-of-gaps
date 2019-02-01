@@ -1,9 +1,8 @@
 #!/usr/bin/env perl
-#
+
 # Generate a table of the "gaps of gaps" between sucessive primes and their
 # gaps, and their gaps, and their gaps... given a maximum.
-# -- gene@cpan.org
-#
+
 use strict;
 use warnings;
 
