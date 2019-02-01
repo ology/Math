@@ -3,6 +3,8 @@
 # Generate a table of the "gaps of gaps" between sucessive primes and their
 # gaps, and their gaps, and their gaps... given a maximum.
 
+# Writeup: http://techn.ology.net/primes-gaps-and-gaps-of-gaps/
+
 use strict;
 use warnings;
 
