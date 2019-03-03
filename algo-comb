@@ -4,15 +4,12 @@ use warnings;
 
 use Algorithm::Combinatorics qw(variations_with_repetition);
 
-my $k = shift || 3;
-my @range = @ARGV ? @ARGV : 1 .. $k;
-
-print "variations_with_repetition:\n";
+my $k = shift || 3;                  # How many objects?
+my @range = @ARGV ? @ARGV : 1 .. $k; # The range of possible values
 
 my $v = variations_with_repetition(\@range, $k);
 
 my $n = 2;
-
 my $i = 0;
 
 while (my $x = $v->next) {
