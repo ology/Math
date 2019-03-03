@@ -9,7 +9,7 @@ my @range = @ARGV ? @ARGV : 1 .. $k; # The range of possible values
 
 my $v = variations_with_repetition(\@range, $k);
 
-my $n = 2;
+my $n = @$v + 1;
 my $i = 0;
 
 while (my $x = $v->next) {
