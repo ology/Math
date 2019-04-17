@@ -35,4 +35,4 @@ for ( 0 .. $g->vertices - 1 ) {
     push @path, $v;
 }
 
-print join( ', ', @path ), "\n";
+print join( ' ', @path ), "\n";
