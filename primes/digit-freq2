@@ -8,7 +8,6 @@ use Math::Prime::XS qw(primes);
 my $max = shift || 1000;
 
 my @primes = primes($max);
-warn(__PACKAGE__,' ',__LINE__," MARK: ",scalar(@primes),"\n");
 
 # Count the number of times a digit is seen
 my %digits;
