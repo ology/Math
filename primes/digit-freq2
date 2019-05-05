@@ -15,10 +15,8 @@ for my $prime ( @primes ) {
     my @parts = split //, $prime;
     $digits{$_}++ for @parts;
 }
-#use Data::Dumper;warn(__PACKAGE__,' ',__LINE__," MARK: ",Dumper\%digits);
 
 my $total = sum0 values %digits;
-#warn(__PACKAGE__,' ',__LINE__," MARK: ",$total,"\n");
 
 # Compute the proportional frequencies
 for my $digit ( keys %digits ) {
