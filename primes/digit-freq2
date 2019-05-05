@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use List::Util qw( sum0 );
+use List::Util qw(sum0);
 use Math::Prime::XS qw(primes);
 
 my $max = shift || 1000;
