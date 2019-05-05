@@ -16,7 +16,7 @@ for my $prime ( @primes ) {
     $digits{$_}++ for @parts;
 }
 
-# Find the total that all digits are seen
+# Find the total of all digits are seen
 my $total = sum0 values %digits;
 
 # Compute the proportional frequencies
