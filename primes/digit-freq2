@@ -25,6 +25,6 @@ for my $digit ( keys %digits ) {
 }
 
 # Output the frequencies in sorted order
-for my $digit ( sort { $digits{$a} <=> $digits{$b} } keys %digits ) {
+for my $digit ( sort { $digits{$a} <=> $digits{$b} || $a <=> $b } keys %digits ) {
     printf "%d: %.4f\n", $digit, $digits{$digit};
 }
