@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use List::Util qw(sum0);
+use Math::BigRat;
 use Math::Prime::XS qw(primes);
 
 my $max = shift || 1000;
@@ -21,10 +22,14 @@ my $total = sum0 values %digits;
 
 # Compute the proportional frequencies
 for my $digit ( keys %digits ) {
-    $digits{$digit} /= $total;
+    $digits{$digit} = Math::BigRat->new(
+        Math::BigInt->new( $digits{$digit} ),
+        Math::BigInt->new($total)
+    );
 }
 
 # Output the frequencies in sorted order
 for my $digit ( sort { $digits{$a} <=> $digits{$b} || $a <=> $b } keys %digits ) {
-    printf "%d: %.4f\n", $digit, $digits{$digit};
+    print "$digit: ", $digits{$digit}->as_float, "\n";
+#    printf "%d: %.4f\n", $digit, $digits{$digit}->as_float;
 }
