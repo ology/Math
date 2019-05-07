@@ -10,7 +10,7 @@ my $min = shift // 10_000;
 my $max = shift || 10_000_000;
 
 my @primes = primes( $min, $max );
-warn(__PACKAGE__,' ',__LINE__," $min to $max => ",scalar(@primes),"\n");
+warn " $min to $max => ",scalar(@primes),"\n";
 
 # Count the number of times a digit is seen
 my %digits;
@@ -25,13 +25,13 @@ my $total = sum0 values %digits;
 # Compute the proportional frequencies
 for my $digit ( keys %digits ) {
     $digits{$digit} = Math::BigRat->new(
-        Math::BigInt->new( $digits{$digit} ),
+        Math::BigInt->new($digits{$digit}),
         Math::BigInt->new($total)
     );
 }
 
 # Output the frequencies in sorted order
 for my $digit ( sort { $digits{$a} <=> $digits{$b} || $a <=> $b } keys %digits ) {
-    print "$digit: ", $digits{$digit}->as_float, "\n";
-#    printf "%d: %.4f\n", $digit, $digits{$digit}->as_float;
+#    print "$digit: ", $digits{$digit}->as_float, "\n";
+    printf "%d: %.4f\n", $digit, $digits{$digit}->as_float;
 }
