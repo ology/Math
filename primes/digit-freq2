@@ -6,9 +6,11 @@ use List::Util qw(sum0);
 use Math::BigRat;
 use Math::Prime::XS qw(primes);
 
-my $max = shift || 1000;
+my $min = shift // 10_000;
+my $max = shift || 10_000_000;
 
-my @primes = primes($max);
+my @primes = primes( $min, $max );
+warn(__PACKAGE__,' ',__LINE__," $min to $max => ",scalar(@primes),"\n");
 
 # Count the number of times a digit is seen
 my %digits;
