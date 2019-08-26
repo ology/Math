@@ -25,7 +25,7 @@ iterate_plot <- function( r_min, r_max, equation ) {
 
     r <- seq( r_min, r_max, length.out = length(v) )
 
-    plot( r, v, type = 'p', cex  = 0.1, xlab = 'r', ylab = 'x' )
+    plot( r, v, type = 'p', cex = 0.1, xlab = 'r', ylab = 'x' )
 }
 
 # The logistic equation
