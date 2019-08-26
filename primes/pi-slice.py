@@ -33,7 +33,6 @@ plt.xlabel('pi Slice Size')
 plt.ylabel('Number of primes seen')
 plt.show()
 
-
 # How many overlapping primes are there?
 import collections
 
