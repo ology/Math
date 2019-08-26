@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 #
 # Modulo transform a numerical sequence into an alternate set of "digits."
 # Usage: perl base-mod-seq [M B p|f 0 1 2 a b c...] where 
