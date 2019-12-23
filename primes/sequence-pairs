@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use Math::Prime::XS qw(primes);
-use List::MoreUtils qw(firstidx);
+use List::SomeUtils qw(firstidx);
 use Statistics::Frequency;
 use Statistics::R;
 
