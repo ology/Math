@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+my $m     = shift || 100;
+my $r_min = shift || 100;
+my $r_max = shift || 1000;
+my $t_min = shift || 0;
+my $t_max = shift || 1;
+
+my $x = (($m - $r_min) / ($r_max - $r_min)) * ($t_max - $t_min) + $t_min;
+
+print "$m [$r_min,$r_max] -> $x [$t_min,$t_max]\n";
