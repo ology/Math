@@ -1,13 +1,49 @@
-#!/usr/bin/env perl
+package ScaleNumber;
+
 use strict;
 use warnings;
 
-my $m     = shift || 100;
-my $r_min = shift || 100;
-my $r_max = shift || 1000;
-my $t_min = shift || 0;
-my $t_max = shift || 1;
+=head1 SYNOPSIS
 
-my $x = (($m - $r_min) / ($r_max - $r_min)) * ($t_max - $t_min) + $t_min;
+  my $x = 500;
 
-print "$m [$r_min,$r_max] -> $x [$t_min,$t_max]\n";
+  my $y = scale($x, 0, 1000); # 0.5
+
+  $y = scale($x, 500, 1000); # 0
+
+  $y = scale($x, 0, 500); # 1
+
+  $y = scale($x, 0, 500, 10, 100); # 
+
+=head1 FUNCTION
+
+=head2 scale
+
+Scale a number from one range to another.
+
+If not given a number and its data range, the function will die.
+
+If not given a target range to scale to, 0 to 1 inclusive is used.
+
+=cut
+
+sub scale {
+    # Number to scale, the range it is in, & the target range to scale to
+    my ($n, $r_min, $r_max, $t_min, $t_max) = @_;
+
+    die 'Number to scale not given'
+        unless defined $n;
+    die 'Data range not given'
+        unless defined $r_min && defined $r_max;
+
+    $t_min = 0 unless defined $t_min;
+    $t_max = 1 unless defined $t_max;
+
+    my $scaled = (($n - $r_min) / ($r_max - $r_min)) * ($t_max - $t_min) + $t_min;
+
+#    print "$n in [$r_min,$r_max] -> $scaled in [$t_min,$t_max]\n";
+
+    return $scaled;
+}
+
+1;
