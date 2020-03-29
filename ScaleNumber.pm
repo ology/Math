@@ -3,6 +3,10 @@ package ScaleNumber;
 use strict;
 use warnings;
 
+=head1 NAME
+
+ScaleNumber - Scale a number from one range to another
+
 =head1 SYNOPSIS
 
   my $x = 500;
