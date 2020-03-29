@@ -11,20 +11,20 @@ ScaleNumber - Scale a number from one range to another
 
   my $x = 500;
 
-  my $y = ScaleNumber::scale($x, 0, 1000); # 0.5
+  my $y = ScaleNumber::in_range($x, 0, 1000); # 0.5
 
-  $y = ScaleNumber::scale($x, 500, 1000); # 0
+  $y = ScaleNumber::in_range($x, 500, 1000); # 0
 
-  $y = ScaleNumber::scale($x, 0, 500); # 1
+  $y = ScaleNumber::in_range($x, 0, 500); # 1
 
-  $y = ScaleNumber::scale($x, 0, 900, 100, 1000); # 600
+  $y = ScaleNumber::in_range($x, 0, 900, 100, 1000); # 600
 
 =head1 FUNCTION
 
-=head2 scale
+=head2 in_range
 
-  $y = ScaleNumber::scale($x, $r_min, $r_max);
-  $y = ScaleNumber::scale($x, $r_min, $r_max, $t_min, $t_max);
+  $y = ScaleNumber::in_range($x, $r_min, $r_max);
+  $y = ScaleNumber::in_range($x, $r_min, $r_max, $t_min, $t_max);
 
 Scale a number from one range to another.
 
@@ -34,7 +34,7 @@ If not given a target range to scale to, 0 to 1 inclusive is used.
 
 =cut
 
-sub scale {
+sub in_range {
     # Number to scale, the range it is in, & the target range to scale to
     my ($n, $r_min, $r_max, $t_min, $t_max) = @_;
 
