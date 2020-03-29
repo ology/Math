@@ -43,8 +43,8 @@ sub to_range {
     die 'Data range not given'
         unless defined $r_min && defined $r_max;
 
-    $t_min = 0 unless defined $t_min;
-    $t_max = 1 unless defined $t_max;
+    $t_min //= 0;
+    $t_max //= 1;
 
     my $scaled = (($n - $r_min) / ($r_max - $r_min)) * ($t_max - $t_min) + $t_min;
 
