@@ -13,7 +13,7 @@ use warnings;
 
   $y = scale($x, 0, 500); # 1
 
-  $y = scale($x, 0, 1000, 100, 1000); # 550
+  $y = scale($x, 0, 900, 100, 1000); # 600
 
 =head1 FUNCTION
 
