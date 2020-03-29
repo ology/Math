@@ -11,17 +11,19 @@ ScaleNumber - Scale a number from one range to another
 
   my $x = 500;
 
-  my $y = scale($x, 0, 1000); # 0.5
+  my $y = ScaleNumber::scale($x, 0, 1000); # 0.5
 
-  $y = scale($x, 500, 1000); # 0
+  $y = ScaleNumber::scale($x, 500, 1000); # 0
 
-  $y = scale($x, 0, 500); # 1
+  $y = ScaleNumber::scale($x, 0, 500); # 1
 
-  $y = scale($x, 0, 900, 100, 1000); # 600
+  $y = ScaleNumber::scale($x, 0, 900, 100, 1000); # 600
 
 =head1 FUNCTION
 
 =head2 scale
+
+  $y = ScaleNumber::scale($n, $r_min, $r_max, $t_min, $t_max);
 
 Scale a number from one range to another.
 
