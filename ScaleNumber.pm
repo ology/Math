@@ -36,19 +36,19 @@ If not given a target range to scale to, 0 to 1 inclusive is used.
 
 sub to_range {
     # Number to scale, the range it is in, & the target range to scale to
-    my ($n, $r_min, $r_max, $t_min, $t_max) = @_;
+    my ($n, $f_min, $f_max, $t_min, $t_max) = @_;
 
     die 'Number to scale not given'
         unless defined $n;
     die 'Data range not given'
-        unless defined $r_min && defined $r_max;
+        unless defined $f_min && defined $f_max;
 
     $t_min //= 0;
     $t_max //= 1;
 
-    my $scaled = (($n - $r_min) / ($r_max - $r_min)) * ($t_max - $t_min) + $t_min;
+    my $scaled = (($n - $f_min) / ($f_max - $f_min)) * ($t_max - $t_min) + $t_min;
 
-#    print "$n in [$r_min,$r_max] -> $scaled in [$t_min,$t_max]\n";
+#    print "$n in [$f_min,$f_max] -> $scaled in [$t_min,$t_max]\n";
 
     return $scaled;
 }
