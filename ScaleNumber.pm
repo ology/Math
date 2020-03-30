@@ -15,6 +15,9 @@ ScaleNumber - Scale a number from one range to another
 
 =head1 SYNOPSIS
 
+  use lib '.';
+  use ScaleNumber;
+
   my $x = 500;
 
   my $y = to_range($x, 0, 1000); # 0.5
