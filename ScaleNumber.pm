@@ -3,6 +3,12 @@ package ScaleNumber;
 use strict;
 use warnings;
 
+use Exporter 'import';
+
+our $VERSION = '0.0100';
+
+our @EXPORT_OK = ('to_range');
+
 =head1 NAME
 
 ScaleNumber - Scale a number from one range to another
