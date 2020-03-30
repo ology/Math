@@ -58,11 +58,7 @@ sub to_range {
     $t_min //= 0;
     $t_max //= 1;
 
-    my $scaled = (($n - $f_min) / ($f_max - $f_min)) * ($t_max - $t_min) + $t_min;
-
-#    print "$n in [$f_min,$f_max] -> $scaled in [$t_min,$t_max]\n";
-
-    return $scaled;
+    return (($n - $f_min) / ($f_max - $f_min)) * ($t_max - $t_min) + $t_min;
 }
 
 =head1 SEE ALSO
