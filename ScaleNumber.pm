@@ -1,5 +1,7 @@
 package ScaleNumber;
 
+# ABSTRACT: Scale a number from one range to another
+
 use strict;
 use warnings;
 
