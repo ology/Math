@@ -5,9 +5,9 @@ use warnings;
 
 use Exporter 'import';
 
-our $VERSION = '0.0100';
-
 our @EXPORT_OK = ('to_range');
+
+our $VERSION = '0.0100';
 
 =head1 NAME
 
