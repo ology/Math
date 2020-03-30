@@ -17,20 +17,20 @@ ScaleNumber - Scale a number from one range to another
 
   my $x = 500;
 
-  my $y = ScaleNumber::to_range($x, 0, 1000); # 0.5
+  my $y = to_range($x, 0, 1000); # 0.5
 
-  $y = ScaleNumber::to_range($x, 500, 1000); # 0
+  $y = to_range($x, 500, 1000); # 0
 
-  $y = ScaleNumber::to_range($x, 0, 500); # 1
+  $y = to_range($x, 0, 500); # 1
 
-  $y = ScaleNumber::to_range($x, 0, 900, 100, 1000); # 600
+  $y = to_range($x, 0, 900, 100, 1000); # 600
 
 =head1 FUNCTION
 
 =head2 to_range
 
-  $y = ScaleNumber::to_range($x, $from_min, $from_max);
-  $y = ScaleNumber::to_range($x, $from_min, $from_max, $to_min, $to_max);
+  $y = to_range($x, $from_min, $from_max);
+  $y = to_range($x, $from_min, $from_max, $to_min, $to_max);
 
 Scale a number from one range to another.
 
