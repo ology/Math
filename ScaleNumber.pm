@@ -26,7 +26,7 @@ ScaleNumber - Scale a number from one range to another
 
   $y = to_range($x, 0, 500); # 1
 
-  $y = to_range($x, 0, 900, 100, 1000); # 600
+  $y = to_range($x, 0, 1000, -1, 1); # 0
 
 =head1 FUNCTION
 
