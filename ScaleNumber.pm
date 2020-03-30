@@ -16,7 +16,7 @@ ScaleNumber - Scale a number from one range to another
 =head1 SYNOPSIS
 
   use lib '.';
-  use ScaleNumber;
+  use ScaleNumber 'to_range';
 
   my $x = 500;
 
