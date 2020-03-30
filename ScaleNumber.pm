@@ -17,7 +17,8 @@ ScaleNumber - Scale a number from one range to another
 
 =head1 SYNOPSIS
 
-  use lib '.';
+  use lib $ENV{HOME} . '/sandbox/Math';
+
   use ScaleNumber 'to_range';
 
   my $x = 500;
