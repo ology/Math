@@ -23,8 +23,8 @@ ScaleNumber - Scale a number from one range to another
 
 =head2 to_range
 
-  $y = ScaleNumber::to_range($x, $r_min, $r_max);
-  $y = ScaleNumber::to_range($x, $r_min, $r_max, $t_min, $t_max);
+  $y = ScaleNumber::to_range($x, $from_min, $from_max);
+  $y = ScaleNumber::to_range($x, $from_min, $from_max, $to_min, $to_max);
 
 Scale a number from one range to another.
 
