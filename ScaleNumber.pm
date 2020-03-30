@@ -20,9 +20,9 @@ ScaleNumber - Scale a number from one range to another
 
   my $x = 500;
 
-  my $y = to_range($x, 0, 1000); # 0.5
+  my $y = to_range($x, 500, 1000); # 0
 
-  $y = to_range($x, 500, 1000); # 0
+  $y = to_range($x, 0, 1000); # 0.5
 
   $y = to_range($x, 0, 500); # 1
 
