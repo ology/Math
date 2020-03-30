@@ -65,6 +65,10 @@ sub to_range {
     return $scaled;
 }
 
+=head1 SEE ALSO
+
+L<https://stats.stackexchange.com/q/281164>
+
 =head1 AUTHOR
 
 Gene Boggs
