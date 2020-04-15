@@ -11,7 +11,7 @@ use Math::Prime::XS qw( is_prime );
 
 my $size        = shift || 1050;
 my $max         = shift || 65521;
-my $prime_color = shift || 'black';
+my $prime_color = shift || 'blue';
 my $line_color  = shift || 'lightgray';
 
 my $image = Imager->new( xsize => $size, ysize => $size );
