@@ -2,6 +2,8 @@
 use strict;
 use warnings;
 
+# http://techn.ology.net/subsequent-prime-number-distribution/
+
 use Math::Prime::XS qw(primes);
 
 my $max = shift || 100;
