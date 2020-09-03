@@ -16,8 +16,8 @@ my %digits;
 
 for my $p ( @primes ) {
     my @numbers = split //, $p;
-    my ($previous, $current) = @numbers[-2,-1];
-    $digits{ $previous . $current }++;
+    my ($penultimate, $final) = @numbers[-2,-1];
+    $digits{ $penultimate . $final }++;
 }
 
 my $i = 0;
