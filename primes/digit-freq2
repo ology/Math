@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-# http://techn.ology.net/subsequent-prime-number-distribution/
+# http://techn.ology.net/prime-number-digit-frequencies/
 
 use List::Util qw(sum0);
 use Math::BigRat;
