@@ -13,19 +13,16 @@ my $length = @primes;
 print "Primes = $length\n";
 
 my %digits;
-my $previous;
 
 for my $p ( @primes ) {
-    my $current = substr $p, -1; # Last digit of p
-    if ($previous) {
-        $digits{ $previous . $current }++;
-    }
-    $previous = $current;
+    my @numbers = split //, $p;
+    my ($previous, $current) = @numbers[-2,-1];
+    $digits{ $previous . $current }++;
 }
 
 my $i = 0;
 
-for my $key ( sort { $digits{$a} <=> $digits{$b} } keys %digits ) {
+for my $key ( sort { $digits{$a} <=> $digits{$b} || $a <=> $b } keys %digits ) {
     $i++;
 
     # Set the value to the ratio of the number of times seen per number of primes.
