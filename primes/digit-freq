@@ -16,7 +16,7 @@ my %digits;
 my $previous;
 
 for my $p ( @primes ) {
-    my $current = substr $p, -1;
+    my $current = substr $p, -1; # Last digit of p
     if ($previous) {
         $digits{ $previous . $current }++;
     }
