@@ -10,7 +10,7 @@ my $min = shift // 10_000;
 my $max = shift || 10_000_000;
 
 my @primes = primes( $min, $max );
-warn " $min to $max => ",scalar(@primes),"\n";
+#warn "$min to $max is ",scalar(@primes)," primes from $primes[0] to $primes[-1]\n";
 
 # Count the number of times a digit is seen
 my %digits;
