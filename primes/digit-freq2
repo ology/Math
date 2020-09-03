@@ -2,6 +2,8 @@
 use strict;
 use warnings;
 
+# http://techn.ology.net/subsequent-prime-number-distribution/
+
 use List::Util qw(sum0);
 use Math::BigRat;
 use Math::Prime::XS qw(primes);
