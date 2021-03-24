@@ -15,6 +15,7 @@ my $html = "$0.html";
 open(my $content, '>', $html) or die "Can't write to '$html': $!";
 print $content "<html>\n<body>\n<table>\n\n";
 
+#for my $m (31) {
 for my $m (2 .. $mod) {
     # Get the modulus as a bigint
     my $bm = Math::BigInt->new($m);
