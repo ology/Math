@@ -8,8 +8,8 @@ use Math::BigInt try => 'GMP';
 my $max = shift || 20;
 my $mod = shift || 6;
 
-my $w   = length $max;
-my $z   = length $mod;
+my $w = length $max;
+my $z = length $mod;
 
 my $html = "$0.html";
 open(my $content, '>', $html) or die "Can't write to '$html': $!";
