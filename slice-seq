@@ -7,28 +7,29 @@ use Math::BigInt try => 'GMP';
 
 my $max = shift || 20;
 my $mod = shift || 6;
+
 my $w   = length $max;
 my $z   = length $mod;
 
 my $html = "$0.html";
-open( my $content, '>', $html ) or die "Can't write to '$html': $!";
+open(my $content, '>', $html) or die "Can't write to '$html': $!";
 print $content "<html>\n<body>\n<table>\n\n";
 
-for my $m ( 2 .. $mod ) {
+for my $m (2 .. $mod) {
     # Get the modulus as a bigint
     my $bm = Math::BigInt->new($m);
 
     print $content "<tr>\n\n"; # Start table row
 
-    for ( my $x = 2; $x <= $max; $x += 10 ) {
+    for (my $x = 2; $x <= $max; $x += 10) {
         my $name = sprintf '%s-%0*d-%0*d', $0, $w, $x, $z, $m;
         my $file = $name . '.dat';
-        open( my $dat, '>', $file ) or die "Can't write to '$file': $!";
+        open(my $dat, '>', $file) or die "Can't write to '$file': $!";
 
         print $content "<td>"; # Start table cell
 
         my $i = 1;
-        for my $n ( primes($x) ) {
+        for my $n (primes($x)) {
             my $p = Math::BigInt->new($n);
             $p->bmod($bm);
             my $fib = fibonacci($n);
