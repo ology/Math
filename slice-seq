@@ -6,6 +6,7 @@ use Math::Big qw( fibonacci primes );
 use Math::BigInt try => 'GMP';
 
 my $max = shift || 20;
+my $start = shift || 2;
 my $mod = shift || 6;
 
 my $w = length $max;
@@ -15,8 +16,7 @@ my $html = "$0.html";
 open(my $content, '>', $html) or die "Can't write to '$html': $!";
 print $content "<html>\n<body>\n<h3>Prime limit to $max by 10 x Modulo to $mod</h3>\n<table>\n\n";
 
-#for my $m (31) {
-for my $m (2 .. $mod) {
+for my $m ($start .. $mod) {
     # Get the modulus as a bigint
     my $bm = Math::BigInt->new($m);
 
