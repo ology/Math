@@ -13,7 +13,7 @@ my $z = length $mod;
 
 my $html = "$0.html";
 open(my $content, '>', $html) or die "Can't write to '$html': $!";
-print $content "<html>\n<body>\n<table>\n\n";
+print $content "<html>\n<body>\n<h3>Prime limit to $max by 10 x Modulo to $mod</h3>\n<table>\n\n";
 
 #for my $m (31) {
 for my $m (2 .. $mod) {
