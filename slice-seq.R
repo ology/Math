@@ -1,6 +1,6 @@
 # Visualize Fibonacci x Primes, each modulo N, with R.
 
-# Collect the election data files.
+# Collect the data files.
 filenames <- list.files(
     '.',
     pattern = '^slice-seq-[0-9]+-[0-9]+.dat$',
