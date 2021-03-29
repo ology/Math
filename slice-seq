@@ -48,11 +48,13 @@ for my $m ($start .. $mod) {
             my $f = Math::BigInt->new($fib);
             $f->bmod($bm);
 
+            # Show our progress
             print "[$i,$x] mod=$m\tprime=$n ($p)\tfib=$fib ($f)\n";
 
+            # Print a line to the data file
             print $dat "$p\t$f\n";
 
-            $i++;
+            $i++; # Increment the seen prime
         }
         print $content qq|<a href="$name.png"><img src="$name.png" width="100 height="100"/></a>|; # Table cell data
 
