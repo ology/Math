@@ -17,6 +17,7 @@ die "Starting modulo must be greater than or equal to the maximum modulo\n"
 my $w = length $max; # printf field width
 my $z = length $mod; # "
 
+# Create an HTML table for the images
 my $html = "$0.html";
 open(my $content, '>', $html) or die "Can't write to '$html': $!";
 print $content "<html>\n<body>\n<h3>Prime limit to $max by $inc x Modulo to $mod</h3>\n<table>\n\n";
