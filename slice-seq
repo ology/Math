@@ -29,7 +29,9 @@ for my $m ($start .. $mod) {
 
     print $content "<tr>\n\n"; # Start table row
 
+    # Consider each prime limit
     for (my $x = $min; $x <= $max; $x += $inc) {
+        # Make a file for the data
         my $name = sprintf '%s-%0*d-%0*d', $0, $w, $x, $z, $m;
         my $file = $name . '.dat';
         open(my $dat, '>', $file) or die "Can't write to '$file': $!";
