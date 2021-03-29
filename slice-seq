@@ -38,7 +38,9 @@ for my $m ($start .. $mod) {
 
         print $content "<td>"; # Start table cell
 
-        my $i = 1;
+        my $i = 1; # Increment for the prime
+
+        # Do the actual number crunching
         for my $n (primes($x)) {
             my $p = Math::BigInt->new($n);
             $p->bmod($bm);
