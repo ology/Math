@@ -6,6 +6,10 @@
 # perl slice-seq 2 100 10 2 31
 # perl slice-seq 100 1000 100 2 31
 # perl slice-seq 10000 10000 1 2 31
+#
+# Then, to get the images, run:
+#
+# Rscript slice-seq.R
 
 use strict;
 use warnings;
