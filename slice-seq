@@ -5,7 +5,9 @@ use warnings;
 use Math::Big qw(fibonacci primes);
 use Math::BigInt try => 'GMP';
 
+my $min = shift || 2;
 my $max = shift || 20;
+my $inc = shift || 10;
 my $start = shift || 2;
 my $mod = shift || 6;
 
@@ -25,7 +27,7 @@ for my $m ($start .. $mod) {
 
     print $content "<tr>\n\n"; # Start table row
 
-    for (my $x = 2; $x <= $max; $x += 10) {
+    for (my $x = $min; $x <= $max; $x += $inc) {
         my $name = sprintf '%s-%0*d-%0*d', $0, $w, $x, $z, $m;
         my $file = $name . '.dat';
         open(my $dat, '>', $file) or die "Can't write to '$file': $!";
