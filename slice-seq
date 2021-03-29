@@ -2,6 +2,13 @@
 use strict;
 use warnings;
 
+# Examples:
+#
+# perl slice-seq
+# perl slice-seq 2 100 10 2 31
+# perl slice-seq 100 1000 100 2 31
+# perl slice-seq 10000 10000 1 2 31
+
 use Math::Big qw(fibonacci primes);
 use Math::BigInt try => 'GMP';
 
