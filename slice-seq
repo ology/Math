@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Math::Big qw( fibonacci primes );
+use Math::Big qw(fibonacci primes);
 use Math::BigInt try => 'GMP';
 
 my $max = shift || 20;
