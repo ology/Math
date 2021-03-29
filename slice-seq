@@ -55,7 +55,7 @@ for my $m ($start .. $mod) {
         my $file = $name . '.dat';
         open(my $dat, '>', $file) or die "Can't write to '$file': $!";
 
-        print $content "<td>"; # Start table cell
+        print $content '<td>'; # Start table cell
 
         my $i = 1; # Loop increment
 
