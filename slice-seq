@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# Generate data files of P(n) x F(P(n)) for consumption by R.
+
 # Examples:
 #
 # perl slice-seq
