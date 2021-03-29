@@ -14,7 +14,7 @@ my $mod = shift || 6;   # Maximum modulo
 die "Starting modulo must be greater than or equal to the maximum modulo\n"
     if $start > $mod;
 
-my $w = length $max; # printf field width
+my $w = length $max; # Field width for sprintf
 my $z = length $mod; # "
 
 # Create an HTML table for the images
