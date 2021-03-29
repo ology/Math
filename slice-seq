@@ -19,6 +19,9 @@ my $inc = shift || 10;  # Increment for prime numbers
 my $start = shift || 2; # Minimum modulo
 my $mod = shift || 6;   # Maximum modulo
 
+die "Starting prime must be greater than or equal to the maximum prime\n"
+    if $min > $max;
+
 die "Starting modulo must be greater than or equal to the maximum modulo\n"
     if $start > $mod;
 
