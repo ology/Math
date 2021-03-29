@@ -14,8 +14,8 @@ my $mod = shift || 6;   # Maximum modulo
 die "Starting modulo must be greater than or equal to the maximum modulo\n"
     if $start > $mod;
 
-my $w = length $max;
-my $z = length $mod;
+my $w = length $max; # printf field width
+my $z = length $mod; # "
 
 my $html = "$0.html";
 open(my $content, '>', $html) or die "Can't write to '$html': $!";
