@@ -5,11 +5,11 @@ use warnings;
 use Math::Big qw(fibonacci primes);
 use Math::BigInt try => 'GMP';
 
-my $min = shift || 2;
-my $max = shift || 20;
-my $inc = shift || 10;
-my $start = shift || 2;
-my $mod = shift || 6;
+my $min = shift || 2;   # Minimum prime number
+my $max = shift || 20;  # Maximum prime number
+my $inc = shift || 10;  # Increment for prime numbers
+my $start = shift || 2; # Minimum modulo
+my $mod = shift || 6;   # Maximum modulo
 
 die "Starting modulo must be greater than or equal to the maximum modulo\n"
     if $start > $mod;
