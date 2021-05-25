@@ -1,4 +1,4 @@
-# http://techn.ology.net/alternatives-to-the-logistic-equation/
+# Write-up: https://ology.github.io/2016/03/11/alternatives-to-the-logistic-equation/
 
 iterate <- function( equation, range, x_max ) {
     # Initialize the bucket of x's
