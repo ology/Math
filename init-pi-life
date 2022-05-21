@@ -84,6 +84,7 @@ for my $n (0 .. $iteration - 1) {
     for my $row ($grid->@*) {
         $i = 0;
 
+        # Add a colored pixel to the image for each bit in the row
         for my $bit ($row->@*) {
             my $color = $bit ? $black : $white; # NB: Invert the game by swapping colors here
 
