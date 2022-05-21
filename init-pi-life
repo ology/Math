@@ -67,8 +67,8 @@ for my $n (split //, $decimal) {
 
 my $img = Imager->new(xsize => $row_size, ysize => $row_size);
 
-my $white = Imager::Color->new(255, 255, 255);
 my $black = Imager::Color->new(  0,   0,   0);
+my $white = Imager::Color->new(255, 255, 255);
 
 my $game = Game::Life->new($row_size);
 $game->place_points(0, 0, $init);
