@@ -55,6 +55,8 @@ for my $n (split //, $decimal) {
     for my $bit (split //, $binary) {
         push $init->[$i]->@*, $bit;
 
+        # Make sure we stay within the row (j)
+        # and within the number of rows (i)
         $j++;
         if ($j >= $row_size) {
             $i++;
