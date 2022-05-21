@@ -95,5 +95,5 @@ for my $n (1 .. $iteration) {
 
     $img->write(file => sprintf '%s/%s-%04d.png', $path, $0, $n) or die $img->errstr;
 
-    $game->process();
+    $game->process;
 }
