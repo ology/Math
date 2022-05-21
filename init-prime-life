@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use File::Slurper qw(read_text write_text);
-use Game::Life ();
+use Game::Life::Faster ();
 use Imager ();
 use Math::NumSeq::Primes ();
 
@@ -62,7 +62,7 @@ my $black = Imager::Color->new(  0,   0,   0);
 my $white = Imager::Color->new(255, 255, 255);
 
 # Make a new game of life
-my $game = Game::Life->new($row_size);
+my $game = Game::Life::Faster->new($row_size);
 $game->place_points(0, 0, $init);
 
 print "Rendering $iteration game of life frames...\n";
