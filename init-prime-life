@@ -1,0 +1,96 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use File::Slurper qw(read_text write_text);
+use Game::Life ();
+use Imager ();
+use Math::NumSeq::Primes ();
+
+use constant DIGITS => 4; # Bits needed to represent 9
+
+my $iteration = shift || 630;     # How many game frames?
+my $row_size  = shift || 48 * 2;  # Size of the image in pixels
+
+# Number of decimal digits
+my $max = $row_size * $row_size / DIGITS;
+
+# Subdirectory to house the generated frames
+my $path = 'frames';
+
+my $decimal; # The decimal digits
+
+print "Gathering $max decimals...\n";
+my $primes = Math::NumSeq::Primes->new;
+while (1) {
+    my (undef, $value) = $primes->next;
+    $decimal .= $value;
+    last if length($decimal) >= $max;
+}
+
+my $init = []; # The initial GoL state
+
+# Keep track of the grid position
+my $i = 0;
+my $j = 0;
+
+print "Building a $row_size x $row_size initial grid...\n";
+for my $n (split //, $decimal) {
+    last if $i >= $row_size;
+
+    # Turn the decimal digit into a binary number
+    my $binary = sprintf '%0*b', DIGITS, $n;
+
+    # Add the bits to the grid
+    for my $bit (split //, $binary) {
+        push $init->[$i]->@*, $bit;
+
+        # Make sure we stay within the row (j)
+        # and within the number of rows (i)
+        $j++;
+        if ($j >= $row_size) {
+            $i++;
+            $j = 0;
+        }
+        last if $i >= $row_size;
+    }
+}
+
+# Make a new canvas and colors
+my $img   = Imager->new(xsize => $row_size, ysize => $row_size);
+my $black = Imager::Color->new(  0,   0,   0);
+my $white = Imager::Color->new(255, 255, 255);
+
+# Make a new game of life
+my $game = Game::Life->new($row_size);
+$game->place_points(0, 0, $init);
+
+print "Rendering $iteration game of life frames...\n";
+for my $n (0 .. $iteration - 1) {
+    $j = 0;
+
+    my $grid = $game->get_grid;
+
+    for my $row ($grid->@*) {
+        $i = 0;
+
+        # Add a colored pixel to the image for each bit in the row
+        for my $bit ($row->@*) {
+            # NB: Invert the game by swapping colors here
+            my $color = $bit ? $black : $white;
+
+            $img->setpixel(x => $i, y => $j, color => $color);
+
+            $i++;
+        }
+
+        $j++;
+    }
+
+    # Write the image frame to disk
+    $img->write(file => sprintf '%s/%s-%04d.png', $path, $0, $n)
+        or die $img->errstr;
+
+    # Compute the next game of life frame
+    $game->process;
+}
