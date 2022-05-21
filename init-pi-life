@@ -3,8 +3,8 @@ use strict;
 use warnings;
 
 # Arrange the binary bits of pi in a square grid, and use as the initial GoL state.
-# A stable state is reached at the 400th iteration for a 48x48 surface.
-# A stable state is reached at the 748th iteration for a 96x96 surface.
+# A stable state is reached at the 361st iteration for a 48x48 surface.
+# A stable state is reached at the 629th iteration for a 96x96 surface.
 
 # After running this and generating the GoL frames. Use ImageMagick to increase size:
 # $ cp init-pi-life-0001.png init-pi-life-0000.png
@@ -19,8 +19,8 @@ use Imager;
 use Imager::Color;
 use Math::BigFloat;
 
-my $iteration = shift || 500;     # How many game frames?
-my $row_size  = shift || 48 * 3;  # Size of the image in pixels
+my $iteration = shift || 900;     # How many game frames?
+my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
@@ -43,24 +43,24 @@ else { # Get the digits ... very slow
 
 my $init = []; # The initial GoL state
 
-# Counter that keeps track of the grid position
+# Keep track of grid position
 my $i = 0;
+my $j = 0;
 
 print "Constructing a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
+    last if $i > $row_size;
+
     my $binary = sprintf '%04b', $n; # Turn the decimal digit 0-9 into a binary number
 
-    # Add each bit to the grid
+    # Add the bits to the grid
     for my $bit (split //, $binary) {
         push $init->[$i]->@*, $bit;
-    }
-
-    # Increment the counter
-    if ($i > $row_size) {
-        $i = 0;
-    }
-    else {
-        $i++;
+        $j++;
+        if ($j > $row_size) {
+            $i++;
+            $j = 0;
+        }
     }
 }
 
