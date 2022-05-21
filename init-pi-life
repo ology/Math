@@ -16,9 +16,9 @@ use warnings;
 # $ convert -delay 60 resized/resized*.png animated-pi-life.gif
 
 use File::Slurper qw(read_text write_text);
-use Game::Life;
-use Imager;
-use Math::BigFloat;
+use Game::Life ();
+use Imager ();
+use Math::BigFloat ();
 
 my $iteration = shift || 630;     # How many game frames?
 my $row_size  = shift || 48 * 2;  # Size of the image in pixels
