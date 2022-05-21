@@ -4,7 +4,7 @@ use warnings;
 
 # Arrange the binary bits of pi in a square grid, and use as the
 # initial GoL state.
-
+#
 # After running this and generating the GoL frames. Use ImageMagick to
 # possibly increase the size:
 # $ convert 'init-pi-life-%04d.png[0-629]' -resize 192x192 'resized/resized%04d.png'
