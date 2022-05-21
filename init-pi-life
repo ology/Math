@@ -12,7 +12,7 @@ use warnings;
 # $ cp init-pi-life-0001.png init-pi-life-0000.png
 # $ convert 'init-pi-life-%04d.png[0-750]' -resize 192x192 'resized/resized%04d.png'
 # $ rm resized/resized0000.png
-# Then mash them into an animated gif:
+# Then turn them into an animated gif:
 # $ convert -delay 60 resized/resized*.png animated-pi-life.gif
 
 use File::Slurper qw(read_text write_text);
