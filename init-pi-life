@@ -48,7 +48,7 @@ my $init = []; # The initial GoL state
 my $i = 0;
 my $j = 0;
 
-print "Constructing a $row_size x $row_size initial grid...\n";
+print "Building a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
     last if $i > $row_size;
 
