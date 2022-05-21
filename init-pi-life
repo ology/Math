@@ -84,12 +84,9 @@ for my $n (1 .. $iteration) {
         $i = 0;
 
         for my $bit (@$row) {
-            if ($bit) {
-                $img->setpixel(x => $i, y => $j, color => $black);
-            }
-            else {
-                $img->setpixel(x => $i, y => $j, color => $white);
-            }
+            my $color = $bit ? $black : $white;
+
+            $img->setpixel(x => $i, y => $j, color => $white);
 
             $i++;
         }
