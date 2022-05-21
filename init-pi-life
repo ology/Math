@@ -7,7 +7,7 @@ use warnings;
 # A stable state is reached at the 748th iteration for a 96x96 surface.
 
 # After running this and generating the GoL frames. Use ImageMagick to increase size:
-# $ convert 'init-pi-life-%04d.png[0-9]' -resize 192x192 'resized/resized%04d.png'
+# $ convert 'init-pi-life-%04d.png[0-754]' -resize 192x192 'resized/resized%04d.png'
 # Then mash them into an animated gif:
 # $ convert -delay 60 resized/resized*.png animated-pi-life.gif
 
