@@ -42,7 +42,7 @@ else { # Get the digits ... very slow
 
 my $init = []; # The initial GoL state
 
-# Keep track of grid position
+# Keep track of the grid position
 my $i = 0;
 my $j = 0;
 
