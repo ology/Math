@@ -22,19 +22,19 @@ my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
-my $max = $row_size * $row_size;  # Number of pi decimal digits
+my $max = $row_size * $row_size / 3;  # Number of pi decimal digits
 
 my $decimal; # The decimal digits
 
 my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our computed digits
 
+print "Gathering $max decimals of pi...\n";
 # Use the file of digits if it exists
 if (-e $pi_digits_file) {
     $decimal = read_text($pi_digits_file);
     chomp $decimal;
 }
 else { # Get the digits ... very slow
-    print "Gathering $max decimals of pi...\n";
     ($decimal = Math::BigFloat->bpi($max)) =~ s/^3\.(.+)$/$1/;
     write_text($pi_digits_file, $decimal);
 }
