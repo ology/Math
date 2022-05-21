@@ -25,19 +25,19 @@ my $max = $row_size * $row_size / DIGITS; # Number of pi decimal digits
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
-my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our digits of pi
+my $pi_digits = 'pi-digits-' . $max . '.txt'; # The file to hold our digits of pi
 
 my $decimal; # The decimal digits
 
 print "Gathering $max decimals of pi...\n";
 # Use the file of digits if it exists
-if (-e $pi_digits_file) {
-    $decimal = read_text($pi_digits_file);
+if (-e $pi_digits) {
+    $decimal = read_text($pi_digits);
     chomp $decimal;
 }
 else { # Get the digits ... very slow
     ($decimal = Math::BigFloat->bpi($max + 1)) =~ s/^3\.(.+)$/$1/;
-    write_text($pi_digits_file, $decimal);
+    write_text($pi_digits, $decimal);
 }
 
 my $init = []; # The initial GoL state
