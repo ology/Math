@@ -54,6 +54,7 @@ for my $n (split //, $decimal) {
     # Add the bits to the grid
     for my $bit (split //, $binary) {
         push $init->[$i]->@*, $bit;
+
         $j++;
         if ($j >= $row_size) {
             $i++;
