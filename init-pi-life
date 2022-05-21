@@ -76,10 +76,10 @@ for my $n (0 .. $iteration - 1) {
 
     my $grid = $game->get_grid;
 
-    for my $row (@$grid) {
+    for my $row ($grid->@*) {
         $i = 0;
 
-        for my $bit (@$row) {
+        for my $bit ($row->@*) {
             my $color = $bit ? $black : $white; # NB: Invert the game by swapping colors here
 
             $img->setpixel(x => $i, y => $j, color => $color);
