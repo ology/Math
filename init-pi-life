@@ -9,7 +9,7 @@ use warnings;
 # After running this and generating the GoL frames. Use ImageMagick to
 # possibly increase the size:
 # $ cp init-pi-life-0001.png init-pi-life-0000.png
-# $ convert 'init-pi-life-%04d.png[0-750]' -resize 192x192 'resized/resized%04d.png'
+# $ convert 'init-pi-life-%04d.png[0-630]' -resize 192x192 'resized/resized%04d.png'
 # $ rm resized/resized0000.png
 # Then turn them into an animated gif:
 # $ convert -delay 60 resized/resized*.png animated-pi-life.gif
