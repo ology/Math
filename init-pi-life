@@ -17,7 +17,7 @@ use Imager;
 use Imager::Color;
 use Math::BigFloat;
 
-my $iteration = shift || 760;     # How many game frames?
+my $iteration = shift || 750;     # How many game frames?
 my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
 my $path = 'life'; # Subdirectory to house the generated frames
