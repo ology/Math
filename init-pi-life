@@ -18,7 +18,6 @@ use warnings;
 use File::Slurper qw(read_text write_text);
 use Game::Life;
 use Imager;
-use Imager::Color;
 use Math::BigFloat;
 
 my $iteration = shift || 630;     # How many game frames?
