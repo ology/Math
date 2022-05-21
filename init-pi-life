@@ -24,7 +24,7 @@ my $row_size  = shift || 48 * 3;  # Size of the image in pixels
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
-my $max = $row_size * $row_size / 3;  # Number of pi decimal digits
+my $max = $row_size * $row_size / 3;  # Approximate number of pi decimal digits
 
 my $decimal; # The decimal digits
 
@@ -45,7 +45,6 @@ my $init = []; # The initial GoL state
 
 # Counters that keep track of the grid position
 my $i = 0;
-my $j = 0;
 
 print "Constructing a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
@@ -56,10 +55,9 @@ for my $n (split //, $decimal) {
         push $init->[$i]->@*, $bit;
     }
 
-    # Increment the counters
+    # Increment the counter
     if ($i > $row_size) {
         $i = 0;
-        $j++;
     }
     else {
         $i++;
@@ -76,7 +74,7 @@ $game->place_points(0, 0, $init);
 
 print "Rendering game of life frames...\n";
 for my $n (1 .. $iteration) {
-    $j = 0;
+    my $j = 0;
 
     my $grid = $game->get_grid;
 
