@@ -25,11 +25,11 @@ my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
+my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our computed digits
+
 my $max = $row_size * $row_size / 3; # Approximate number of pi decimal digits needed
 
 my $decimal; # The decimal digits
-
-my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our computed digits
 
 print "Gathering $max decimals of pi...\n";
 # Use the file of digits if it exists
