@@ -17,39 +17,42 @@ use Imager;
 use Imager::Color;
 use Math::BigFloat;
 
-my $iteration = shift || 1000;
-my $row_size  = shift || 48 * 2;
-my $img_size  = shift || 800;
+my $iteration = shift || 1000;    # How many game frames?
+my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
-my $max = $row_size * $row_size;
+my $max = $row_size * $row_size;  # Number of pi decimal digits
 
-my $decimal;
+my $decimal; # The decimal digits
 
-my $pi_digits_file = 'pi-digits-' . $max . '.txt';
+my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our computed digits
 
+# Use the file of digits if it exists
 if (-e $pi_digits_file) {
     $decimal = read_text($pi_digits_file);
     chomp $decimal;
 }
-else {
+else { # Get the digits ... very slow
     print "Gathering $max decimals of pi...\n";
     ($decimal = Math::BigFloat->bpi($max)) =~ s/^3\.(.+)$/$1/;
     write_text($pi_digits_file, $decimal);
 }
 
-my $init = [];
+my $init = []; # The initial GoL state
 
+# Counters that keep track of the grid position
 my $i = 0;
 my $j = 0;
 
 print "Constructing a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
-    my $binary = sprintf '%04b', $n;
+    my $binary = sprintf '%04b', $n; # Turn the decimal digit into a binary number
 
-    for my $pixel (split //, $binary) {
-        push $init->[$i]->@*, $pixel;
+    # Add each bit to the grid
+    for my $bit (split //, $binary) {
+        push $init->[$i]->@*, $bit;
     }
 
+    # Increment the counters
     if ($i > $row_size) {
         $i = 0;
         $j++;
