@@ -20,6 +20,8 @@ use Math::BigFloat;
 my $iteration = shift || 1000;    # How many game frames?
 my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
+my $path = 'life'; # Subdirectory to house the generated frames
+
 my $max = $row_size * $row_size;  # Number of pi decimal digits
 
 my $decimal; # The decimal digits
@@ -93,7 +95,7 @@ for my $n (1 .. $iteration) {
         $j++;
     }
 
-    $img->write(file => sprintf 'life/%s-%04d.png', $0, $n) or die $img->errstr;
+    $img->write(file => sprintf '%s/%s-%04d.png', $path, $0, $n) or die $img->errstr;
 
     $game->process();
 }
