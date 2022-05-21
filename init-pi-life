@@ -43,7 +43,7 @@ else { # Get the digits ... very slow
 
 my $init = []; # The initial GoL state
 
-# Counters that keep track of the grid position
+# Counter that keeps track of the grid position
 my $i = 0;
 
 print "Constructing a $row_size x $row_size initial grid...\n";
