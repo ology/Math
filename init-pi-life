@@ -4,7 +4,6 @@ use warnings;
 
 # Arrange the binary bits of pi in a square grid, and use as the
 # initial GoL state.
-# A stable state is reached at the 832nd iteration for a 48x48 surface.
 
 # After running this and generating the GoL frames. Use ImageMagick to
 # possibly increase the size:
