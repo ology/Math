@@ -75,7 +75,7 @@ $game->place_points(0, 0, $init);
 
 print "Rendering $iteration game of life frames...\n";
 for my $n (1 .. $iteration) {
-    my $j = 0;
+    $j = 0;
 
     my $grid = $game->get_grid;
 
