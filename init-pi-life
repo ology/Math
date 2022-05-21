@@ -24,7 +24,7 @@ my $max = $row_size * $row_size / 3; # Approximate number of pi decimal digits n
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
-my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our computed digits
+my $pi_digits_file = 'pi-digits-' . $max . '.txt'; # The file to hold our digits of pi
 
 my $decimal; # The decimal digits
 
