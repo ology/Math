@@ -5,6 +5,10 @@ use warnings;
 # Arrange the binary bits of pi in a square grid, and use as the initial GoL state.
 # A stable state is reached at the 400th iteration for a 48x48 surface.
 # A stable state is reached at the 748th iteration for a 96x96 surface.
+# After running this and generating the GoL frames. Do this to increase their size:
+# $ convert 'init-pi-life-%04d.png[0-9]' -resize 192x192 'resized/resized%04d.png'
+# Then mash them into an animated gif:
+# $ convert -delay 60 resized/resized*.png animated-pi-life.gif
 
 use File::Slurper qw(read_text write_text);
 use Game::Life;
