@@ -59,6 +59,7 @@ for my $n (split //, $decimal) {
             $i++;
             $j = 0;
         }
+        last if $i >= $row_size;
     }
 }
 
