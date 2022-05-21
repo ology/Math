@@ -48,7 +48,7 @@ my $i = 0;
 
 print "Constructing a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
-    my $binary = sprintf '%04b', $n; # Turn the decimal digit into a binary number
+    my $binary = sprintf '%04b', $n; # Turn the decimal digit 0-9 into a binary number
 
     # Add each bit to the grid
     for my $bit (split //, $binary) {
