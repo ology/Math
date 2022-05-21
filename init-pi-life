@@ -82,7 +82,7 @@ for my $n (1 .. $iteration) {
         $i = 0;
 
         for my $bit (@$row) {
-            my $color = $bit ? $black : $white;
+            my $color = $bit ? $black : $white; # NB: Invert the game by swapping colors here
 
             $img->setpixel(x => $i, y => $j, color => $color);
 
