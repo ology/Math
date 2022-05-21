@@ -17,12 +17,12 @@ use Game::Life ();
 use Imager ();
 use Math::BigFloat ();
 
-use constant WIDTH => 4; # Bits needed to represent 9
+use constant DIGITS => 4; # Bits needed to represent 9
 
 my $iteration = shift || 630;     # How many game frames?
 my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
-my $max = $row_size * $row_size / WIDTH; # Number of pi decimal digits
+my $max = $row_size * $row_size / DIGITS; # Number of pi decimal digits
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
@@ -51,7 +51,7 @@ print "Building a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
     last if $i >= $row_size;
 
-    my $binary = sprintf '%0*b', WIDTH, $n; # Turn the decimal digit into a binary number
+    my $binary = sprintf '%0*b', DIGITS, $n; # Turn the decimal digit into a binary number
 
     # Add the bits to the grid
     for my $bit (split //, $binary) {
