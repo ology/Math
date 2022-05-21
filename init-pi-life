@@ -101,5 +101,6 @@ for my $n (0 .. $iteration - 1) {
     $img->write(file => sprintf '%s/%s-%04d.png', $path, $0, $n)
         or die $img->errstr;
 
+    # Compute the next game of life frame
     $game->process;
 }
