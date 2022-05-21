@@ -95,6 +95,7 @@ for my $n (0 .. $iteration - 1) {
         $j++;
     }
 
+    # Write the image frame to disk
     $img->write(file => sprintf '%s/%s-%04d.png', $path, $0, $n)
         or die $img->errstr;
 
