@@ -20,7 +20,7 @@ use Math::BigFloat ();
 my $iteration = shift || 630;     # How many game frames?
 my $row_size  = shift || 48 * 2;  # Size of the image in pixels
 
-my $max = $row_size * $row_size / 3; # Approximate number of pi decimal digits needed
+my $max = $row_size * $row_size / 4; # Number of pi decimal digits needed
 
 my $path = 'life'; # Subdirectory to house the generated frames
 
