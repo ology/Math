@@ -50,7 +50,8 @@ print "Building a $row_size x $row_size initial grid...\n";
 for my $n (split //, $decimal) {
     last if $i >= $row_size;
 
-    my $binary = sprintf '%0*b', DIGITS, $n; # Turn the decimal digit into a binary number
+    # Turn the decimal digit into a binary number
+    my $binary = sprintf '%0*b', DIGITS, $n;
 
     # Add the bits to the grid
     for my $bit (split //, $binary) {
