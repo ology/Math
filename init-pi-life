@@ -86,7 +86,7 @@ for my $n (1 .. $iteration) {
         for my $bit (@$row) {
             my $color = $bit ? $black : $white;
 
-            $img->setpixel(x => $i, y => $j, color => $white);
+            $img->setpixel(x => $i, y => $j, color => $color);
 
             $i++;
         }
