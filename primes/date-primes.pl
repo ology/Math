@@ -6,7 +6,9 @@ use strict;
 use warnings;
 
 use Data::Dumper::Compact qw(ddc);
+use List::Util qw(sum0);
 use Math::Prime::XS qw(is_prime);
+use Statistics::Basic qw(mean median);
 use Time::Moment ();
 
 my $start_year = shift || 2025;
@@ -39,6 +41,18 @@ while ($year <= $end_year) {
     $year = $tm->year;
 }
 
+my $months = {};
+for my $y (sort keys %$by_month) {
+    for my $month (sort keys $by_month->{$y}->%*) {
+        push $months->{$month}->@*, $by_month->{$y}{$month};
+    }
+}
+
 print 'Prime dates: ', ddc $prime_stamps;
-print 'By month count: ', ddc $by_month;
+print 'Month by year count: ', ddc $by_month;
+print 'Month counts: ', ddc $months;
+for my $m (sort keys $months->%*) {
+    printf "$m: Mean: %.3f, Median: %.3f, Total: %d\n",
+        mean($months->{$m}), median($months->{$m}), sum0($months->{$m}->@*);
+}
 print 'By year count: ', ddc $by_year;
