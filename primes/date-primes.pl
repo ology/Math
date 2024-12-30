@@ -63,3 +63,4 @@ for my $d (sort keys $days->%*) {
     printf "$d: %d\n", $days->{$d};
 }
 print "\nBy year count: ", ddc $by_year;
+
