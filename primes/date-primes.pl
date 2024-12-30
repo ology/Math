@@ -48,9 +48,9 @@ for my $y (sort keys %$by_month) {
     }
 }
 
-print 'Prime dates: ', ddc $prime_stamps;
-print 'Month by year count: ', ddc $by_month;
-print 'Month counts: ', ddc $months;
+print "\nPrime dates: ", ddc $prime_stamps;
+# print "\nMonth by year count: ", ddc $by_month;
+print "\nMonth counts: ", ddc $months;
 for my $m (sort keys $months->%*) {
     printf "$m: Mean: %.3f, Median: %.3f, Total: %d\n",
         mean($months->{$m}), median($months->{$m}), sum0($months->{$m}->@*);
