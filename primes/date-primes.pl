@@ -58,9 +58,6 @@ for my $m (sort keys $months->%*) {
     printf "$m: Mean: %.3f, Stddev: %.3f, Median: %.3f, Total: %d\n",
         mean($months->{$m}), stddev($months->{$m}), median($months->{$m}), sum0($months->{$m}->@*);
 }
-print "\nBy day:\n";
-for my $d (sort keys $days->%*) {
-    printf "$d: %d\n", $days->{$d};
-}
+print "\nDay count: ", ddc $days;
 print "\nBy year count: ", ddc $by_year;
 
