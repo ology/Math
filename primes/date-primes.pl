@@ -52,7 +52,7 @@ for my $y (sort keys %$by_month) {
 
 print "\nPrime dates: ", ddc $prime_stamps;
 print "\nPrimes per day: ", ddc $days;
-print "\nPrimes per month: ", ddc $months;
+print "\nPrimes per year by month: ", ddc $months;
 for my $m (sort keys $months->%*) {
     printf "$m: Mean: %.3f, Stddev: %.3f, Median: %.3f, Total: %d\n",
         mean($months->{$m}), stddev($months->{$m}), median($months->{$m}), sum0($months->{$m}->@*);
