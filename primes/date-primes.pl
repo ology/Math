@@ -55,4 +55,4 @@ for my $m (sort keys $months->%*) {
     printf "$m: Mean: %.3f, Median: %.3f, Total: %d\n",
         mean($months->{$m}), median($months->{$m}), sum0($months->{$m}->@*);
 }
-print 'By year count: ', ddc $by_year;
+print "\nBy year count: ", ddc $by_year;
