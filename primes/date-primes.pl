@@ -38,6 +38,7 @@ while ($year <= $end_year) {
     $tm = $tm->plus_days(1);
     $year = $tm->year;
 }
+
 print 'Prime dates: ', ddc $prime_stamps;
 print 'By month count: ', ddc $by_month;
 print 'By year count: ', ddc $by_year;
