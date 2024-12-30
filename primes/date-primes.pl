@@ -27,6 +27,7 @@ my $tm = Time::Moment->new(
 my $prime_stamps = {};
 my $by_year      = {};
 my $by_month     = {};
+my $months       = {};
 my $days         = {};
 
 while ($year <= $end_year) {
@@ -43,7 +44,6 @@ while ($year <= $end_year) {
     $year = $tm->year;
 }
 
-my $months = {};
 for my $y (sort keys %$by_month) {
     for my $month (sort keys $by_month->{$y}->%*) {
         push $months->{$month}->@*, $by_month->{$y}{$month};
