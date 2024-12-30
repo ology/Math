@@ -23,7 +23,8 @@ my $tm = Time::Moment->new(
 );
 
 my $prime_stamps = {};
-my $counts       = {};
+my $by_year      = {};
+my $by_month     = {};
 
 while ($year <= $end_year) {
     $month = sprintf '%02d', $tm->month;
@@ -31,10 +32,12 @@ while ($year <= $end_year) {
     my $stamp = $year . $month . $day;
     if (is_prime($stamp)) {
         push $prime_stamps->{$year}{$month}->@*, $stamp;
-        $counts->{$year}++;
+        $by_year->{$year}++;
+        $by_month->{$year}{$month}++;
     }
     $tm = $tm->plus_days(1);
     $year = $tm->year;
 }
-print ddc $prime_stamps;
-print ddc $counts;
+print 'Prime dates: ', ddc $prime_stamps;
+print 'By month count: ', ddc $by_month;
+print 'By year count: ', ddc $by_year;
